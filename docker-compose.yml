@@ -1,0 +1,13 @@
+mysql:
+    image: mysql
+    ports:
+        - "3306:3306"
+    expose:
+        - "3306"
+    environment:
+        - MYSQL_USER=springusers1
+        - MYSQL_PASSWORD=ThePassword
+        - MYSQL_DATABASE=pairdesk_db;
+        - MYSQL_ROOT_PASSWORD=ThePassword
+    volumes:
+        - "./conf.d:/etc/mysql/conf.d:ro"
