@@ -6,41 +6,87 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 
-@Data
 @Entity
-@Table(name = "Features")
-@Builder(builderMethodName = "feature")
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
 public class Feature {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "task_id")
     private Integer task_id;
 
-    @Column(name = "user_id")
     private Integer user_id;
 
-    @Column(name = "featureName")
     private String featureName;
 
-    @Column(name = "priority")
     private String priority;
 
-    @Column(name = "progress")
     private int progress;
 
-    @Column(name = "description")
     private String description;
 
-    //@Builder.Default
-    @Column(name = "deadline")
-    @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date deadline;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getTask_id() {
+        return task_id;
+    }
+
+    public void setTask_id(Integer task_id) {
+        this.task_id = task_id;
+    }
+
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getFeatureName() {
+        return featureName;
+    }
+
+    public void setFeatureName(String featureName) {
+        this.featureName = featureName;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
+    public int getProgress() {
+        return progress;
+    }
+
+    public void setProgress(int progress) {
+        this.progress = progress;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
+    }
 }
