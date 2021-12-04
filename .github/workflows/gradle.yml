@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DB_DATABASE: pairdesk_db
-      DB_USER: springusers1'@'%
+      DB_USER: springusers1
       DB_PASSWORD: ThePassword
     steps:
     - name: Set up MySQL
