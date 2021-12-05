@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 style="text-align: center">Feature List</h1>
-    <div v-for="feature in list" v-bind:key="feature.id">
+    <div style="margin-left: 45%" v-for="feature in list" v-bind:key="feature.id">
       <h2>{{ feature.featureName }}</h2>
       <h2>{{ feature.priority }}</h2>
     </div>
