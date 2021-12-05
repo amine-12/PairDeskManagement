@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 style="text-align: center">Feature List</h1>
-    <div v-for="feature in list" v-bind:key="feature.id">
+    <div style="margin-left: 45%" v-for="feature in list" v-bind:key="feature.id">
       <h2>{{ feature.featureName }}</h2>
       <h2>{{ feature.priority }}</h2>
     </div>
@@ -20,11 +20,7 @@ export default {
   mounted()
   {
     try {
-      axios.get("http://localhost:8080/features/api/all", {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-        },
-          }).then((resp) => {
+      axios.get("http://localhost:8080/features/api/all").then((resp) => {
         this.list = resp.data;
         console.log(this.list)
       })
