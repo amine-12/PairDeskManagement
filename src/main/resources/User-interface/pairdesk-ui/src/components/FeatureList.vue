@@ -1,10 +1,55 @@
+<style>
+table.GeneratedTable {
+  width: 55%;
+  background-color: #ffffff;
+  border-collapse: collapse;
+  border-width: 2px;
+  border-color: #000000;
+  border-style: double;
+  color: #000000;
+}
+
+table.GeneratedTable td, table.GeneratedTable th {
+  border-width: 2px;
+  border-color: #000000;
+  border-style: double;
+  padding: 3px;
+}
+
+table.GeneratedTable thead {
+  background-color: #94afff;
+}
+</style>
 <template>
   <div>
-    <h1 style="text-align: center">Feature List</h1>
+    <h1 style="text-align: center">Features List</h1>
+    <table style="margin-left: 25%" class="GeneratedTable" >
+      <thead>
+      <tr>
+        <th>Feature Name</th>
+        <th>Priority</th>
+        <th>Description</th>
+        <th>Progress</th>
+        <th>deadline</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr v-for="feature in list" v-bind:key="feature.id">
+        <td>{{ feature.featureName }}</td>
+        <td>{{ feature.priority }}</td>
+        <td>{{ feature.description }}</td>
+        <td>{{ feature.progress }}%</td>
+        <td>{{ feature.deadline }}</td>
+      </tr>
+      </tbody>
+    </table>
+
+
+    <!--<h1 style="text-align: center">Feature List</h1>
     <div style="margin-left: 45%" v-for="feature in list" v-bind:key="feature.id">
       <h2>{{ feature.featureName }}</h2>
       <h2>{{ feature.priority }}</h2>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -31,40 +76,3 @@ export default {
   }
 }
 </script>
-<!--<template>-->
-<!--  <div>-->
-<!--    <div v-for="feature in features" v-bind:key="feature.id">-->
-<!--      <h2>{{ feature.featureName }}</h2>-->
-<!--      <p>{{ feature.description }}</p>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</template>-->
-
-<!--<script>-->
-<!--export default {-->
-<!--  data() {-->
-<!--    return {-->
-<!--      features: [],-->
-<!--    };-->
-<!--  },-->
-
-<!--  methods: {-->
-<!--    async getData() {-->
-<!--      try {-->
-<!--        const response = await this.$http.get(-->
-<!--            "http://localhost:8080/features/api/all"-->
-<!--        );-->
-<!--        // JSON responses are automatically parsed.-->
-<!--        this.features = response.data;-->
-<!--        console.log(this.features);-->
-<!--      } catch (error) {-->
-<!--        console.log(error);-->
-<!--      }-->
-<!--    },-->
-<!--  },-->
-
-<!--  created() {-->
-<!--    this.getData();-->
-<!--  },-->
-<!--};-->
-<!--</script>-->
