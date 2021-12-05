@@ -20,11 +20,7 @@ export default {
   mounted()
   {
     try {
-      axios.get("http://localhost:8080/features/api/all", {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-        },
-          }).then((resp) => {
+      axios.get("http://localhost:8080/features/api/all").then((resp) => {
         this.list = resp.data;
         console.log(this.list)
       })
