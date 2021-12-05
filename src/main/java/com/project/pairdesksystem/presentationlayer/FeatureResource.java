@@ -22,12 +22,14 @@ public class FeatureResource {
         this.featureService = featureService;
     }
 
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/api/all")
     public Iterable<Feature> showResourcesVetList() {
         Iterable<Feature> featureList = featureService.getAllFeatures();
         return featureList;
     }
 
+    @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE,
