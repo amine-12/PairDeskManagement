@@ -24,9 +24,8 @@ public class FeatureResource {
 
     @CrossOrigin
     @GetMapping("/api/all")
-    public Iterable<Feature> showResourcesVetList() {
-        Iterable<Feature> featureList = featureService.getAllFeatures();
-        return featureList;
+    public Iterable<Feature> getFeatureList() {
+        return featureService.getAllFeatures();
     }
 
     @CrossOrigin
