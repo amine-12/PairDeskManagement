@@ -1,13 +1,95 @@
 package com.project.pairdesksystem;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import com.project.pairdesksystem.datalayer.Feature;
+import com.project.pairdesksystem.datalayer.FeaturesRepository;
 
-@SpringBootTest
-class PairdesksystemApplicationTests {
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
+
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
+
+
+import java.util.Date;
+
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
+@DataJpaTest
+
+
+public class PairdesksystemApplicationTests {
+
+    @Autowired
+    private FeaturesRepository featRep;
+
+
+    @BeforeEach
+    public void setUpDb(){
+
+        Feature f1 = new Feature();
+            Date date = new Date();
+
+
+            f1.setId(1);
+            f1.setFeatureName("MyFeature");
+            f1.setDeadline(date);
+            f1.setDescription("Some Feature here");
+            f1.setPriority("MEDIUM");
+            f1.setUser_id(1);
+            f1.setTask_id(1);
+            f1.setProgress(2);
+        featRep.save(f1);
+        Feature f2 = new Feature();
+
+            f2.setId(2);
+            f2.setFeatureName("MyFeature2");
+            f2.setDeadline(date);
+            f2.setDescription("Some Feature here");
+            f2.setPriority("MEDIUM");
+            f2.setUser_id(1);
+            f2.setTask_id(1);
+            f2.setProgress(2);
+            featRep.save(f2);
+    }
 
     @Test
-    void contextLoads() {
+    void saveFeatures() {
+        Feature f1 = new Feature();
+        Date date = new Date();
+
+
+        f1.setId(1);
+        f1.setFeatureName("MyFeature");
+        f1.setDeadline(date);
+        f1.setDescription("Some Feature here");
+        f1.setPriority("MEDIUM");
+        f1.setUser_id(1);
+        f1.setTask_id(1);
+        f1.setProgress(2);
+        featRep.save(f1);
+        System.out.println(featRep.count() + "ADSASD");
+
+        long count = featRep.count();
+        int intCount=(int)count;
+
+        assertEquals( intCount, 2);
+
+    }
+
+    @Test
+    void get_All_Features(){
+        featRep.findAll();
+        assertEquals(featRep.findAll().size(), 2);
+
     }
 
 }
