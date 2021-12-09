@@ -63,25 +63,7 @@ public class PairdesksystemApplicationTests {
 
     @Test
     void saveFeatures() {
-        Feature f1 = new Feature();
-        Date date = new Date();
-
-
-        f1.setId(1);
-        f1.setFeatureName("MyFeature");
-        f1.setDeadline(date);
-        f1.setDescription("Some Feature here");
-        f1.setPriority("MEDIUM");
-        f1.setUser_id(1);
-        f1.setTask_id(1);
-        f1.setProgress(2);
-        featRep.save(f1);
-
-        long count = featRep.count();
-        int intCount=(int)count;
-
-        assertEquals( intCount, 2);
-
+        assertEquals( featRep.count(), 2);
     }
 
     @Test
