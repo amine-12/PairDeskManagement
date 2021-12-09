@@ -122,7 +122,7 @@
               ></path>
             </g>
           </svg>
-          <span class="link-text">PROGRESS</span>
+          <span class="link-text">REPORTS</span>
         </a>
       </li>
 
