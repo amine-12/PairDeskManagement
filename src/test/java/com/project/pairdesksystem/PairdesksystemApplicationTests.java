@@ -76,7 +76,6 @@ public class PairdesksystemApplicationTests {
         f1.setTask_id(1);
         f1.setProgress(2);
         featRep.save(f1);
-        System.out.println(featRep.count() + "ADSASD");
 
         long count = featRep.count();
         int intCount=(int)count;
