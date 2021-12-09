@@ -6,6 +6,10 @@
     - `create database pairdesk_db;`
     - `create user 'springusers1'@'%' identified by 'ThePassword';`
     - `grant all on pairdesk_db.* to 'springusers1'@'%';`
-## How to run project
+## How to run service
 - Open git on the root directory of the project
 - Enter `./gradlew bootRun`
+## How to run vue application
+- Open a command line in 
+- Enter `cd ~/source/pairdesksystem/src/main/resources/User-interface/pairdesk-ui` 
+- Enter `npm run serve`
