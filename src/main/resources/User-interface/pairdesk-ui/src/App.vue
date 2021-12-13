@@ -1,17 +1,17 @@
 <template>
-  <navigation />
-  <FeatureList/>
+  <div id="nav">
+    <navigation/>
+  </div>
+  <router-view/>
 </template>
 
 <script>
-import Navigation from './components/navigation.vue'
-import FeatureList from "@/components/FeatureList";
-
+// @ is an alias to /src
+import Navigation from '@/components/navigation.vue'
 
 export default {
-  name: 'App',
+  name: 'Home',
   components: {
-    FeatureList,
     Navigation
   }
 }
