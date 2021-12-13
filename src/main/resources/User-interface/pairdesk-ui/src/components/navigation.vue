@@ -31,8 +31,8 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link">
-          <router-link to="/">
+        <a >
+          <router-link class="nav-link" to="/">
           <svg
               aria-hidden="true"
               focusable="false"
@@ -57,8 +57,8 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link">
-          <router-link to="/features" >
+        <a >
+          <router-link class="nav-link" to="/features" >
           <svg
               aria-hidden="true"
               focusable="false"
