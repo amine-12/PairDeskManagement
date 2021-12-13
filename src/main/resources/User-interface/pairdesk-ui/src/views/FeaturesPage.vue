@@ -1,6 +1,5 @@
 <template>
   <div class="about">
-    <h1>This is feature page</h1>
     <feature-list></feature-list>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar-personalized" style="z-index: 1; background-color: #23232e;">
+  <nav class="navbar-personalized" style="z-index: 1; background-color: #2b3d8c;">
     <ul class="navbar-nav">
       <li class="logo">
         <a href="" class="nav-link">
@@ -225,8 +225,8 @@ export default {
 :root {
   font-size: 16px;
   font-family: 'Open Sans';
-  --text-primary: #b6b6b6;
-  --text-secondary: #ececec;
+  --text-primary: #ffffff;
+  --text-secondary: #ffffff;
   --bg-primary: #23232e;
   --bg-secondary: #141418;
   --transition-speed: 600ms;
