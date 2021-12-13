@@ -3,15 +3,20 @@
     <navigation/>
   </div>
   <router-view/>
+  <AddFeature/>
 </template>
 
 <script>
-// @ is an alias to /src
-import Navigation from '@/components/navigation.vue'
+import Navigation from './components/navigation.vue'
+import FeatureList from "@/components/FeatureList";
+import AddFeature from "@/components/AddFeature";
+
 
 export default {
   name: 'Home',
   components: {
+    AddFeature,
+    FeatureList,
     Navigation
   }
 }
