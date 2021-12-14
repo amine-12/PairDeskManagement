@@ -1,4 +1,4 @@
-package com.project.pairdesksystem.datalayer;
+package com.project.pairdesksystem.datalayer.Feature;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,20 +1,12 @@
 package com.project.pairdesksystem;
 
-import com.project.pairdesksystem.datalayer.Feature;
-import com.project.pairdesksystem.datalayer.FeaturesRepository;
+import com.project.pairdesksystem.datalayer.Feature.Feature;
+import com.project.pairdesksystem.datalayer.Feature.FeaturesRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
-
-
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
 
 
 import java.util.Date;

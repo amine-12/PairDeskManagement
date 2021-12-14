@@ -105,6 +105,7 @@ body {
 }
 .card__body {
   grid-row: 3;
+  font-size: medium;
   font-weight: 400;
   color: #5e5fb8;
 }

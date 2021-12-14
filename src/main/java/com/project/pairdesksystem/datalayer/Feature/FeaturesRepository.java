@@ -1,4 +1,4 @@
-package com.project.pairdesksystem.datalayer;
+package com.project.pairdesksystem.datalayer.Feature;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

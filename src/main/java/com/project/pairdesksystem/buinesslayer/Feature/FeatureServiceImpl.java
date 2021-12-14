@@ -1,15 +1,14 @@
-package com.project.pairdesksystem.buinesslayer;
+package com.project.pairdesksystem.buinesslayer.Feature;
 
-import com.project.pairdesksystem.datalayer.Feature;
-import com.project.pairdesksystem.datalayer.FeatureDTO;
-import com.project.pairdesksystem.datalayer.FeaturesRepository;
+import com.project.pairdesksystem.datalayer.Feature.Feature;
+import com.project.pairdesksystem.datalayer.Feature.FeatureDTO;
+import com.project.pairdesksystem.datalayer.Feature.FeaturesRepository;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

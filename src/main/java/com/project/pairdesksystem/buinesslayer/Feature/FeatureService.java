@@ -1,11 +1,10 @@
-package com.project.pairdesksystem.buinesslayer;
+package com.project.pairdesksystem.buinesslayer.Feature;
 
-import com.project.pairdesksystem.datalayer.Feature;
-import com.project.pairdesksystem.datalayer.FeatureDTO;
+import com.project.pairdesksystem.datalayer.Feature.Feature;
+import com.project.pairdesksystem.datalayer.Feature.FeatureDTO;
 import javassist.NotFoundException;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface FeatureService {
     List<Feature> getAllFeatures();
