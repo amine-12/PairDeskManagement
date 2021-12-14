@@ -179,7 +179,7 @@ body {
     <h1 class="heading__title">Features List</h1>
   </div>
     <div class="main-container row center" >
-      <div class="column" v-for="feature in list" v-bind:key="feature.id">
+      <div class="column" v-for="feature in list" v-bind:key="feature.featureId">
         <div class="cards">
           <div class="card card-1">
             <h2 class="card__title">{{ feature.featureName }}</h2>

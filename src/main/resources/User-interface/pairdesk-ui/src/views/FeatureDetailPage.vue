@@ -1,10 +1,12 @@
 <template>
-  <h1></h1>
+  <feature-details></feature-details>
 </template>
 
 <script>
+import FeatureDetails from "@/components/FeatureDetails";
 export default {
-  name: "FeatureDetailPage"
+  name: "FeatureDetailPage",
+  components: {FeatureDetails}
 }
 </script>
 
