@@ -31,13 +31,14 @@ public class TaskServiceImpl implements TaskService{
     }
 
     @Override
-    public Task getTasksByFeatureId(int taskId) throws NotFoundException {
-        return null;
+    public List<Task> getTasksByFeatureId(int featureId) throws NotFoundException {
+        return taskRepository.findAllByFeatureId(featureId);
     }
 
     @Override
-    public TaskDTO getTaskDTOByFeatureId(int taskId) throws NotFoundException {
-        return null;
+    public List<TaskDTO> getTaskDTOByFeatureId(int taskId) throws NotFoundException {
+        List<Task> task = getTasksByFeatureId(taskId);
+        return taskMapper.taskListToTaskDTOList(task);
     }
 
     @Override
