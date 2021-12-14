@@ -11,8 +11,8 @@ import java.util.List;
 public interface TaskService {
     List<Task> getAllTasks();
     Task createTask(Task task);
-    Task getTasksByFeatureId(int taskId) throws NotFoundException;
-    TaskDTO getTaskDTOByFeatureId(int taskId) throws NotFoundException;
+    List<Task> getTasksByFeatureId(int featureId) throws NotFoundException;
+    List<TaskDTO> getTaskDTOByFeatureId(int featureId) throws NotFoundException;
 
     List<TaskDTO> getAllTasksDTO();
     TaskDTO createTaskDTO(TaskDTO taskDTO);

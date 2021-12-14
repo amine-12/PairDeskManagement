@@ -3,6 +3,7 @@ package com.project.pairdesksystem.presentationlayer;
 import com.project.pairdesksystem.buinesslayer.Task.TaskService;
 import com.project.pairdesksystem.datalayer.Feature.FeatureDTO;
 import com.project.pairdesksystem.datalayer.Task.TaskDTO;
+import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,14 @@ public class TaskResource {
     @GetMapping("/api/tasks")
     public List<TaskDTO> getTaskList() {
         return taskService.getAllTasksDTO();
+    }
+
+
+    @CrossOrigin
+    @GetMapping("/api/tasks/{featureId}")
+    public List<TaskDTO> getTasksByFeatureId(@PathVariable int featureId) throws NotFoundException {
+        List<TaskDTO> taskDTO = taskService.getTaskDTOByFeatureId(featureId);
+        return taskDTO;
     }
 
     @CrossOrigin
