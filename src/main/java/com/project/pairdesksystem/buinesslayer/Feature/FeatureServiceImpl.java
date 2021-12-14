@@ -50,4 +50,16 @@ public class FeatureServiceImpl implements FeatureService{
         Feature feature = featureMapper.featureDTOToFeature(featureDTO);
         return featureMapper.featureToFeatureDTO(createFeature(feature));
     }
+
+    @Override
+    public void deleteFeature(int featureId) {
+        log.debug("Feature object is deleted with this id: " + featureId);
+        Feature feature = featuresRepository.findByFeatureId(featureId).orElse(new Feature());
+        if(feature.getFeatureId() != null)
+            featuresRepository.delete(feature);
+
+        log.debug("feature deleted");
+    }
+
+
 }
