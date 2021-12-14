@@ -221,13 +221,17 @@ export default {
     }
   },
   methods:{
-    deleteFeature(featureId){
+    deleteFeature(featureId) {
+      let confirmed = confirm("Are you sure you would like to delete this feature ");
+
+      if(confirmed){
       console.log("form is valid")
-      axios.delete('http://localhost:8080/features/api/'+featureId, this.form)
+      axios.delete('http://localhost:8080/features/api/' + featureId, this.form)
           .then((resp) => {
             this.form = resp.data;
             console.log(this.form);
           })
+      }
     }
 
 
