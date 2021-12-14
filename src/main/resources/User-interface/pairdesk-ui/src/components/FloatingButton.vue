@@ -1,11 +1,10 @@
 <template>
-  <a style="padding:10px;display:block;" href="http://androidcss.com/css/css3-floating-button-tutorial/" target="_blank">Click here for complete tutorial</a>
-
-  <!-- Code begins here -->
-
-  <a href="#" class="float">
+<button @click='displayComponent'>
+  <a class="float">
     <i class="fa fa-plus my-float"></i>
   </a>
+</button>
+
 </template>
 
 <script>
@@ -27,8 +26,8 @@ body{
   position:fixed;
   width:60px;
   height:60px;
-  bottom:40px;
-  right:40px;
+  bottom:50px;
+  right:50px;
   background-color:#0C9;
   color:#FFF;
   border-radius:50px;
