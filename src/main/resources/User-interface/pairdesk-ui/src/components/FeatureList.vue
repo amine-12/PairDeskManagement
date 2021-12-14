@@ -188,14 +188,67 @@ body {
             <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }" class="heading__link "> <h2 class="card__title">{{ feature.featureName }}</h2></router-link>
 
             <h2 class="card__body">{{ feature.description }}</h2>
-
+            <button v-on:click="isVisible = !isVisible" @click="goto()" class="card__title" style="background: transparent; border: none; text-align: end" name="editFeatureButton">
+              <img src="@/assets/pencil.png" alt="Edit Feature" style="height: 30px; width: 30px"/>
+            </button>
             <p class="card__apply">
+              <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }" class="card__link">Details</router-link>
               <button style="margin-left: 50px;" @click="deleteFeature(feature.featureId)" class="btn btn-danger">Delete </button>
             </p>
           </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="col-xs-1" align="center" v-show="isVisible">
+    <form class="form-horizontal" v-on:submit.prevent="submitForm" @submit="checkForm">
+      <fieldset>
+        <h1>Edit Feature</h1>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="featureName">Feature Name:</label>
+          <div class="col-md-4">
+            <input id="featureName" name="Feature Name" type="text" placeholder="New Feature Name" class="form-control input-md" v-model="form.featureName">
+            <p v-if="!featureNameIsValid" class="error-message" style="color: red">Feature Name Required</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="description">Description</label>
+          <div class="col-md-4">
+            <textarea id="description" name="description" type="text" placeholder="description" class="form-control input-md" v-model="form.description"/>
+            <p v-if="!descriptionIsValid" class="error-message" style="color: red">Description Required</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="priority">Priority</label>
+          <div class="col-md-4">
+            <select id="priority" name="priority" class="form-control" v-model="form.priority">
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="deadline">Deadline</label>
+          <div class="col-md-4">
+            <input id="deadline" name="deadline" type="datetime-local" placeholder="deadline" class="form-control input-md" v-model="form.deadline">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="submit"></label>
+          <div class="col-md-4">
+            <button :disabled="!formIsValid" id="submit" name="submit" class="btn btn-primary">Update Feature</button>
+          </div>
+        </div>
+
+      </fieldset>
+    </form>
   </div>
 </template>
 
@@ -204,9 +257,16 @@ import axios from "axios";
 
 export default {
   name:"FeatureList",
-  data()
-  {
-    return {list:undefined}
+  data() {
+    return {
+      list:undefined,
+      form: {
+        featureName: '',
+        priority: '',
+        description: '',
+        deadline: ''
+      },
+      isVisible: false}
   },
   mounted()
   {
@@ -219,7 +279,40 @@ export default {
       console.log(error)
     }
   },
-  methods:{
+  computed: {
+
+    featureNameIsValid() {
+      return !!this.form.featureName
+    },
+
+    descriptionIsValid() {
+      return !!this.form.description
+    },
+
+    formIsValid() {
+      return this.featureNameIsValid && this.descriptionIsValid
+    }//may also use vuelidate in the future to perform input validation
+  },
+  methods: {
+    submitForm() {
+      if(this.formIsValid) {
+        console.log("form is valid")
+        axios.post('http://localhost:8080/features/api/update/{featureId}', this.form)
+            .then((resp) => {
+              this.form = resp.data;
+              console.log(this.form);
+            })
+            .catch((error) => {
+              console.log(error)
+            }).finally(() => {
+        });
+      }else{
+        console.log("form is invalid")
+      }
+    },
+    goto() {
+      window.scrollTo(0, document.body.scrollHeight);
+    },
     deleteFeature(featureId) {
       let confirmed = confirm("Are you sure you would like to delete this feature ");
 

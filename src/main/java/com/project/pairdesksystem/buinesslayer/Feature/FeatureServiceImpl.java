@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -49,6 +51,33 @@ public class FeatureServiceImpl implements FeatureService{
     public FeatureDTO createFeatureDTO(FeatureDTO featureDTO) {
         Feature feature = featureMapper.featureDTOToFeature(featureDTO);
         return featureMapper.featureToFeatureDTO(createFeature(feature));
+    }
+
+    @Override
+    public Feature updateFeature(Feature feature, Feature updateFeature) {
+        if (updateFeature.getFeatureName() != null && !updateFeature.getFeatureName().isEmpty()) {
+            feature.setFeatureName(updateFeature.getFeatureName());
+        }
+        if (updateFeature.getDescription() != null && !updateFeature.getDescription().isEmpty()) {
+            feature.setDescription(updateFeature.getDescription());
+        }
+        if (updateFeature.getPriority() != null && !updateFeature.getPriority().isEmpty()) {
+            feature.setPriority(updateFeature.getPriority());
+        }
+        if (updateFeature.getDeadline() != null) {
+            feature.setDeadline(updateFeature.getDeadline());
+        }
+
+        return featuresRepository.save(feature);
+    }
+
+    @Override
+    public FeatureDTO updateFeatureWithDTO(int featureId, FeatureDTO featureDTO) throws NotFoundException {
+        featureDTO.setFeatureId(featureId);
+        Feature feature = getFeatureByFeatureId(featureId);
+        Feature featureUpdate = featureMapper.featureDTOToFeature(featureDTO);
+        updateFeature(feature, featureUpdate);
+        return featureMapper.featureToFeatureDTO(updateFeature(feature, featureUpdate));
     }
 
     @Override
