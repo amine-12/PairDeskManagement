@@ -1,7 +1,7 @@
-package com.project.pairdesksystem.buinesslayer;
+package com.project.pairdesksystem.buinesslayer.Feature;
 
-import com.project.pairdesksystem.datalayer.Feature;
-import com.project.pairdesksystem.datalayer.FeatureDTO;
+import com.project.pairdesksystem.datalayer.Feature.Feature;
+import com.project.pairdesksystem.datalayer.Feature.FeatureDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;

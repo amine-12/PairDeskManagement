@@ -2,7 +2,7 @@
   <nav class="navbar-personalized" style="z-index: 1; background-color: #2b3d8c;">
     <ul class="navbar-nav">
       <li class="logo">
-        <a href="" class="nav-link">
+        <a href="" class="nav-links">
           <span class="link-text logo-text">MENU</span>
           <svg
               aria-hidden="true"
@@ -32,7 +32,7 @@
 
       <li class="nav-item">
         <a >
-          <router-link class="nav-link" to="/">
+          <router-link class="nav-links" to="/">
           <svg
               aria-hidden="true"
               focusable="false"
@@ -58,7 +58,7 @@
 
       <li class="nav-item">
         <a >
-          <router-link class="nav-link" to="/features" >
+          <router-link class="nav-links" to="/features" >
           <svg
               aria-hidden="true"
               focusable="false"
@@ -83,7 +83,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="./transactions.html" class="nav-link">
+        <a href="./transactions.html" class="nav-links">
           <svg
               aria-hidden="true"
               focusable="false"
@@ -107,7 +107,7 @@
       </li>
 
       <li class="nav-item">
-        <a href="./budget.html" class="nav-link">
+        <a href="./budget.html" class="nav-links">
           <svg
               aria-hidden="true"
               focusable="false"
@@ -133,7 +133,7 @@
 
 
       <li class="nav-item">
-        <a href="./profile.html" class="nav-link">
+        <a href="./profile.html" class="nav-links">
           <svg
               aria-hidden="true"
               focusable="false"
@@ -157,7 +157,7 @@
       </li>
 
       <li class="nav-item">
-        <a href="./add-accounts.html" class="nav-link">
+        <a href="./add-accounts.html" class="nav-links">
           <svg
               aria-hidden="true"
               focusable="false"
@@ -185,7 +185,7 @@
 
 
       <li class="nav-item" >
-        <a href="../index.html" class="nav-link">
+        <a href="../index.html" class="nav-links">
           <svg
               id="darkIcon"
               aria-hidden="true"
@@ -281,7 +281,7 @@ main {
   margin-top: auto;
 }
 
-.nav-link {
+.nav-links {
   display: flex;
   align-items: center;
   height: 5rem;
@@ -291,7 +291,7 @@ main {
   transition: var(--transition-speed);
 }
 
-.nav-link:hover {
+.nav-links:hover {
   filter: grayscale(0%) opacity(1);
   background: var(--bg-secondary);
   color: var(--text-secondary);
@@ -302,7 +302,7 @@ main {
   margin-left: 1rem;
 }
 
-.nav-link svg {
+.nav-links svg {
   width: 2rem;
   min-width: 2rem;
   margin: 0 1.5rem;
@@ -367,7 +367,7 @@ main {
     flex-direction: row;
   }
 
-  .nav-link {
+  .nav-links {
     justify-content: center;
   }
 

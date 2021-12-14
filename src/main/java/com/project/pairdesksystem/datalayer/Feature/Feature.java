@@ -1,9 +1,6 @@
-package com.project.pairdesksystem.datalayer;
+package com.project.pairdesksystem.datalayer.Feature;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.UniqueElements;
 import java.util.Random;
 import javax.persistence.*;

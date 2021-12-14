@@ -1,8 +1,7 @@
 package com.project.pairdesksystem.presentationlayer;
 
-import com.project.pairdesksystem.buinesslayer.FeatureService;
-import com.project.pairdesksystem.datalayer.Feature;
-import com.project.pairdesksystem.datalayer.FeatureDTO;
+import com.project.pairdesksystem.buinesslayer.Feature.FeatureService;
+import com.project.pairdesksystem.datalayer.Feature.FeatureDTO;
 import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
