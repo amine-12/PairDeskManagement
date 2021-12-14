@@ -25,7 +25,7 @@
       <div class="form-group">
         <label class="col-md-4 control-label" for="description">Description</label>
         <div class="col-md-4">
-          <input id="description" name="description" type="text" placeholder="description" class="form-control input-md" v-model="form.description">
+          <textarea id="description" name="description" type="text" placeholder="description" class="form-control input-md" v-model="form.description"/>
           <p v-if="!descriptionIsValid" class="error-message" style="color: red">Description Required</p>
         </div>
       </div>
@@ -34,9 +34,9 @@
         <label class="col-md-4 control-label" for="priority">Priority</label>
         <div class="col-md-4">
           <select id="priority" name="priority" class="form-control" v-model="form.priority">
-            <option value="">Low</option>
-            <option value="">Medium</option>
-            <option value="">High</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
           </select>
         </div>
       </div>
