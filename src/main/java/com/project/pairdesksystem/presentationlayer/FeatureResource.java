@@ -3,12 +3,14 @@ package com.project.pairdesksystem.presentationlayer;
 import com.project.pairdesksystem.buinesslayer.FeatureService;
 import com.project.pairdesksystem.datalayer.Feature;
 import com.project.pairdesksystem.datalayer.FeatureDTO;
+import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -27,6 +29,13 @@ public class FeatureResource {
     @GetMapping("/api/all")
     public List<FeatureDTO> getFeatureList() {
         return featureService.getAllFeaturesDTO();
+    }
+
+    @CrossOrigin
+    @GetMapping("/api/{featureId}")
+    public FeatureDTO findFeature(@PathVariable int featureId) throws NotFoundException {
+        FeatureDTO featureDTO = featureService.getFeatureDTOByFeatureId(featureId);
+        return featureDTO;
     }
 
     @CrossOrigin

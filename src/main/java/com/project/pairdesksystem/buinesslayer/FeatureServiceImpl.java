@@ -3,11 +3,13 @@ package com.project.pairdesksystem.buinesslayer;
 import com.project.pairdesksystem.datalayer.Feature;
 import com.project.pairdesksystem.datalayer.FeatureDTO;
 import com.project.pairdesksystem.datalayer.FeaturesRepository;
+import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +26,18 @@ public class FeatureServiceImpl implements FeatureService{
     @Override
     public Feature createFeature(Feature feature) {
         return featuresRepository.save(feature);
+    }
+
+    @Override
+    public Feature getFeatureByFeatureId(int featureId) throws NotFoundException {
+        return featuresRepository.findByFeatureId(featureId).orElseThrow(() -> new NotFoundException("No feature found for featureId: " + featureId));
+    }
+
+    @Override
+    public FeatureDTO getFeatureDTOByFeatureId(int featureId) throws NotFoundException {
+        Feature feature = getFeatureByFeatureId(featureId);
+        FeatureDTO featureDTO = featureMapper.featureToFeatureDTO(feature);
+        return featureDTO;
     }
 
     @Override
