@@ -214,7 +214,6 @@ export default {
     try {
       axios.get("http://localhost:8080/features/api/all").then((resp) => {
         this.list = resp.data;
-        console.log(this.list)
       })
     }
     catch(error){
