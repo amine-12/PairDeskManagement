@@ -2,15 +2,25 @@ package com.project.pairdesksystem.datalayer;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
-
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.UniqueElements;
+import java.util.Random;
 import javax.persistence.*;
 import java.util.Date;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Feature {
+    Random rand = new Random();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @UniqueElements(groups = Feature.class)
+    private Integer featureId;
 
     private Integer task_id;
 
@@ -28,6 +38,14 @@ public class Feature {
 
     public Integer getId() {
         return id;
+    }
+
+    public Integer getFeatureId() {
+        return featureId;
+    }
+
+    public void setFeatureId(Integer featureId) {
+        this.featureId = rand.nextInt(99999);
     }
 
     public void setId(Integer id) {

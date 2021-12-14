@@ -2,6 +2,7 @@ package com.project.pairdesksystem.presentationlayer;
 
 import com.project.pairdesksystem.buinesslayer.FeatureService;
 import com.project.pairdesksystem.datalayer.Feature;
+import com.project.pairdesksystem.datalayer.FeatureDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +25,8 @@ public class FeatureResource {
 
     @CrossOrigin
     @GetMapping("/api/all")
-    public Iterable<Feature> getFeatureList() {
-        return featureService.getAllFeatures();
+    public List<FeatureDTO> getFeatureList() {
+        return featureService.getAllFeaturesDTO();
     }
 
     @CrossOrigin
@@ -35,7 +36,8 @@ public class FeatureResource {
             path = "/api/add"
     ) // Map ONLY POST Requests
     @ResponseStatus(HttpStatus.CREATED)
-    public Feature addNewFeature (@RequestBody Feature feature) {
-        return featureService.createFeature(feature);
+    public FeatureDTO addNewFeature (@RequestBody FeatureDTO feature) {
+        LOG.debug("THIS IS THE ID: " + feature.getFeatureId());
+        return featureService.createFeatureDTO(feature);
     }
 }

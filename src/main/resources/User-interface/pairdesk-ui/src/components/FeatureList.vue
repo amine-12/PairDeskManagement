@@ -158,12 +158,7 @@ body {
   }
 }
 
-.columns {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 100%;
-}
+
 .center {
   margin: auto;
   width: 70%;
@@ -184,7 +179,6 @@ body {
     <h1 class="heading__title">Features List</h1>
   </div>
     <div class="main-container row center" >
-
       <div class="column" v-for="feature in list" v-bind:key="feature.id">
         <div class="cards">
           <div class="card card-1">
