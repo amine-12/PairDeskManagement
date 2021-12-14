@@ -185,7 +185,7 @@ body {
             <h2 class="card__title">{{ feature.featureName }}</h2>
             <h2 class="card__body">{{ feature.description }}</h2>
             <p class="card__apply">
-              <a class="card__link" href="#">Details <i class="fas fa-arrow-right"></i></a>
+              <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }" class="card__link">Details</router-link>
             </p>
           </div>
         </div>

@@ -19,6 +19,12 @@ const routes = [
     path: '/features',
     name: 'Features',
     component: () => import(/* webpackChunkName: "about" */ '../views/FeaturesPage.vue')
+  },
+  {
+    path: '/features/:featureId',
+    name: 'FeaturesDetail',
+    params: true,
+    component: () => import(/* webpackChunkName: "about" */ '../views/FeatureDetailPage.vue')
   }
 ]
 
