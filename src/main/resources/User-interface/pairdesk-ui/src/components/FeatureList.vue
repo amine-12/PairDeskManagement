@@ -182,11 +182,16 @@ body {
     <div class="main-container row center" >
       <div class="column" v-for="feature in list" v-bind:key="feature.featureId">
         <div class="cards">
+
           <div class="card card-1">
             <h2 class="card__title">{{ feature.featureName }}</h2>
+
             <h2 class="card__body">{{ feature.description }}</h2>
+
+
             <p class="card__apply">
               <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }" class="card__link">Details</router-link>
+              <button style="margin-left: 50px;" @click="deleteFeature(feature.featureId)" class="btn btn-danger">Delete </button>
             </p>
           </div>
         </div>
@@ -214,6 +219,18 @@ export default {
     catch(error){
       console.log(error)
     }
+  },
+  methods:{
+    deleteFeature(featureId){
+      console.log("form is valid")
+      axios.delete('http://localhost:8080/features/api/'+featureId, this.form)
+          .then((resp) => {
+            this.form = resp.data;
+            console.log(this.form);
+          })
+    }
+
+
   }
 }
 </script>

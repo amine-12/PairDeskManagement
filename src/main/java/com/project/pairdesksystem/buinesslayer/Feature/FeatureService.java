@@ -14,4 +14,6 @@ public interface FeatureService {
 
     List<FeatureDTO> getAllFeaturesDTO();
     FeatureDTO createFeatureDTO(FeatureDTO featureDTO);
+
+    public void deleteFeature(int featureId);
 }

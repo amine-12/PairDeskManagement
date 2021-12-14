@@ -48,4 +48,12 @@ public class FeatureResource {
         LOG.debug("THIS IS THE ID: " + feature.getFeatureId());
         return featureService.createFeatureDTO(feature);
     }
+
+    @CrossOrigin
+    @DeleteMapping("/api/{featureId}")
+    public void deleteFeature(@PathVariable int featureId) throws NotFoundException {
+        FeatureDTO featureDTO = featureService.getFeatureDTOByFeatureId(featureId);
+        featureService.deleteFeature(featureId);
+    }
+
 }
