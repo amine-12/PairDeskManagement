@@ -29,8 +29,6 @@ public class Task {
     private String status;
     private String description;
 
-
-
     public Integer getId() {
         return id;
     }
