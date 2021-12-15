@@ -10,7 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 public class Feature {
-    Random rand = new Random();
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -18,8 +18,6 @@ public class Feature {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @UniqueElements(groups = Feature.class)
     private Integer featureId;
-
-    private Integer task_id;
 
     private Integer user_id;
 
@@ -42,19 +40,12 @@ public class Feature {
     }
 
     public void setFeatureId(Integer featureId) {
+        Random rand = new Random();
         this.featureId = rand.nextInt(99999);
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getTask_id() {
-        return task_id;
-    }
-
-    public void setTask_id(Integer task_id) {
-        this.task_id = task_id;
     }
 
     public Integer getUser_id() {

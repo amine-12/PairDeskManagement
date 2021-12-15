@@ -9,8 +9,8 @@
 
             <h1 class="m-b-20">{{ info.featureName }}</h1>
                 <h5 class="media-heading mb-0 mt-0">Assigned to: //User Placeholder</h5><span class="badge badge-danger">Urgent</span></div>
-            <h3 class="m-b-5">Priority</h3>
-            <p class="text-muted">{{info.priority}}//TODO</p>
+            <h2 class="m-b-5">Priority</h2>
+            <h4 >{{info.priority}}</h4>
             <h3 class="m-b-5">Description</h3>
             <p class="text-muted">{{info.description}}</p>
             <ul class="list-inline task-dates m-b-0 mt-5">

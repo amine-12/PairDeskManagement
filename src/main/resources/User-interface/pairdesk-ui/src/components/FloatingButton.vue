@@ -236,7 +236,7 @@ export default {
   height:60px;
   bottom:50px;
   right:50px;
-  background-color:#0C9;
+  background-color:#2b3d8c;
   color:#FFF;
   border-radius:50px;
   text-align:center;

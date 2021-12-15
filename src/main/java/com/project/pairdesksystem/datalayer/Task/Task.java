@@ -15,7 +15,6 @@ import java.util.Random;
 @AllArgsConstructor
 @Entity
 public class Task {
-    Random rand = new Random();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -45,6 +44,7 @@ public class Task {
     }
 
     public void setTaskId(Integer taskId) {
+        Random rand = new Random();
         this.taskId = rand.nextInt(99999);;
     }
 
