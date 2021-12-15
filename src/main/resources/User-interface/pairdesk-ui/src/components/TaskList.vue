@@ -2,9 +2,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
 
 
-  <div class="container">
+  <div class="container2">
     <div class="col-md-12 col-12 col-sm-12">
-      <div class="card">
+      <div class="card1">
         <div class="card-header">
           <h4>Task List</h4>
         </div>
@@ -14,6 +14,7 @@
               <tbody><tr>
 
                 <th>Task Name</th>
+                <th>DESCRIPTION</th>
                 <th>PRIORITY</th>
                 <th>STATUS</th>
                 <th>Action</th>
@@ -26,9 +27,8 @@
                 <!--                  </div>-->
                 <!--                </td>-->
                 <td>{{ task.taskName }}</td>
-                <td class="align-middle">
-                  {{ task.priority}}
-                </td>
+                <td>{{ task.description }}</td>
+                <td>{{ task.priority}} </td>
                 <td>{{ task.status }}</td>
                 <td>
                   <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>
@@ -76,7 +76,11 @@ body{
   margin-top:20px;
 }
 
-.card {
+.container2{
+  margin-right: 10%;
+  margin-left: 10%;
+}
+.card1 {
   background-color: #fff;
   border-radius: 10px;
   border: none;
@@ -85,7 +89,7 @@ body{
   box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,0.1), 0 0.9375rem 1.40625rem rgba(90,97,105,0.1), 0 0.25rem 0.53125rem rgba(90,97,105,0.12), 0 0.125rem 0.1875rem rgba(90,97,105,0.1);
 }
 
-.card .card-header {
+.card1 .card-header {
   border-bottom-color: #f9f9f9;
   line-height: 30px;
   -ms-grid-row-align: center;
@@ -96,7 +100,7 @@ body{
   align-items: center;
 }
 
-.card .card-header, .card .card-body, .card .card-footer {
+.card1 .card-header, .card1 .card-body, .card1 .card-footer {
   background-color: transparent;
   padding: 20px 25px;
 }

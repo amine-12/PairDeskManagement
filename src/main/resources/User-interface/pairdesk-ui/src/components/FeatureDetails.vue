@@ -1,7 +1,7 @@
 <template>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
   <div class="content">
-    <div class="container">
+    <div class="container2">
       <div class="row">
         <div class="col-lg-8">
           <div class="card-box task-detail">
@@ -17,7 +17,7 @@
 
               <li>
                 <h3 class="m-b-5">Due Date</h3>
-                <p>{{ info.deadline}}<small class="text-muted">12:00 PM</small></p>
+                <p>{{ formattedDate}}</p>
               </li>
             </ul>
             <div class="clearfix"></div>
@@ -54,6 +54,7 @@ export default {
     try {
       axios.get("http://localhost:8080/features/api/" + this.$route.params.featureId).then((resp) => {
         this.info = resp.data;
+        this.formattedDate = new Date(this.info.deadline)
         console.log(this.info)
         console.log(this.$route.params.featureId)
       })
@@ -66,5 +67,8 @@ export default {
 </script>
 
 <style scoped>
-
+.container2{
+  margin-right: 10%;
+  margin-left: 10%;
+}
 </style>
