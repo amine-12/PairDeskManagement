@@ -185,12 +185,11 @@ body {
         <div class="cards">
 
           <div class="card card-1">
-            <h2 class="card__title">{{ feature.featureName }}</h2>
+            <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }" class="heading__link "> <h2 class="card__title">{{ feature.featureName }}</h2></router-link>
 
             <h2 class="card__body">{{ feature.description }}</h2>
 
             <p class="card__apply">
-              <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }" class="card__link">Details</router-link>
               <button style="margin-left: 50px;" @click="deleteFeature(feature.featureId)" class="btn btn-danger">Delete </button>
             </p>
           </div>

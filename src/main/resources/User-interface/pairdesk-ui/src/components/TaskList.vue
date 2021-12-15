@@ -6,7 +6,7 @@
     <div class="col-md-12 col-12 col-sm-12">
       <div class="card1">
         <div class="card-header">
-          <h4>Task List</h4>
+          <h4>Tasks List</h4>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -20,15 +20,9 @@
                 <th>Action</th>
               </tr>
               <tr v-for="task in list" v-bind:key="task.featureId">
-                <!--                <td class="p-0 text-center">-->
-                <!--                  <div class="custom-checkbox custom-control">-->
-                <!--                    <input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-1">-->
-                <!--                    <label for="checkbox-1" class="custom-control-label">&nbsp;</label>-->
-                <!--                  </div>-->
-                <!--                </td>-->
                 <td>{{ task.taskName }}</td>
                 <td>{{ task.description }}</td>
-                <td>{{ task.priority}} </td>
+                <td>{{ task.priority }} </td>
                 <td>{{ task.status }}</td>
                 <td>
                   <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>
@@ -59,8 +53,6 @@ export default {
     try {
       axios.get("http://localhost:8080/features/api/tasks/" +  this.$route.params.featureId).then((resp) => {
         this.list = resp.data;
-        console.log(this.list)
-
       })
     }
     catch(error){
@@ -68,6 +60,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <style scoped>

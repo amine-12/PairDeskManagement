@@ -62,9 +62,6 @@ export default {
           document.getElementById("pC").style.color = "red"
         }
         this.formattedDate = new Date(this.info.deadline)
-        console.log(this.info)
-        console.log(this.priorityColor)
-        console.log(this.$route.params.featureId)
       })
     }
     catch(error){
