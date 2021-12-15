@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.Date;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -54,5 +55,11 @@ public class FeatureAPITests {
         featRep.findAll();
         assertEquals(featRep.findAll().size(), 2);
 
+    }
+
+    @Test
+    void get_Features_By_Id(){
+        Feature feat = featRep.findById(1).get();
+        assertEquals(feat.getFeatureName(), "MyFeature");
     }
 }
