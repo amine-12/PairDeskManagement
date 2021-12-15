@@ -10,13 +10,12 @@
     <div class="modal-content">
       <div class="modal-header">
         <span class="close">&times;</span>
-        <h2>Modal Header</h2>
+
       </div>
       <div class="modal-body">
         <form class="form-horizontal" v-on:submit.prevent="submitForm" @submit="checkForm">
           <fieldset>
             <h1>New Task</h1>
-
             <div class="form-group">
               <label class="col-md-4 control-label" for="taskName">Task Name:</label>
               <div class="col-md-4">
@@ -47,7 +46,8 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="submit"></label>
               <div class="col-md-4">
-                <button :disabled="!formIsValid" id="submit" name="submit" class="btn btn-primary">Create Task</button>
+                <button :disabled="!formIsValid" id="submit" name="submit" class="btn btn-primary" style="margin-right: 15%">Create Task</button>
+                <button type="reset" class="btn btn-primary">Reset</button>
               </div>
             </div>
           </fieldset>
@@ -167,7 +167,7 @@ export default {
 /* Modal Content */
 .modal-content {
   background-color: #fefefe;
-  width: 50%;
+  width: 30%;
   -webkit-animation-name: slideIn;
   -webkit-animation-duration: 0.4s;
   animation-name: slideIn;
@@ -199,7 +199,9 @@ export default {
   color: white;
 }
 
-.modal-body {padding: 2px 16px;}
+.modal-body {
+  left: 30%;
+}
 
 .modal-footer {
   padding: 2px 16px;

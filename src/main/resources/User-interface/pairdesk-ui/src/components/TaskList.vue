@@ -110,6 +110,7 @@ body{
   border-bottom: 1px solid rgba(0,0,0,.125);
 }
 
+
 .table:not(.table-sm) thead th {
   border-bottom: none;
   background-color: #e9e9eb;
