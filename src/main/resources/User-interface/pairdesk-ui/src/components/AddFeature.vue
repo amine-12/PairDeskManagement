@@ -70,7 +70,7 @@ export default {
     return {
       form: {
         featureName: '',
-        priority: 'TEST',
+        priority: '',
         description: '',
         deadline: ''
       },

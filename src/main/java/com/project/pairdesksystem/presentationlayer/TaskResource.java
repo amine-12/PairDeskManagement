@@ -44,7 +44,7 @@ public class TaskResource {
             path = "/api/task/add"
     ) // Map ONLY POST Requests
     @ResponseStatus(HttpStatus.CREATED)
-    public TaskDTO addNewFeature (@RequestBody TaskDTO task) {
+    public TaskDTO addNewTask (@RequestBody TaskDTO task) {
         LOG.debug("THIS IS THE ID: " + task.getTaskId());
         return taskService.createTaskDTO(task);
     }

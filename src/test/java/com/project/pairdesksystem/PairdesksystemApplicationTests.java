@@ -37,7 +37,6 @@ public class PairdesksystemApplicationTests {
             f1.setDescription("Some Feature here");
             f1.setPriority("MEDIUM");
             f1.setUser_id(1);
-            f1.setTask_id(1);
             f1.setProgress(2);
         featRep.save(f1);
         Feature f2 = new Feature();
@@ -48,7 +47,6 @@ public class PairdesksystemApplicationTests {
             f2.setDescription("Some Feature here");
             f2.setPriority("MEDIUM");
             f2.setUser_id(1);
-            f2.setTask_id(1);
             f2.setProgress(2);
             featRep.save(f2);
     }
