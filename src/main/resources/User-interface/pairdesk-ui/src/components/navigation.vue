@@ -156,34 +156,6 @@
         </a>
       </li>
 
-      <li class="nav-item">
-        <a href="./add-accounts.html" class="nav-links">
-          <svg
-              aria-hidden="true"
-              focusable="false"
-              data-prefix="fad"
-              data-icon="space-station-moon-alt"
-              role="img"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              class="svg-inline--fa fa-space-station-moon-alt fa-w-16 fa-5x"
-          >
-            <g class="fa-group">
-              <path
-                  fill="currentColor"
-                  d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"
-                  class="fa-secondary"
-              ></path>
-
-            </g>
-          </svg>
-          <span class="link-text">ADD ACCOUNTS</span>
-        </a>
-      </li>
-
-
-
-
       <li class="nav-item" >
         <a href="../index.html" class="nav-links">
           <svg

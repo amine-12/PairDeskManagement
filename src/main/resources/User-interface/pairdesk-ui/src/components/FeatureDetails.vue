@@ -1,7 +1,7 @@
 <template>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
   <div class="content">
-    <div class="container">
+    <div class="container2">
       <div class="row">
         <div class="col-lg-8">
           <div class="card-box task-detail">
@@ -10,14 +10,14 @@
             <h1 class="m-b-20">{{ info.featureName }}</h1>
                 <h5 class="media-heading mb-0 mt-0">Assigned to: //User Placeholder</h5><span class="badge badge-danger">Urgent</span></div>
             <h2 class="m-b-5">Priority</h2>
-            <h4 >{{info.priority}}</h4>
+            <h4 id="pC">{{info.priority}}</h4>
             <h3 class="m-b-5">Description</h3>
             <p class="text-muted">{{info.description}}</p>
             <ul class="list-inline task-dates m-b-0 mt-5">
 
               <li>
                 <h3 class="m-b-5">Due Date</h3>
-                <p>{{ info.deadline}}<small class="text-muted">12:00 PM</small></p>
+                <p>{{ formattedDate}}</p>
               </li>
             </ul>
             <div class="clearfix"></div>
@@ -54,8 +54,14 @@ export default {
     try {
       axios.get("http://localhost:8080/features/api/" + this.$route.params.featureId).then((resp) => {
         this.info = resp.data;
-        console.log(this.info)
-        console.log(this.$route.params.featureId)
+        if(this.info.priority === "Low"){
+          document.getElementById("pC").style.color = "green"
+        }else if(this.info.priority === "Medium"){
+          document.getElementById("pC").style.color = "orange"
+        }else if(this.info.priority === "High"){
+          document.getElementById("pC").style.color = "red"
+        }
+        this.formattedDate = new Date(this.info.deadline)
       })
     }
     catch(error){
@@ -66,5 +72,8 @@ export default {
 </script>
 
 <style scoped>
-
+.container2{
+  margin-right: 10%;
+  margin-left: 10%;
+}
 </style>
