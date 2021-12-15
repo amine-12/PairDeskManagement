@@ -10,7 +10,7 @@
             <h1 class="m-b-20">{{ info.featureName }}</h1>
                 <h5 class="media-heading mb-0 mt-0">Assigned to: //User Placeholder</h5><span class="badge badge-danger">Urgent</span></div>
             <h2 class="m-b-5">Priority</h2>
-            <h4 >{{info.priority}}</h4>
+            <h4 id="pC">{{info.priority}}</h4>
             <h3 class="m-b-5">Description</h3>
             <p class="text-muted">{{info.description}}</p>
             <ul class="list-inline task-dates m-b-0 mt-5">
@@ -54,8 +54,16 @@ export default {
     try {
       axios.get("http://localhost:8080/features/api/" + this.$route.params.featureId).then((resp) => {
         this.info = resp.data;
+        if(this.info.priority === "Low"){
+          document.getElementById("pC").style.color = "green"
+        }else if(this.info.priority === "Medium"){
+          document.getElementById("pC").style.color = "orange"
+        }else if(this.info.priority === "High"){
+          document.getElementById("pC").style.color = "red"
+        }
         this.formattedDate = new Date(this.info.deadline)
         console.log(this.info)
+        console.log(this.priorityColor)
         console.log(this.$route.params.featureId)
       })
     }
