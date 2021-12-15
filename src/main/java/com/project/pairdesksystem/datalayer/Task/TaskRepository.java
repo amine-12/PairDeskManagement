@@ -10,5 +10,6 @@ import java.util.Optional;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Integer> {
     List<Task> findAllByFeatureId(int featureId);
+    //find by task id. useful for delete and update
     Optional<Task> findByTaskId(int taskId);
 }
