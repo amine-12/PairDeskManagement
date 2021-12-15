@@ -186,15 +186,18 @@ body {
 
           <div class="card card-1">
             <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }" class="heading__link "> <h2 class="card__title">{{ feature.featureName }}</h2></router-link>
-
             <h2 class="card__body">{{ feature.description }}</h2>
             <p id="id" hidden>{{feature.featureId}}</p>
-            <button v-on:click="isVisible = !isVisible; getId(feature.featureId)" @click="goto()" class="card__title" style="background: transparent; border: none; text-align: end" name="editFeatureButton">
-              <img src="@/assets/pencil.png" alt="Edit Feature" style="height: 30px; width: 30px"/>
-            </button>
+            <div style="text-align: right" class="card__title">
+              <button v-on:click="getId(feature.featureId); hideShowFunction();" @click="goto()" style="background: transparent; border: none;" name="editFeatureButton">
+                <img src="@/assets/pencil.png" alt="Edit Feature" style="height: 30px; width: 30px"/>
+              </button>
+              <button @click="deleteFeature(feature.featureId)" style="background: transparent; border: none;" name="deleteFeatureButton">
+                <img src="@/assets/delete.png" alt="Delete Feature" style="height: 30px; width: 30px"/>
+              </button>
+            </div>
             <p class="card__apply">
               <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }" class="card__link">Details</router-link>
-              <button style="margin-left: 50px;" @click="deleteFeature(feature.featureId)" class="btn btn-danger">Delete </button>
             </p>
           </div>
         </div>
@@ -202,7 +205,7 @@ body {
     </div>
   </div>
 
-  <div class="col-xs-1" align="center" v-show="isVisible">
+  <div class="col-xs-1" align="center" id="updateFormDiv" style="display: none">
     <form class="form-horizontal" v-on:submit.prevent="submitForm" @submit="checkForm">
       <fieldset>
         <h1>Edit Feature</h1>
@@ -296,6 +299,11 @@ export default {
     }//may also use vuelidate in the future to perform input validation
   },
   methods: {
+    // getFeatureById() {
+    //   axios.get("http://localhost:8080/features/api/" + this.fid).then((resp) => {
+    //     this.list = resp.data;
+    //   })
+    // },
     submitForm() {
       if(this.formIsValid) {
         console.log("form is valid")
@@ -320,6 +328,14 @@ export default {
       this.fid = id;
       console.log(this.fid)
       return id;
+    },
+    hideShowFunction: function (){
+      let x = document.getElementById("updateFormDiv");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
     },
     deleteFeature(featureId) {
       let confirmed = confirm("Are you sure you would like to delete this feature ");
