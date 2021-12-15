@@ -196,9 +196,6 @@ body {
                 <img src="@/assets/delete.png" alt="Delete Feature" style="height: 30px; width: 30px"/>
               </button>
             </div>
-            <p class="card__apply">
-              <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }" class="card__link">Details</router-link>
-            </p>
           </div>
         </div>
       </div>
