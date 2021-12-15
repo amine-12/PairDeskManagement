@@ -1,6 +1,6 @@
 <template>
   <feature-details></feature-details>
-  <floating-button></floating-button>
+  <floating-button ></floating-button>
 </template>
 
 <script>

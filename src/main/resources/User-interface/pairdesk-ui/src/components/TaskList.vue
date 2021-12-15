@@ -60,7 +60,6 @@ export default {
       axios.get("http://localhost:8080/features/api/tasks/" +  this.$route.params.featureId).then((resp) => {
         this.list = resp.data;
         console.log(this.list)
-        console.log(this.$route.params.featureId)
 
       })
     }
