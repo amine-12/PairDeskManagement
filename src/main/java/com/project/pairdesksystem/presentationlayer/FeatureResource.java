@@ -38,6 +38,15 @@ public class FeatureResource {
     }
 
     @CrossOrigin
+    @PutMapping( value = "/api/update/{featureId}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public FeatureDTO updateFeature(@PathVariable int featureId, @RequestBody FeatureDTO featureRequest) throws NotFoundException {
+        return featureService.updateFeatureWithDTO(featureId,featureRequest);
+    }
+
+    @CrossOrigin
     @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE,

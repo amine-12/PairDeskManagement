@@ -4,12 +4,12 @@
   <div class="col-xs-1" align="center">
     <label class="col-md-4 control-label" for="submit"></label>
     <div class="col-md-4">
-      <button v-on:click="isVisible = !isVisible" @click="goto()" id="viewFeatureCreationForm" name="viewFeatureCreationForm" class="btn btn-primary">Add a new feature</button>
+      <button v-on:click="hideShowFunction()" @click="goto()" id="viewFeatureCreationForm" name="viewFeatureCreationForm" class="btn btn-primary">Add a new feature</button>
     </div>
   </div>
   <p></p>
 
-  <div class="col-xs-1" align="center" v-show="isVisible">
+  <div class="col-xs-1" align="center" id="addFeatureForm" style="display: none">
   <form class="form-horizontal" v-on:submit.prevent="submitForm" @submit="checkForm">
     <fieldset>
       <h1>New Feature</h1>
@@ -107,6 +107,14 @@ export default {
         });
       }else{
         console.log("form is invalid")
+      }
+    },
+    hideShowFunction: function (){
+      let x = document.getElementById("addFeatureForm");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
       }
     },
     goto() {

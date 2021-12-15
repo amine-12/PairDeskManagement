@@ -15,5 +15,8 @@ public interface FeatureService {
     List<FeatureDTO> getAllFeaturesDTO();
     FeatureDTO createFeatureDTO(FeatureDTO featureDTO);
 
+    Feature updateFeature(Feature feature, Feature updateFeature);
+    FeatureDTO updateFeatureWithDTO(int featureId, FeatureDTO featureDTO) throws NotFoundException;
+
     public void deleteFeature(int featureId);
 }
