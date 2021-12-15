@@ -186,17 +186,73 @@ body {
 
           <div class="card card-1">
             <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }" class="heading__link "> <h2 class="card__title">{{ feature.featureName }}</h2></router-link>
-
             <h2 class="card__body">{{ feature.description }}</h2>
-
-
+            <p id="id" hidden>{{feature.featureId}}</p>
+            <div style="text-align: right" class="card__title">
+              <button v-on:click="getId(feature.featureId); hideShowFunction();" @click="goto()" style="background: transparent; border: none;" name="editFeatureButton">
+                <img src="@/assets/pencil.png" alt="Edit Feature" style="height: 30px; width: 30px"/>
+              </button>
+              <button @click="deleteFeature(feature.featureId)" style="background: transparent; border: none;" name="deleteFeatureButton">
+                <img src="@/assets/delete.png" alt="Delete Feature" style="height: 30px; width: 30px"/>
+              </button>
+            </div>
             <p class="card__apply">
-              <button style="margin-left: 50px;" @click="deleteFeature(feature.featureId)" class="btn btn-danger">Delete </button>
+              <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }" class="card__link">Details</router-link>
             </p>
           </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="col-xs-1" align="center" id="updateFormDiv" style="display: none">
+    <form class="form-horizontal" v-on:submit.prevent="submitForm" @submit="checkForm">
+      <fieldset>
+        <h1>Edit Feature</h1>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="featureName">Feature Name:</label>
+          <div class="col-md-4">
+            <input id="featureName" name="Feature Name" type="text" placeholder="New Feature Name" class="form-control input-md" v-model="form.featureName">
+            <p v-if="!featureNameIsValid" class="error-message" style="color: red">Feature Name Required</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="description">Description</label>
+          <div class="col-md-4">
+            <textarea id="description" name="description" type="text" placeholder="description" class="form-control input-md" v-model="form.description"/>
+            <p v-if="!descriptionIsValid" class="error-message" style="color: red">Description Required</p>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="priority">Priority</label>
+          <div class="col-md-4">
+            <select id="priority" name="priority" class="form-control" v-model="form.priority">
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="deadline">Deadline</label>
+          <div class="col-md-4">
+            <input id="deadline" name="deadline" type="datetime-local" placeholder="deadline" class="form-control input-md" v-model="form.deadline">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="submit"></label>
+          <div class="col-md-4">
+            <button :disabled="!formIsValid" id="submit" name="submit" class="btn btn-primary">Update Feature</button>
+          </div>
+        </div>
+
+      </fieldset>
+    </form>
   </div>
 </template>
 
@@ -205,9 +261,17 @@ import axios from "axios";
 
 export default {
   name:"FeatureList",
-  data()
-  {
-    return {list:undefined}
+  data() {
+    return {
+      list:undefined,
+      fid:undefined,
+      form: {
+        featureName: '',
+        priority: '',
+        description: '',
+        deadline: ''
+      },
+      isVisible: false}
   },
   mounted()
   {
@@ -220,7 +284,59 @@ export default {
       console.log(error)
     }
   },
-  methods:{
+  computed: {
+
+    featureNameIsValid() {
+      return !!this.form.featureName
+    },
+
+    descriptionIsValid() {
+      return !!this.form.description
+    },
+
+    formIsValid() {
+      return this.featureNameIsValid && this.descriptionIsValid
+    }//may also use vuelidate in the future to perform input validation
+  },
+  methods: {
+    // getFeatureById() {
+    //   axios.get("http://localhost:8080/features/api/" + this.fid).then((resp) => {
+    //     this.list = resp.data;
+    //   })
+    // },
+    submitForm() {
+      if(this.formIsValid) {
+        console.log("form is valid")
+        axios.put('http://localhost:8080/features/api/update/' + this.fid, this.form) //WORKING WHEN PUTTING THE ID DIRECTLY, LOOK AT ARTICLE AND FIND HOW TO PASS ID
+            .then((resp) => {
+              this.form = resp.data;
+              console.log(this.fid);
+              console.log(resp);
+            })
+            .catch((error) => {
+              console.log(error)
+            }).finally(() => {
+        });
+      }else{
+        console.log("form is invalid")
+      }
+    },
+    goto() {
+      window.scrollTo(0, document.body.scrollHeight);
+    },
+    getId(id) {
+      this.fid = id;
+      console.log(this.fid)
+      return id;
+    },
+    hideShowFunction: function (){
+      let x = document.getElementById("updateFormDiv");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    },
     deleteFeature(featureId) {
       let confirmed = confirm("Are you sure you would like to delete this feature ");
 
@@ -233,8 +349,6 @@ export default {
           })
       }
     }
-
-
   }
 }
 </script>
