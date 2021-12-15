@@ -51,4 +51,19 @@ public class TaskServiceImpl implements TaskService{
         Task task = taskMapper.taskDTOToTask(taskDTO);
         return taskMapper.taskToTaskDTO(createTask(task));
     }
+
+    @Override
+    public void deleteTask(int taskId) {
+        log.debug("task object is deleted with this id: " + taskId);
+        Task task = taskRepository.findByTaskId(taskId).orElse(new Task());
+        if(task.getTaskId() != null)
+            taskRepository.delete(task);
+
+        log.debug("task deleted");
+    }
+
+    @Override
+    public Task getTaskByTaskId(int taskId) throws NotFoundException {
+        return taskRepository.findByTaskId(taskId).orElseThrow(() -> new NotFoundException("No task found for featureId: " + taskId));
+    }
 }

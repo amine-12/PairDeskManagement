@@ -26,7 +26,12 @@
                 <td>{{ task.status }}</td>
                 <td>
                   <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                  <a class="btn btn-danger btn-action" data-toggle="tooltip" title="" data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')" data-original-title="Delete"><i class="fas fa-trash"></i></a>
+
+                  <a class="btn btn-danger btn-action" @click="deleteTask(task.taskId)" data-toggle="tooltip" title=""
+                     data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?"
+                     data-confirm-yes="alert('Deleted')" data-original-title="Delete">
+                    <i class="fas fa-trash"></i></a>
+
                 </td>
               </tr>
 
@@ -58,6 +63,22 @@ export default {
     catch(error){
       console.log(error)
     }
+  },
+  methods:{
+    deleteTask(taskId) {
+      let confirmed = confirm("Are you sure you would like to delete this task ");
+
+      if(confirmed){
+        console.log("task id : " +taskId);
+        console.log("task form is valid");
+        axios.delete('http://localhost:8080/features/api/tasks/' + taskId, this.form)
+            .then((resp) => {
+              this.form = resp.data;
+              console.log(this.form);
+            })
+      }
+    }
+
   }
 }
 
