@@ -188,7 +188,8 @@ body {
             <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }" class="heading__link "> <h2 class="card__title">{{ feature.featureName }}</h2></router-link>
 
             <h2 class="card__body">{{ feature.description }}</h2>
-            <button v-on:click="isVisible = !isVisible" @click="goto()" class="card__title" style="background: transparent; border: none; text-align: end" name="editFeatureButton">
+            <p id="id" hidden>{{feature.featureId}}</p>
+            <button v-on:click="isVisible = !isVisible; getId(feature.featureId)" @click="goto()" class="card__title" style="background: transparent; border: none; text-align: end" name="editFeatureButton">
               <img src="@/assets/pencil.png" alt="Edit Feature" style="height: 30px; width: 30px"/>
             </button>
             <p class="card__apply">
@@ -260,6 +261,7 @@ export default {
   data() {
     return {
       list:undefined,
+      fid:undefined,
       form: {
         featureName: '',
         priority: '',
@@ -297,10 +299,11 @@ export default {
     submitForm() {
       if(this.formIsValid) {
         console.log("form is valid")
-        axios.post('http://localhost:8080/features/api/update/{featureId}', this.form)
+        axios.put('http://localhost:8080/features/api/update/' + this.fid, this.form) //WORKING WHEN PUTTING THE ID DIRECTLY, LOOK AT ARTICLE AND FIND HOW TO PASS ID
             .then((resp) => {
               this.form = resp.data;
-              console.log(this.form);
+              console.log(this.fid);
+              console.log(resp);
             })
             .catch((error) => {
               console.log(error)
@@ -312,6 +315,11 @@ export default {
     },
     goto() {
       window.scrollTo(0, document.body.scrollHeight);
+    },
+    getId(id) {
+      this.fid = id;
+      console.log(this.fid)
+      return id;
     },
     deleteFeature(featureId) {
       let confirmed = confirm("Are you sure you would like to delete this feature ");
@@ -325,8 +333,6 @@ export default {
           })
       }
     }
-
-
   }
 }
 </script>
