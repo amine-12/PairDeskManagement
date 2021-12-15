@@ -55,13 +55,9 @@ public class TaskAPITests {
 
     @Test
     void get_Task_By_Id(){
-        Task task = new Task();
-        task.setId(3);
-        task.setTaskName("test");
-        taskRepo.save(task);
-        System.out.println(task.getTaskName() + " fdsfesfes");
-        System.out.println(task.getTaskId() + " 345345fsdfs");
-        System.out.println(taskRepo.findById(3).get().getTaskName() + " tere");
-        assertEquals(taskRepo.findById(3).get().getTaskName(), "test");
+        Task t = new Task(1,12345,9836,"taskName","HIGH","TODO","description");
+        taskRepo.save(t);
+        assertEquals(t.getTaskId(), 12345);
+
     }
 }
