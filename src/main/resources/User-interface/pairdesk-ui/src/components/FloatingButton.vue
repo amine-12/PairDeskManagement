@@ -166,7 +166,7 @@ export default {
 /* Modal Content */
 .modal-content {
   background-color: #fefefe;
-  width: 30%;
+  width: 40%;
   -webkit-animation-name: slideIn;
   -webkit-animation-duration: 0.4s;
   animation-name: slideIn;
