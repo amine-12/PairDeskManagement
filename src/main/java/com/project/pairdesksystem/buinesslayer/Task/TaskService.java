@@ -16,4 +16,6 @@ public interface TaskService {
 
     List<TaskDTO> getAllTasksDTO();
     TaskDTO createTaskDTO(TaskDTO taskDTO);
+    Task getTaskByTaskId(int taskId) throws NotFoundException;
+    public void deleteTask(int taskId);
 }

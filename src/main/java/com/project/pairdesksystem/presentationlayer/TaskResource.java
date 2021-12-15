@@ -48,4 +48,12 @@ public class TaskResource {
         LOG.debug("THIS IS THE ID: " + task.getTaskId());
         return taskService.createTaskDTO(task);
     }
+
+
+    @CrossOrigin
+    @DeleteMapping("/api/tasks/{taskId}")
+    public void deleteFeature(@PathVariable int taskId) throws NotFoundException {
+        //TaskDTO taskDTO = taskService.getTaskDTOByFeatureId(taskId);
+        taskService.deleteTask(taskId);
+    }
 }
