@@ -189,6 +189,7 @@ body {
 
             <h2 class="card__body">{{ feature.description }}</h2>
 
+
             <p class="card__apply">
               <button style="margin-left: 50px;" @click="deleteFeature(feature.featureId)" class="btn btn-danger">Delete </button>
             </p>
