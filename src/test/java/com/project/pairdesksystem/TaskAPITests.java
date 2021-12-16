@@ -67,6 +67,12 @@ public class TaskAPITests {
         List<Task> t = taskRepo.findAllByFeatureId(12345);
         assertEquals(t.get(0).getTaskName(), "taskName");
     }
+    @Test
+    void delete_Task_by_Id(){
+        Task t = new Task(1,12345,9836,"taskName","HIGH","TODO","description");
+        taskRepo.delete(t);
+        assertEquals(t.getId(), null);
+    }
 
  
 }
