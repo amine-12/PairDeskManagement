@@ -2,9 +2,7 @@
   <div class="main-container row center" >
   <div class="cards">
 
-    <div class="card card-1">
-      fd
-    </div>
+
     </div>
   </div>
 
