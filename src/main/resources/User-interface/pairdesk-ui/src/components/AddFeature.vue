@@ -14,7 +14,7 @@
     <fieldset>
       <h1>New Feature</h1>
 
-      <div class="form-group">
+      <div class="form-group" id="inputFeatureName">
         <label class="col-md-4 control-label" for="featureName">Feature Name:</label>
         <div class="col-md-4">
           <input id="featureName" name="Feature Name" type="text" placeholder="New Feature Name" class="form-control input-md" v-model="form.featureName">
@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" id="inputFeatureDescription">
         <label class="col-md-4 control-label" for="description">Description</label>
         <div class="col-md-4">
           <textarea id="description" name="description" type="text" placeholder="description" class="form-control input-md" v-model="form.description"/>
@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" id="inputFeaturePriority">
         <label class="col-md-4 control-label" for="priority">Priority</label>
         <div class="col-md-4">
           <select id="priority" name="priority" class="form-control" v-model="form.priority">
@@ -41,14 +41,14 @@
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" id="inputFeatureDeadline">
         <label class="col-md-4 control-label" for="deadline">Deadline</label>
         <div class="col-md-4">
           <input id="deadline" name="deadline" type="datetime-local" placeholder="deadline" class="form-control input-md" v-model="form.deadline">
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" id="inputFeatureSubmit">
         <label class="col-md-4 control-label" for="submit"></label>
         <div class="col-md-4">
           <button :disabled="!formIsValid" id="submit" name="submit" class="btn btn-primary">Create Feature</button>
