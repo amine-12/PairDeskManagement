@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class FeatureAPITests {
     @Autowired
     private FeaturesRepository featRep;
-    @Autowired
+
     private FeatureService featureService;
 
     @BeforeEach
