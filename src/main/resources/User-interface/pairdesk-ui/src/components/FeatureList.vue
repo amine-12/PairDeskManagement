@@ -197,8 +197,8 @@ body {
 <!--            <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }" class="heading__link "> <h2 class="card__title">{{ feature.featureName }}</h2></router-link>-->
             <h2 class="card__body">{{ feature.description }}</h2>
             <p id="id" hidden>{{feature.featureId}}</p>
-            <div style="text-align: right" class="card__title">
-              <button v-on:click="getId(feature.featureId); hideShowFunction();" @click="goto()" style="background: transparent; border: none;" name="editFeatureButton">
+            <div style="text-align: right" class="card__title" id="editDeleteButtonsDiv">
+              <button id="editButton" v-on:click="getId(feature.featureId); hideShowFunction();" @click="goto()" style="background: transparent; border: none;" name="editFeatureButton">
                 <img src="@/assets/pencil.png" alt="Edit Feature" style="height: 30px; width: 30px"/>
               </button>
               <button @click="deleteFeature(feature.featureId)" style="background: transparent; border: none;" name="deleteFeatureButton">
@@ -218,7 +218,7 @@ body {
       <fieldset>
         <h1>Edit Feature</h1>
 
-        <div class="form-group">
+        <div class="form-group" id="inputUpdateFeatureName">
           <label class="col-md-4 control-label" for="featureName">Feature Name:</label>
           <div class="col-md-4">
             <input id="featureName" name="Feature Name" type="text" placeholder="New Feature Name" class="form-control input-md" v-model="form.featureName">
@@ -226,7 +226,7 @@ body {
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" id="inputUpdateFeatureDescription">
           <label class="col-md-4 control-label" for="description">Description</label>
           <div class="col-md-4">
             <textarea id="description" name="description" type="text" placeholder="description" class="form-control input-md" v-model="form.description"/>
@@ -234,7 +234,7 @@ body {
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" id="inputUpdateFeaturePriority">
           <label class="col-md-4 control-label" for="priority">Priority</label>
           <div class="col-md-4">
             <select id="priority" name="priority" class="form-control" v-model="form.priority">
@@ -245,7 +245,7 @@ body {
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" id="inputUpdateFeatureDeadline">
           <label class="col-md-4 control-label" for="deadline">Deadline</label>
           <div class="col-md-4">
             <input id="deadline" name="deadline" type="datetime-local" placeholder="deadline" class="form-control input-md" v-model="form.deadline">
