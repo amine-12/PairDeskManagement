@@ -293,14 +293,6 @@ export default {
     }
   },
   computed: {
-    classObject: function () {
-      console.log(this.list.priority)
-      if (this.priority === 'Low') {
-        return 'background-color: green;'
-      }
-
-      return 'background-color: red;'
-    },
     featureNameIsValid() {
       return !!this.form.featureName
     },
@@ -320,7 +312,6 @@ export default {
     //   })
     // },
     getStatus(property){
-      console.log(property)
       if(property === "Low"){
         return 'background-color: green;'
       }
