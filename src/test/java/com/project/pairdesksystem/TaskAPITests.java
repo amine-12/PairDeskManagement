@@ -10,7 +10,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -69,19 +68,5 @@ public class TaskAPITests {
         assertEquals(t.get(0).getTaskName(), "taskName");
     }
 
-    @Test
-    void delete_Task_by_Id(){
-        Task t = new Task(10,12345,9836,"taskName","HIGH","TODO","description");
-        taskRepo.delete(t);
-        assertEquals(t.getId(), null);
-    }
-
-    @Test
-    void get_Task_By_TaskId(){
-        Task t1 = new Task(10,12345,12345,"tasskName","HIGH","TODO","description");
-        taskRepo.save(t1);
-        Optional<Task> t = taskRepo.findByTaskId(1);
-        assertEquals(t.get().getTaskName(), "tasskName");
-        taskRepo.delete(t1);
-    }
+ 
 }
