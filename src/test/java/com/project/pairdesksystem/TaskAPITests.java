@@ -1,5 +1,8 @@
 package com.project.pairdesksystem;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
+import com.project.pairdesksystem.buinesslayer.Task.TaskService;
+import com.project.pairdesksystem.buinesslayer.Task.TaskServiceImpl;
 import com.project.pairdesksystem.datalayer.Feature.Feature;
 import com.project.pairdesksystem.datalayer.Task.Task;
 import com.project.pairdesksystem.datalayer.Task.TaskRepository;
@@ -11,7 +14,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 @DataJpaTest
@@ -67,4 +71,7 @@ public class TaskAPITests {
         List<Task> t = taskRepo.findAllByFeatureId(12345);
         assertEquals(t.get(0).getTaskName(), "taskName");
     }
+
+
+
 }
