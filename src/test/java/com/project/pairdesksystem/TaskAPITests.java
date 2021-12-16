@@ -79,10 +79,10 @@ public class TaskAPITests {
 
     @Test
     void get_Task_By_TaskId(){
-        Task t1 = new Task(1,12345,12345,"taskName","HIGH","TODO","description");
+        Task t1 = new Task(1,12345,12345,"tasskName","HIGH","TODO","description");
         taskRepo.save(t1);
         Optional<Task> t = taskRepo.findByTaskId(1);
-        assertEquals(t.get().getTaskName(), "taskName");
+        assertEquals(t.get().getTaskName(), "tasskName");
     }
 
 
