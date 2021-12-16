@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "vue-simple-alert": "^1.1.1"
+    "progressbar.js": "^1.1.0",
+    "vue-simple-alert": "^1.1.1",
+    "vue-simple-progress": "^1.1.1"
   }
 }

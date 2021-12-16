@@ -16,8 +16,9 @@
             <ul class="list-inline task-dates m-b-0 mt-5">
 
               <li>
-                <h3 class="m-b-5">Due Date</h3>
+                <h3 class="m-b-5">Deadline</h3>
                 <p>{{ formattedDate}}</p>
+
               </li>
             </ul>
             <div class="clearfix"></div>
@@ -46,7 +47,9 @@ export default {
   data()
   {
     return {
-      info:[]
+      info:[],
+      value: 45,
+      max: 100
     }
   },
   mounted()
@@ -69,6 +72,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <style scoped>
@@ -76,4 +80,5 @@ export default {
   margin-right: 10%;
   margin-left: 10%;
 }
+
 </style>

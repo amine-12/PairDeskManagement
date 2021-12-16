@@ -6,7 +6,7 @@
     <div class="col-md-12 col-12 col-sm-12">
       <div class="card1">
         <div class="card-header">
-          <h4>Tasks List</h4>
+          <h4>Tasks</h4>
         </div>
         <div class="card-body">
           <div class="table-responsive">
