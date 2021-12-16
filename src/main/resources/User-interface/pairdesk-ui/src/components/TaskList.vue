@@ -19,7 +19,7 @@
                 <th>STATUS</th>
                 <th>Action</th>
               </tr>
-              <tr v-for="task in list" v-bind:key="task.featureId">
+              <tr v-for="task in list" v-bind:key="task.featureId" id="rowForTask" v-bind:style="setBackground(task.status)">
                 <td>{{ task.taskName }}</td>
                 <td>{{ task.description }}</td>
                 <td  v-bind:style="getStatus(task.priority)">{{ task.priority }} </td>
@@ -31,6 +31,8 @@
                      data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?"
                      data-confirm-yes="alert('Deleted')" data-original-title="Delete">
                     <i class="fas fa-trash"></i></a>
+
+                  <a class="btn btn-success btn-action" v-on:click="completeTask(task.taskId)" data-toggle="tooltip" title="" data-original-title="Complete"><i class="fas fa-check"></i></a>
 
                 </td>
               </tr>
@@ -51,7 +53,17 @@ export default {
   name: "TaskList",
   data()
   {
-    return {list:undefined}
+    return {
+      list:undefined,
+      tid:undefined,
+      form: {
+        featureId: this.$route.params.featureId,
+        taskName: this.taskName,
+        description: this.description,
+        priority: this.priority,
+        status: "DONE"
+      }
+    }
   },
   mounted()
   {
@@ -86,8 +98,35 @@ export default {
               console.log(this.form);
             })
       }
-    }
+    },
+    setBackground(status) {
+      if(status === "DONE"){
+        return "background-color: #97f7ac";
+      }
+    },
+    completeTask(id) {
+      let confirmed = confirm("Is this task complete?");
+      this.tid = id;
+      console.log(this.tid)
+      if(confirmed){
+          axios.get("http://localhost:8080/features/api/task/" + id).then((resp) => {
+            this.info = resp.data;
+            console.log(this.description)
+            console.log(this.info)
+          })
 
+        axios.put('http://localhost:8080/features/api/tasks/update/' + id, this.form)
+            .then((resp) => {
+              this.form = resp.data;
+              console.log(this.tid);
+              console.log(resp);
+            })
+            .catch((error) => {
+              console.log(error)});
+        document.getElementById("rowForTask").style.backgroundColor = "#97f7ac";
+        return id;
+      }
+    }
   }
 }
 

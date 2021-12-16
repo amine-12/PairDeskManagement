@@ -323,7 +323,7 @@ export default {
     submitForm() {
       if(this.formIsValid) {
         console.log("form is valid")
-        axios.put('http://localhost:8080/features/api/update/' + this.fid, this.form) //WORKING WHEN PUTTING THE ID DIRECTLY, LOOK AT ARTICLE AND FIND HOW TO PASS ID
+        axios.put('http://localhost:8080/features/api/update/' + this.fid, this.form)
             .then((resp) => {
               this.form = resp.data;
               console.log(this.fid);
