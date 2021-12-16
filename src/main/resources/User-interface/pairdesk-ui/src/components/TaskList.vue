@@ -22,7 +22,7 @@
               <tr v-for="task in list" v-bind:key="task.featureId">
                 <td>{{ task.taskName }}</td>
                 <td>{{ task.description }}</td>
-                <td>{{ task.priority }} </td>
+                <td  v-bind:style="getStatus(task.priority)">{{ task.priority }} </td>
                 <td>{{ task.status }}</td>
                 <td>
                   <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>
@@ -65,6 +65,15 @@ export default {
     }
   },
   methods:{
+    getStatus(property){
+      if(property === "Low"){
+        return 'color: #4CC441;'
+      }
+      if(property === "Medium"){
+        return 'color: orange;'
+      }
+      return 'color: red;'
+    },
     deleteTask(taskId) {
       let confirmed = confirm("Are you sure you would like to delete this task ");
 
