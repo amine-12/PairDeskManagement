@@ -98,6 +98,7 @@ export default {
               console.log(this.form);
             })
       }
+      window.location.reload()
     },
     setBackground(status) {
       if(status === "DONE"){
