@@ -52,7 +52,7 @@ public class TaskResource {
 
     @CrossOrigin
     @DeleteMapping("/api/tasks/{taskId}")
-    public void deleteFeature(@PathVariable int taskId) throws NotFoundException {
+    public void deleteTask(@PathVariable int taskId) throws NotFoundException {
         //TaskDTO taskDTO = taskService.getTaskDTOByFeatureId(taskId);
         taskService.deleteTask(taskId);
     }
