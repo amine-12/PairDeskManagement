@@ -100,6 +100,7 @@ body {
 
 .card__title {
   grid-row: 1;
+  height: 45px;
   font-weight: 400;
   color: #5e5fb8;
 }
@@ -172,7 +173,15 @@ body {
     justify-content: center;
   }
 }
-
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  margin-top: 1%;
+}
 </style>
 <template>
   <div>
@@ -185,7 +194,7 @@ body {
         <div class="cards">
 
           <div class="card card-1">
-            <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }" class="heading__link "> <h2 class="card__title">{{ feature.featureName }}</h2></router-link>
+<!--            <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }" class="heading__link "> <h2 class="card__title">{{ feature.featureName }}</h2></router-link>-->
             <h2 class="card__body">{{ feature.description }}</h2>
             <p id="id" hidden>{{feature.featureId}}</p>
             <div style="text-align: right" class="card__title">
@@ -195,6 +204,8 @@ body {
               <button @click="deleteFeature(feature.featureId)" style="background: transparent; border: none;" name="deleteFeatureButton">
                 <img src="@/assets/delete.png" alt="Delete Feature" style="height: 30px; width: 30px"/>
               </button>
+              <span v-bind:style="getStatus(feature.priority)" id="statusDot" style="float: left;" class="dot"></span>
+              <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }" style="float: left; margin-left: 2%;" class="heading__link "> <h2 class="card__title">{{ feature.featureName }}</h2></router-link>
             </div>
           </div>
         </div>
@@ -282,7 +293,14 @@ export default {
     }
   },
   computed: {
+    classObject: function () {
+      console.log(this.list.priority)
+      if (this.priority === 'Low') {
+        return 'background-color: green;'
+      }
 
+      return 'background-color: red;'
+    },
     featureNameIsValid() {
       return !!this.form.featureName
     },
@@ -301,6 +319,16 @@ export default {
     //     this.list = resp.data;
     //   })
     // },
+    getStatus(property){
+      console.log(property)
+      if(property === "Low"){
+        return 'background-color: green;'
+      }
+      if(property === "Medium"){
+        return 'background-color: orange;'
+      }
+      return 'background-color: red;'
+    },
     submitForm() {
       if(this.formIsValid) {
         console.log("form is valid")
