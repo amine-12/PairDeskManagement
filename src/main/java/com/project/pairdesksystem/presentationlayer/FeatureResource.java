@@ -33,8 +33,7 @@ public class FeatureResource {
     @CrossOrigin
     @GetMapping("/api/{featureId}")
     public FeatureDTO findFeature(@PathVariable int featureId) throws NotFoundException {
-        FeatureDTO featureDTO = featureService.getFeatureDTOByFeatureId(featureId);
-        return featureDTO;
+        return featureService.getFeatureDTOByFeatureId(featureId);
     }
 
     @CrossOrigin
