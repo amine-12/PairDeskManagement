@@ -333,6 +333,8 @@ export default {
               console.log(error)
             }).finally(() => {
         });
+        window.location.reload()
+
       }else{
         console.log("form is invalid")
       }
@@ -363,6 +365,7 @@ export default {
             this.form = resp.data;
             console.log(this.form);
           })
+        window.location.reload()
       }
     }
   }
