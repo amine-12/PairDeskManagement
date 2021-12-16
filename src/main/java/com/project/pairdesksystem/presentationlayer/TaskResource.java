@@ -38,6 +38,22 @@ public class TaskResource {
     }
 
     @CrossOrigin
+    @GetMapping("/api/task/{taskId}")
+    public TaskDTO findTask(@PathVariable int taskId) throws NotFoundException {
+        TaskDTO taskDTO = taskService.getTaskDTOByTaskId(taskId);
+        return taskDTO;
+    }
+
+    @CrossOrigin
+    @PutMapping( value = "/api/tasks/update/{taskId}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public TaskDTO updateTask(@PathVariable int taskId, @RequestBody TaskDTO taskRequest) throws NotFoundException {
+        return taskService.updateTaskWithDTO(taskId,taskRequest);
+    }
+
+    @CrossOrigin
     @PostMapping(
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE,

@@ -53,6 +53,13 @@ public class TaskServiceImpl implements TaskService{
     }
 
     @Override
+    public TaskDTO getTaskDTOByTaskId(int taskId) throws NotFoundException {
+        Task task = getTaskByTaskId(taskId);
+        TaskDTO taskDTO = taskMapper.taskToTaskDTO(task);
+        return taskDTO;
+    }
+
+    @Override
     public void deleteTask(int taskId) {
         log.debug("task object is deleted with this id: " + taskId);
         Task task = taskRepository.findByTaskId(taskId).orElse(new Task());
@@ -63,7 +70,34 @@ public class TaskServiceImpl implements TaskService{
     }
 
     @Override
+    public Task updateTask(Task task, Task updateTask) {
+        if (updateTask.getTaskName() != null && !updateTask.getTaskName().isEmpty()) {
+            task.setTaskName(updateTask.getTaskName());
+        }
+        if (updateTask.getDescription() != null && !updateTask.getDescription().isEmpty()) {
+            task.setDescription(updateTask.getDescription());
+        }
+        if (updateTask.getPriority() != null && !updateTask.getPriority().isEmpty()) {
+            task.setPriority(updateTask.getPriority());
+        }
+        if (updateTask.getStatus() != null) {
+            task.setStatus(updateTask.getStatus());
+        }
+
+        return taskRepository.save(task);
+    }
+
+    @Override
+    public TaskDTO updateTaskWithDTO(int taskId, TaskDTO taskDTO) throws NotFoundException {
+        taskDTO.setTaskId(taskId);
+        Task task = getTaskByTaskId(taskId);
+        Task taskUpdate = taskMapper.taskDTOToTask(taskDTO);
+        updateTask(task, taskUpdate);
+        return taskMapper.taskToTaskDTO(updateTask(task, taskUpdate));
+    }
+
+    @Override
     public Task getTaskByTaskId(int taskId) throws NotFoundException {
-        return taskRepository.findByTaskId(taskId).orElseThrow(() -> new NotFoundException("No task found for featureId: " + taskId));
+        return taskRepository.findByTaskId(taskId).orElseThrow(() -> new NotFoundException("No task found for taskId: " + taskId));
     }
 }
