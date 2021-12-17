@@ -25,7 +25,7 @@
                 <td  v-bind:style="getStatus(task.priority)">{{ task.priority }} </td>
                 <td>{{ task.status }}</td>
                 <td>
-                  <a class="btn btn-primary btn-action mr-1"  @click="displayUpdateForm"
+                  <a class="btn btn-primary btn-action mr-1"  @click="displayUpdateForm(task.taskId)"
                      data-toggle="tooltip" title="" data-original-title="Edit">
                     <i class="fas fa-pencil-alt"></i></a>
 
@@ -60,31 +60,31 @@
 
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" @submit="checkForm" v-on:submit.prevent="submitForm">
+        <form class="form-horizontal" @submit="checkForm" v-on:submit.prevent="submitForm2">
           <fieldset>
             <h1>Update this Task</h1>
             <div class="form-group">
               <label class="col-md-4 control-label" for="taskName">Task Name:</label>
               <div class="col-md-4">
-                <input id="taskName" v-model="form.taskName" class="form-control input-md" name="Feature Name"
+                <input id="taskName" v-model="form3.taskName" class="form-control input-md" name="Feature Name"
                        placeholder="New Task Name" type="text">
-                <p v-if="!featureNameIsValid" class="error-message" style="color: red">Task Name Required</p>
+                <p v-if="!featureNameIsValid2" class="error-message" style="color: red">Task Name Required</p>
               </div>
             </div>
 
             <div class="form-group">
               <label class="col-md-4 control-label" for="description">Description</label>
               <div class="col-md-4">
-                <textarea id="description" v-model="form.description" class="form-control input-md" name="description"
+                <textarea id="description" v-model="form3.description" class="form-control input-md" name="description"
                           placeholder="description" type="text"/>
-                <p v-if="!descriptionIsValid" class="error-message" style="color: red">Description Required</p>
+                <p v-if="!descriptionIsValid2" class="error-message" style="color: red">Description Required</p>
               </div>
             </div>
 
             <div class="form-group">
               <label class="col-md-4 control-label" for="priority">Priority</label>
               <div class="col-md-4">
-                <select id="priority" v-model="form.priority" class="form-control" name="priority">
+                <select id="priority" v-model="form3.priority" class="form-control" name="priority">
                   <option value="Low">Low</option>
                   <option value="Medium">Medium</option>
                   <option value="High">High</option>
@@ -95,7 +95,7 @@
             <div class="form-group">
               <label class="col-md-4 control-label" for="submit"></label>
               <div class="col-md-4">
-                <button id="submit" :disabled="!formIsValid" class="btn btn-primary" name="submit"
+                <button v-on:click="updateTask" id="submit" :disabled="!formIsValid2" class="btn btn-primary" name="submit"
                         style="margin-right: 15%">Update Task
                 </button>
                 <button class="btn btn-primary" type="reset">Reset</button>
@@ -121,12 +121,20 @@ export default {
     return {
       list:undefined,
       tid:undefined,
-      form: {
+      tid2:undefined,
+      form2: {
         featureId: this.$route.params.featureId,
         taskName: this.taskName,
         description: this.description,
         priority: this.priority,
         status: "DONE"
+      },
+      form3: {
+        featureId: this.$route.params.featureId,
+        taskName: this.taskName,
+        description: this.description,
+        priority: this.priority,
+        status: this.status
       }
     }
   },
@@ -144,15 +152,27 @@ export default {
   computed:{
 
     featureNameIsValid() {
-      return !!this.form.taskName
+      return !!this.form2.taskName
     },
 
     descriptionIsValid() {
-      return !!this.form.description
+      return !!this.form2.description
+    },
+    featureNameIsValid2() {
+      return !!this.form3.taskName
+    },
+
+    descriptionIsValid2() {
+      return !!this.form3.description
     },
 
     formIsValid() {
       return this.featureNameIsValid && this.descriptionIsValid
+    }//may also use vuelidate in the future to perform input validation
+    ,
+
+    formIsValid2() {
+      return this.featureNameIsValid2 && this.descriptionIsValid2
     }//may also use vuelidate in the future to perform input validation
   },
 
@@ -178,6 +198,7 @@ export default {
               console.log(this.form);
             })
       }
+      window.location.reload()
     },
     setBackground(status) {
       if(status === "DONE"){
@@ -189,54 +210,55 @@ export default {
       this.tid = id;
       console.log(this.tid)
       if(confirmed){
-          axios.get("http://localhost:8080/features/api/task/" + id).then((resp) => {
-            this.info = resp.data;
-            console.log(this.description)
-            console.log(this.info)
-          })
+        axios.get("http://localhost:8080/features/api/task/" + id).then((resp) => {
+          this.info = resp.data;
+          console.log(this.description)
+          console.log(this.info)
+        })
 
-        axios.put('http://localhost:8080/features/api/tasks/update/' + id, this.form)
+        axios.put('http://localhost:8080/features/api/tasks/update/' + id, this.form2)
             .then((resp) => {
-              this.form = resp.data;
+              this.form2 = resp.data;
               console.log(this.tid);
               console.log(resp);
             })
             .catch((error) => {
               console.log(error)});
-        document.getElementById("rowForTask").style.backgroundColor = "#97f7ac";
+
         return id;
       }
     },
 
-    displayUpdateForm(){
+    displayUpdateForm(id){
 
-        var modal = document.getElementById("myModalTaskUpdate");
+      this.tid2 = id
+      var modal = document.getElementById("myModalTaskUpdate");
 
 // Get the button that opens the modal
 //       var btn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
+      var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal
 //       btn.onclick = function() {
-        modal.style.display = "block";
-        // }
+      modal.style.display = "block";
+      // }
 
 // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
+      span.onclick = function() {
+        modal.style.display = "none";
+        window.location.reload()
+      }
+
+// When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+        if (event.target === modal) {
           modal.style.display = "none";
           window.location.reload()
         }
-
-// When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-          if (event.target === modal) {
-            modal.style.display = "none";
-            window.location.reload()
-          }
-          // `this` inside methods points to the Vue instance
-        }
+        // `this` inside methods points to the Vue instance
+      }
 
     },
 
@@ -257,13 +279,28 @@ export default {
       }else{
         console.log("form is invalid")
       }
+    },
+
+    submitForm2() {
+      if(this.formIsValid2) {
+        console.log("form is valid update")
+        axios.put('http://localhost:8080/features/api/tasks/update/' + this.tid2, this.form3)
+            .then((resp) => {
+              this.form3 = resp.data;
+
+              console.log(this.form3);
+              console.log(this.tid2);
+            })
+            .catch((error) => {
+              console.log(error)
+            }).finally(() => {
+        });
+      }else{
+        console.log("form is invalid")
+      }
+      window.location.reload();
     }
   }
-
-
-
-
-
 }
 
 </script>
