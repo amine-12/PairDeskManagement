@@ -4,6 +4,7 @@ import com.project.pairdesksystem.buinesslayer.Task.TaskService;
 import com.project.pairdesksystem.datalayer.Task.Task;
 import com.project.pairdesksystem.datalayer.Task.TaskRepository;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import javassist.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +47,16 @@ public class TaskServiceTests {
             foundAndDeleted = true;
         }
         assertTrue(foundAndDeleted);
+    }
 
+    @Test
+    void mark_Task_Status_Done() throws NotFoundException {
+        Task t = new Task(12, 12345, 9836, "testTask", "HIGH", "TODO", "description");
+        Task t2 = new Task(12, 12345, 9836, "testTask", "HIGH", "DONE", "description");
 
+        tservice.updateTask(t, t2);
+
+        assertEquals(tservice.getTaskByTaskId(t.getTaskId()).getStatus(), "DONE");
     }
 
 }
