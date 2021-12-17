@@ -25,14 +25,19 @@
                 <td  v-bind:style="getStatus(task.priority)">{{ task.priority }} </td>
                 <td>{{ task.status }}</td>
                 <td>
-                  <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>
+                  <a class="btn btn-primary btn-action mr-1"  @click="displayUpdateForm"
+                     data-toggle="tooltip" title="" data-original-title="Edit">
+                    <i class="fas fa-pencil-alt"></i></a>
 
                   <a class="btn btn-danger btn-action" @click="deleteTask(task.taskId)" data-toggle="tooltip" title=""
                      data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?"
                      data-confirm-yes="alert('Deleted')" data-original-title="Delete">
                     <i class="fas fa-trash"></i></a>
 
-                  <a class="btn btn-success btn-action" v-on:click="completeTask(task.taskId)" data-toggle="tooltip" title="" data-original-title="Complete"><i class="fas fa-check"></i></a>
+                  <a class="btn btn-success btn-action"
+                     v-on:click="completeTask(task.taskId)" data-toggle="tooltip" title=""
+                     data-original-title="Complete">
+                    <i class="fas fa-check"></i></a>
 
                 </td>
               </tr>
@@ -43,6 +48,66 @@
         </div>
       </div>
     </div>
+  </div>
+
+
+  <div id="myModalTaskUpdate" class="modal" style="display: none">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close">&times;</span>
+
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal" @submit="checkForm" v-on:submit.prevent="submitForm">
+          <fieldset>
+            <h1>Update this Task</h1>
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="taskName">Task Name:</label>
+              <div class="col-md-4">
+                <input id="taskName" v-model="form.taskName" class="form-control input-md" name="Feature Name"
+                       placeholder="New Task Name" type="text">
+                <p v-if="!featureNameIsValid" class="error-message" style="color: red">Task Name Required</p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="description">Description</label>
+              <div class="col-md-4">
+                <textarea id="description" v-model="form.description" class="form-control input-md" name="description"
+                          placeholder="description" type="text"/>
+                <p v-if="!descriptionIsValid" class="error-message" style="color: red">Description Required</p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="priority">Priority</label>
+              <div class="col-md-4">
+                <select id="priority" v-model="form.priority" class="form-control" name="priority">
+                  <option value="Low">Low</option>
+                  <option value="Medium">Medium</option>
+                  <option value="High">High</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="submit"></label>
+              <div class="col-md-4">
+                <button id="submit" :disabled="!formIsValid" class="btn btn-primary" name="submit"
+                        style="margin-right: 15%">Update Task
+                </button>
+                <button class="btn btn-primary" type="reset">Reset</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+
+      </div>
+
+    </div>
+
   </div>
 </template>
 
@@ -76,6 +141,21 @@ export default {
       console.log(error)
     }
   },
+  computed:{
+
+    featureNameIsValid() {
+      return !!this.form.taskName
+    },
+
+    descriptionIsValid() {
+      return !!this.form.description
+    },
+
+    formIsValid() {
+      return this.featureNameIsValid && this.descriptionIsValid
+    }//may also use vuelidate in the future to perform input validation
+  },
+
   methods:{
     getStatus(property){
       if(property === "Low"){
@@ -126,8 +206,64 @@ export default {
         document.getElementById("rowForTask").style.backgroundColor = "#97f7ac";
         return id;
       }
+    },
+
+    displayUpdateForm(){
+
+        var modal = document.getElementById("myModalTaskUpdate");
+
+// Get the button that opens the modal
+//       var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal
+//       btn.onclick = function() {
+        modal.style.display = "block";
+        // }
+
+// When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+          modal.style.display = "none";
+          window.location.reload()
+        }
+
+// When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target === modal) {
+            modal.style.display = "none";
+            window.location.reload()
+          }
+          // `this` inside methods points to the Vue instance
+        }
+
+    },
+
+    submitForm() {
+      if(this.formIsValid) {
+        document.getElementById("description").value = "";
+        document.getElementById("taskName").value = "";
+        console.log("form is valid")
+        axios.post('http://localhost:8080/features/api/task/add', this.form)
+            .then((resp) => {
+              this.form = resp.data;
+              console.log(this.form);
+            })
+            .catch((error) => {
+              console.log(error)
+            }).finally(() => {
+        });
+      }else{
+        console.log("form is invalid")
+      }
     }
   }
+
+
+
+
+
 }
 
 </script>
