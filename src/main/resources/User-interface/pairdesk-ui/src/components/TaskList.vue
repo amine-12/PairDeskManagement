@@ -226,9 +226,10 @@ export default {
             })
             .catch((error) => {
               console.log(error)});
-
+        window.location.reload()
         return id;
       }
+
     },
 
     displayUpdateForm(id){

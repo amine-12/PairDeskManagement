@@ -13,28 +13,29 @@
 
       </div>
       <div class="modal-body">
+
         <form class="form-horizontal" v-on:submit.prevent="submitForm" @submit="checkForm">
-          <fieldset>
+          <fieldset id="formContainer">
             <h1>New Task</h1>
             <div class="form-group">
-              <label class="col-md-4 control-label" for="taskName">Task Name:</label>
-              <div class="col-md-4">
-                <input id="taskName" name="Feature Name" type="text" placeholder="New Task Name" class="form-control input-md" v-model="form.taskName">
+              <label class="col-md-6 control-label" for="taskName">Task Name:</label>
+              <div class="col-md-6">
+                <input style="width: 100%" id="taskName" name="Feature Name" type="text" placeholder="New Task Name" class="form-control input-md" v-model="form.taskName">
                 <p v-if="!featureNameIsValid" class="error-message" style="color: red">Task Name Required</p>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-4 control-label" for="description">Description</label>
-              <div class="col-md-4">
+              <label class="col-md-6  control-label" for="description">Description</label>
+              <div class="col-md-6 ">
                 <textarea id="description" name="description" type="text" placeholder="description" class="form-control input-md" v-model="form.description"/>
                 <p v-if="!descriptionIsValid" class="error-message" style="color: red">Description Required</p>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-4 control-label" for="priority">Priority</label>
-              <div class="col-md-4">
+              <label class="col-md-6  control-label" for="priority">Priority</label>
+              <div class="col-md-6 ">
                 <select id="priority" name="priority" class="form-control" v-model="form.priority">
                   <option value="Low">Low</option>
                   <option value="Medium">Medium</option>
@@ -44,10 +45,10 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-4 control-label" for="submit"></label>
-              <div class="col-md-4">
+              <label class="col-md-6  control-label" for="submit"></label>
+              <div class="col-md-6 ">
                 <button :disabled="!formIsValid" id="submit" name="submit" class="btn btn-primary" style="margin-right: 15%">Create Task</button>
-                <button type="reset" class="btn btn-primary">Reset</button>
+                <button type="reset" style="float: right" class="btn btn-primary">Reset</button>
               </div>
             </div>
           </fieldset>
@@ -148,6 +149,9 @@ export default {
 </script>
 
 <style scoped>
+#formContainer{
+
+}
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -201,14 +205,9 @@ export default {
 }
 
 .modal-body {
-  left: 30%;
+  left: 25%;
 }
 
-.modal-footer {
-  padding: 2px 16px;
-  background-color: #5cb85c;
-  color: white;
-}
 
 /* Add Animation */
 @-webkit-keyframes slideIn {
@@ -248,74 +247,4 @@ export default {
   margin-top:22px;
 }
 
-body {font-family: Arial, Helvetica, sans-serif;}
-* {box-sizing: border-box;}
-
-/* Button used to open the contact form - fixed at the bottom of the page */
-.open-button {
-  background-color: #555;
-  color: white;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
-  opacity: 0.8;
-  position: fixed;
-  bottom: 23px;
-  right: 28px;
-  width: 280px;
-}
-
-/* The popup form - hidden by default */
-.form-popup {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  right: 15px;
-  border: 3px solid #f1f1f1;
-  z-index: 9;
-}
-
-/* Add styles to the form container */
-.form-container {
-  max-width: 300px;
-  padding: 10px;
-  background-color: white;
-}
-
-/* Full-width input fields */
-.form-container input[type=text], .form-container input[type=password] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  border: none;
-  background: #f1f1f1;
-}
-
-/* When the inputs get focus, do something */
-.form-container input[type=text]:focus, .form-container input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-/* Set a style for the submit/login button */
-.form-container .btn {
-  background-color: #04AA6D;
-  color: white;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  margin-bottom:10px;
-  opacity: 0.8;
-}
-
-/* Add a red background color to the cancel button */
-.form-container .cancel {
-  background-color: red;
-}
-
-/* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
-  opacity: 1;
-}
 </style>
