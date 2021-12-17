@@ -25,23 +25,22 @@
                 <td  v-bind:style="getStatus(task.priority)">{{ task.priority }} </td>
                 <td>{{ task.status }}</td>
                 <td>
+
                   <a class="btn btn-primary btn-action mr-1"  @click="displayUpdateForm(task.taskId)"
                      data-toggle="tooltip" title="" data-original-title="Edit">
                     <i class="fas fa-pencil-alt"></i></a>
+
+
 
                   <a class="btn btn-danger btn-action" @click="deleteTask(task.taskId)" data-toggle="tooltip" title=""
                      data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?"
                      data-confirm-yes="alert('Deleted')" data-original-title="Delete">
                     <i class="fas fa-trash"></i></a>
 
-                  <a class="btn btn-success btn-action"
-                     v-on:click="completeTask(task.taskId)" data-toggle="tooltip" title=""
-                     data-original-title="Complete">
-                    <i class="fas fa-check"></i></a>
+                  <a class="btn btn-success btn-action" v-on:click="completeTask(task.taskId)" data-toggle="tooltip" title="" data-original-title="Complete" id="completeButton"><i class="fas fa-check"></i></a>
 
                 </td>
               </tr>
-
               </tbody>
             </table>
           </div>
@@ -279,6 +278,7 @@ export default {
       }else{
         console.log("form is invalid")
       }
+
     },
 
     submitForm2() {
@@ -299,6 +299,7 @@ export default {
         console.log("form is invalid")
       }
       window.location.reload();
+
     }
   }
 }
