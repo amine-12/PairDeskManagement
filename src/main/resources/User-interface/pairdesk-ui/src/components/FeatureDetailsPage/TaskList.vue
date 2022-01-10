@@ -121,6 +121,11 @@ export default {
       list:undefined,
       tid:undefined,
       tid2:undefined,
+      yourConfig: {
+        headers: {
+          Authorization: localStorage.getItem("user-token")
+        }
+      },
       form2: {
         featureId: this.$route.params.featureId,
         taskName: this.taskName,
@@ -142,7 +147,7 @@ export default {
   mounted()
   {
     try {
-      axios.get("http://localhost:8080/features/api/tasks/" +  this.$route.params.featureId).then((resp) => {
+      axios.get("http://localhost:8080/features/api/tasks/" +  this.$route.params.featureId, this.yourConfig).then((resp) => {
         this.list = resp.data;
       })
     }
@@ -194,11 +199,19 @@ export default {
       if(confirmed){
         console.log("task id : " +taskId);
         console.log("task form is valid");
-        axios.delete('http://localhost:8080/features/api/tasks/' + taskId, this.form)
+
+        axios.delete('http://localhost:8080/features/api/tasks/' + taskId, this.yourConfig)
             .then((resp) => {
               this.form = resp.data;
               console.log(this.form);
-            })
+            }).catch((error) => {
+          if (error.response.status === 401) {
+            console.log("token expired")
+            this.$router.push('/login')
+          }
+          console.log(error)
+        }).finally(() => {
+        });
       }
       window.location.reload()
     },
@@ -212,13 +225,21 @@ export default {
       this.tid = id;
       console.log(this.tid)
       if(confirmed){
-        axios.get("http://localhost:8080/features/api/task/" + id).then((resp) => {
+
+        axios.get("http://localhost:8080/features/api/task/" + id, this.yourConfig).then((resp) => {
           this.info = resp.data;
           console.log(this.description)
           console.log(this.info)
-        })
+        }).catch((error) => {
+          if (error.response.status === 401) {
+            console.log("token expired")
+            this.$router.push('/login')
+          }
+          console.log(error)
+        }).finally(() => {
+        });
 
-        axios.put('http://localhost:8080/features/api/tasks/update/' + id, this.form2)
+        axios.put('http://localhost:8080/features/api/tasks/update/' + id, this.form2, this.yourConfig)
             .then((resp) => {
               this.form2 = resp.data;
               console.log(this.tid);
@@ -267,15 +288,20 @@ export default {
 
     submitForm() {
       if(this.formIsValid) {
+
         document.getElementById("description").value = "";
         document.getElementById("taskName").value = "";
         console.log("form is valid")
-        axios.post('http://localhost:8080/features/api/task/add', this.form)
+        axios.post('http://localhost:8080/features/api/task/add', this.form, this.yourConfig)
             .then((resp) => {
               this.form = resp.data;
               console.log(this.form);
             })
             .catch((error) => {
+              if (error.response.status === 401) {
+                console.log("token expired")
+                this.$router.push('/login')
+              }
               console.log(error)
             }).finally(() => {
         });
@@ -288,7 +314,7 @@ export default {
     submitForm2() {
       if(this.formIsValid2) {
         console.log("form is valid update")
-        axios.put('http://localhost:8080/features/api/tasks/update/' + this.tid2, this.form3)
+        axios.put('http://localhost:8080/features/api/tasks/update/' + this.tid2, this.form3, this.yourConfig)
             .then((resp) => {
               this.form3 = resp.data;
 
@@ -296,6 +322,10 @@ export default {
               console.log(this.tid2);
             })
             .catch((error) => {
+              if (error.response.status === 401) {
+                console.log("token expired")
+                this.$router.push('/login')
+              }
               console.log(error)
             }).finally(() => {
         });

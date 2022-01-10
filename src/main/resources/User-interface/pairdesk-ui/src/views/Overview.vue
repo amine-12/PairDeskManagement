@@ -7,7 +7,8 @@
 
 <script>
 // @ is an alias to /src
-import OverviewFeature from "@/components/OverviewFeature";
+import OverviewFeature from "@/components/OverviewPage/OverviewFeature";
+
 export default {
   name: 'Home',
   components: {OverviewFeature}

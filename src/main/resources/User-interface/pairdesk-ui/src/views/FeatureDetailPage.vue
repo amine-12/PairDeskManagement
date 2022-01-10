@@ -4,8 +4,9 @@
 </template>
 
 <script>
-import FeatureDetails from "@/components/FeatureDetails";
-import FloatingButton from "@/components/FloatingButton";
+import FeatureDetails from "@/components/FeatureDetailsPage/FeatureDetails";
+import FloatingButton from "@/components/FeatureDetailsPage/FloatingButton";
+
 export default {
   name: "FeatureDetailPage",
   components: {FeatureDetails, FloatingButton}

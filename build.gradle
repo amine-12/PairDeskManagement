@@ -29,6 +29,15 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
+    // https://mvnrepository.com/artifact/org.springframework.security/spring-security-core
+    implementation group: 'org.springframework.security', name: 'spring-security-core', version: '5.6.0'
+
+    // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt
+    implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+
+// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.6.1'
+
     implementation("org.mapstruct:mapstruct:${mapstructVersion}")
     compileOnly "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
@@ -44,6 +53,8 @@ dependencies {
     }
     testImplementation 'io.projectreactor:reactor-test'
     testImplementation('com.h2database:h2')
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test
+
 }
 
 test {

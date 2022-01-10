@@ -133,7 +133,9 @@
 
 
       <li class="nav-item">
-        <a href="./profile.html" class="nav-links">
+
+        <a >
+          <router-link class="nav-links" to="/users">
           <svg
               aria-hidden="true"
               focusable="false"
@@ -153,11 +155,14 @@
             </g>
           </svg>
           <span class="link-text">USERS</span>
+        </router-link>
         </a>
+
       </li>
 
       <li class="nav-item" >
-        <a href="../index.html" class="nav-links">
+        <a >
+          <router-link class="nav-links" to="/login">
           <svg
               id="darkIcon"
               aria-hidden="true"
@@ -181,6 +186,7 @@
             </g>
           </svg>
           <span class="link-text">Log out</span>
+          </router-link>
         </a>
       </li>
     </ul>
@@ -189,8 +195,12 @@
 
 <script>
 export default {
-  name: 'navigation'
+  name: 'navigation',
+  computed:{
+
+  }
 }
+
 </script>
 
 <style>

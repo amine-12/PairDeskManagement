@@ -1,8 +1,7 @@
 <template>
   <div class="main-container row center" >
   <div class="cards">
-
-
+    <h1>{{this.user.username}}</h1>
     </div>
   </div>
 
@@ -15,19 +14,28 @@ export default {
   name: "OverviewFeature",
   data() {
     return {
-      list: undefined
+      list: undefined,
+      user: JSON.parse(localStorage.getItem('userInfo'))
     }
   },
   mounted()
   {
-    try {
-      axios.get("http://localhost:8080/features/api/all").then((resp) => {
+    let yourConfig = {
+      headers: {
+        Authorization: localStorage.getItem("user-token")
+      }
+    }
+      axios.get("http://localhost:8080/features/api/all",yourConfig).then((resp) => {
         this.list = resp.data;
-      })
-    }
-    catch(error){
-      console.log(error)
-    }
+      }).catch((error) => {
+        if (error.response.status === 401) {
+          console.log("token expired")
+          this.$router.push('/login')
+        }
+        console.log(error)
+      }).finally(() => {
+      });
+
   },
 }
 </script>

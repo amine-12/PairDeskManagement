@@ -125,15 +125,24 @@ export default {
   },
     submitForm() {
       if(this.formIsValid) {
+        let yourConfig = {
+          headers: {
+            Authorization: localStorage.getItem("user-token")
+          }
+        }
         document.getElementById("description").value = "";
         document.getElementById("taskName").value = "";
         console.log("form is valid")
-        axios.post('http://localhost:8080/features/api/task/add', this.form)
+        axios.post('http://localhost:8080/features/api/task/add', this.form, yourConfig)
             .then((resp) => {
               this.form = resp.data;
               console.log(this.form);
             })
             .catch((error) => {
+              if (error.response.status === 401) {
+                console.log("token expired")
+                this.$router.push('/login')
+              }
               console.log(error)
             }).finally(() => {
         });

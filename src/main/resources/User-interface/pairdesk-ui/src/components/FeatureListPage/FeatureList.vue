@@ -279,18 +279,27 @@ export default {
         description: '',
         deadline: ''
       },
+      yourConfig: {
+        headers: {
+          Authorization: localStorage.getItem("user-token")
+        }
+      },
+
       isVisible: false}
   },
   mounted()
   {
-    try {
-      axios.get("http://localhost:8080/features/api/all").then((resp) => {
+      axios.get("http://localhost:8080/features/api/all", this.yourConfig).then((resp) => {
         this.list = resp.data;
-      })
-    }
-    catch(error){
-      console.log(error)
-    }
+        console.log(this.$route.name)
+      }).catch((error) => {
+        if (error.response.status === 401) {
+          console.log("token expired")
+          this.$router.push('/login')
+        }
+        console.log(error)
+      }).finally(() => {
+    });
   },
   computed: {
     featureNameIsValid() {
@@ -322,14 +331,19 @@ export default {
     },
     submitForm() {
       if(this.formIsValid) {
+
         console.log("form is valid")
-        axios.put('http://localhost:8080/features/api/update/' + this.fid, this.form)
+        axios.put('http://localhost:8080/features/api/update/' + this.fid, this.form, this.yourConfig)
             .then((resp) => {
               this.form = resp.data;
               console.log(this.fid);
               console.log(resp);
             })
             .catch((error) => {
+              if (error.response.status === 401) {
+                console.log("token expired")
+                this.$router.push('/login')
+              }
               console.log(error)
             }).finally(() => {
         });
@@ -360,11 +374,19 @@ export default {
 
       if(confirmed){
       console.log("form is valid")
-      axios.delete('http://localhost:8080/features/api/' + featureId, this.form)
+
+      axios.delete('http://localhost:8080/features/api/' + featureId, this.yourConfig)
           .then((resp) => {
             this.form = resp.data;
             console.log(this.form);
-          })
+          }).catch((error) => {
+        if (error.response.status === 401) {
+          console.log("token expired")
+          this.$router.push('/login')
+        }
+        console.log(error)
+      }).finally(() => {
+      });
         window.location.reload()
       }
     }
