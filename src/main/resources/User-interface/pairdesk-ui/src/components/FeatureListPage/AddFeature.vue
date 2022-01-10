@@ -68,6 +68,11 @@ export default {
   name: "AddFeature",
   data() {
     return {
+      yourConfig: {
+        headers: {
+          Authorization: localStorage.getItem("user-token")
+        }
+      },
       form: {
         featureName: '',
         priority: '',
@@ -95,13 +100,18 @@ export default {
   methods: {
     submitForm() {
       if(this.formIsValid) {
+
         console.log("form is valid")
-        axios.post('http://localhost:8080/features/api/add', this.form)
+        axios.post('http://localhost:8080/features/api/add', this.form, this.yourConfig)
             .then((resp) => {
               this.form = resp.data;
               console.log(this.form);
             })
             .catch((error) => {
+              if (error.response.status === 401) {
+                console.log("token expired")
+                this.$router.push('/login')
+              }
               console.log(error)
             }).finally(() => {
         });

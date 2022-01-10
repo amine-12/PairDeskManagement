@@ -8,7 +8,7 @@
               <div class="media-body">
 
             <h1 class="m-b-20">{{ info.featureName }}</h1>
-                <h5 class="media-heading mb-0 mt-0">Assigned to: //User Placeholder</h5><span class="badge badge-danger">Urgent</span></div>
+                <h5 class="media-heading mb-0 mt-0">Assigned to: </h5></div>
             <h2 class="m-b-5">Priority</h2>
             <h4 id="pC">{{info.priority}}</h4>
             <h3 class="m-b-5">Description</h3>
@@ -38,7 +38,7 @@
 
 <script>
 import axios from "axios";
-import TaskList from "@/components/TaskList";
+import TaskList from "@/components/FeatureDetailsPage/TaskList";
 
 export default {
 
@@ -48,15 +48,23 @@ export default {
   {
     return {
       info:[],
+      user: JSON.parse(localStorage.getItem('userInfo')),
       value: 45,
-      max: 100
+      max: 100,
+      yourConfig: {
+        headers: {
+          Authorization: localStorage.getItem("user-token")
+        }
+      }
+
     }
   },
   mounted()
   {
-    try {
-      axios.get("http://localhost:8080/features/api/" + this.$route.params.featureId).then((resp) => {
+
+      axios.get("http://localhost:8080/features/api/" + this.$route.params.featureId,this.yourConfig).then((resp) => {
         this.info = resp.data;
+        console.log("this.$route.meta.Navigation" )
         if(this.info.priority === "Low"){
           document.getElementById("pC").style.color = "green"
         }else if(this.info.priority === "Medium"){
@@ -65,11 +73,14 @@ export default {
           document.getElementById("pC").style.color = "red"
         }
         this.formattedDate = new Date(this.info.deadline)
-      })
-    }
-    catch(error){
-      console.log(error)
-    }
+      }).catch((error) => {
+        if (error.response.status === 401) {
+          console.log("token expired")
+          this.$router.push('/login')
+        }
+        console.log(error)
+      }).finally(() => {
+      });
   }
 }
 

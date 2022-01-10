@@ -1,4 +1,7 @@
 <template>
+  <div id="nav">
+    <navigation/>
+  </div>
   <div class="about">
     <feature-list></feature-list>
   </div>
@@ -6,8 +9,8 @@
 </template>
 
 <script>
-import FeatureList from "@/components/FeatureList";
-import AddFeature from "@/components/AddFeature";
+import FeatureList from "@/components/FeatureListPage/FeatureList";
+import AddFeature from "@/components/FeatureListPage/AddFeature";
 export default {
   name: "FeaturesPage",
   components: {FeatureList,AddFeature}
