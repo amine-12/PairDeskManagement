@@ -8,12 +8,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
 
 @RequestMapping("/features")
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 public class FeatureResource {
     @Autowired
@@ -26,6 +28,7 @@ public class FeatureResource {
 
     @CrossOrigin
     @GetMapping("/api/all")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<FeatureDTO> getFeatureList() {
         return featureService.getAllFeaturesDTO();
     }

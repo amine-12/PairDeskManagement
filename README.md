@@ -11,5 +11,5 @@
 - Enter `./gradlew bootRun`
 ## How to run vue application
 - Open a command line in 
-- Enter `cd ~/source/pairdesksystem/src/main/resources/User-interface/pairdesk-ui` 
+- Enter `cd ~/source/pairdesksystem/src/main/resources/com.project.pairdesksystem.User-interface/pairdesk-ui` 
 - Enter `npm run serve`

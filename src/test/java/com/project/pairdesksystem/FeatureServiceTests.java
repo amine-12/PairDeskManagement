@@ -25,8 +25,6 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(SpringExtension.class)
-
-
 public class FeatureServiceTests {
     @Autowired
     private FeatureService fservice;

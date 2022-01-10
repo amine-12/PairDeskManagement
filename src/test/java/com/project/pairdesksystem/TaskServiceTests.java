@@ -17,8 +17,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(SpringExtension.class)
-
-
 public class TaskServiceTests {
     @Autowired
     private TaskService tservice;
