@@ -69,6 +69,7 @@ public class FeatureServiceTests {
         Feature f1 = new Feature();
         Date date = new Date();
         String resultName = "MysFeatureTest";
+        int testUserId = 1;
 
         f1.setId(10);
         f1.setFeatureId(20);
@@ -82,6 +83,7 @@ public class FeatureServiceTests {
         fservice.createFeature(f1);
 
         assertEquals(fservice.getFeatureByFeatureId(f1.getFeatureId()).getFeatureName(), resultName);
+        assertEquals(fservice.getFeatureByFeatureId(f1.getFeatureId()).getUser_id(), testUserId);
     }
 
     @Test
