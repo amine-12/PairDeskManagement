@@ -292,6 +292,7 @@ export default {
       axios.get("http://localhost:8080/features/api/all", this.yourConfig).then((resp) => {
         this.list = resp.data;
         console.log(this.$route.name)
+        console.log(this.list)
       }).catch((error) => {
         if (error.response.status === 401) {
           console.log("token expired")
