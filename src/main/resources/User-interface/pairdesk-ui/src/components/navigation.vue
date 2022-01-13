@@ -57,7 +57,7 @@
       </li>
 
       <li class="nav-item">
-        <a >
+        <a id="featuresNavLink">
           <router-link class="nav-links" to="/features" >
           <svg
               aria-hidden="true"
