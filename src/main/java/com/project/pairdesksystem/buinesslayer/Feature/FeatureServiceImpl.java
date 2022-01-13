@@ -8,9 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +26,18 @@ public class FeatureServiceImpl implements FeatureService{
     public Feature createFeature(Feature feature) {
         return featuresRepository.save(feature);
     }
+
+    @Override
+    public List<Feature> getFeaturesByUserId(int userId) throws NotFoundException {
+        return featuresRepository.findAllByUserId(userId);
+    }
+
+    @Override
+    public List<FeatureDTO> getFeatureDTOByUserId(int userId) throws NotFoundException {
+        List<Feature> feature = getFeaturesByUserId(userId);
+        return featureMapper.featureListToFeatureDTOList(feature);
+    }
+
 
     @Override
     public Feature getFeatureByFeatureId(int featureId) throws NotFoundException {
@@ -67,8 +77,8 @@ public class FeatureServiceImpl implements FeatureService{
         if (updateFeature.getDeadline() != null) {
             feature.setDeadline(updateFeature.getDeadline());
         }
-        if (updateFeature.getUser_id() != null) {
-            feature.setUser_id(updateFeature.getUser_id());
+        if (updateFeature.getUserId() != null) {
+            feature.setUserId(updateFeature.getUserId());
         }
 
         return featuresRepository.save(feature);

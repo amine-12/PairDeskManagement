@@ -76,8 +76,8 @@ export default {
         this.formattedDate = new Date(this.info.deadline)
 
         try{
-          axios.get("http://localhost:8080/users/api/" + this.info.user_id, this.yourConfig).then((resp) => {
-            console.log(this.info.user_id)
+          axios.get("http://localhost:8080/users/api/" + this.info.userId, this.yourConfig).then((resp) => {
+            console.log(this.info.userId)
             this.assigned_user = resp.data;
             console.log(this.assigned_user)
           })

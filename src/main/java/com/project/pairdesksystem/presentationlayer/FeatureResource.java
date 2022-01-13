@@ -2,6 +2,7 @@ package com.project.pairdesksystem.presentationlayer;
 
 import com.project.pairdesksystem.buinesslayer.Feature.FeatureService;
 import com.project.pairdesksystem.datalayer.Feature.FeatureDTO;
+import com.project.pairdesksystem.datalayer.Task.TaskDTO;
 import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,14 @@ public class FeatureResource {
     @PreAuthorize("hasRole('ADMIN')")
     public List<FeatureDTO> getFeatureList() {
         return featureService.getAllFeaturesDTO();
+    }
+
+    @CrossOrigin
+    @GetMapping("/api/users/{userId}")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public List<FeatureDTO> getFeaturesByUserId(@PathVariable int userId) throws NotFoundException {
+        List<FeatureDTO> featureDTO = featureService.getFeatureDTOByUserId(userId);
+        return featureDTO;
     }
 
     @CrossOrigin

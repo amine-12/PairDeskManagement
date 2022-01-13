@@ -51,7 +51,7 @@
       <div class="form-group" id="inputFeatureUser">
         <label class="col-md-4 control-label" for="priority">Assign to User: </label>
         <div class="col-md-4">
-          <select id="user" name="user" class="form-control" v-model="form.user_id">
+          <select id="user" name="user" class="form-control" v-model="form.userId">
             <option v-for="user in users" v-bind:key="user.userId" v-bind:value="user.userId">{{ user.username }}</option>
           </select>
           <p v-if="!userIsValid" class="error-message" style="color: red">User Required</p>
@@ -88,7 +88,7 @@ export default {
         priority: '',
         description: '',
         deadline: '',
-        user_id: ''
+        userId: ''
       },
       users: [],
       isVisible: false
@@ -98,9 +98,6 @@ export default {
     try {
       axios.get("http://localhost:8080/users/api/all", this.yourConfig).then((resp) => {
         this.users = resp.data;
-        console.log(this.users[0].userId)
-        console.log(this.users)
-        console.log(resp.data)
       })
     }
     catch(error){
@@ -119,7 +116,7 @@ export default {
     },
 
     userIsValid(){
-      return !!this.form.user_id
+      return !!this.form.userId
     },
 
     formIsValid() {
@@ -134,6 +131,7 @@ export default {
         axios.post('http://localhost:8080/features/api/add', this.form, this.yourConfig)
             .then((resp) => {
               this.form = resp.data;
+              console.log(this.users[0])
               console.log(this.form);
             })
             .catch((error) => {

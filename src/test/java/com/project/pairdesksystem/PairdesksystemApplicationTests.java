@@ -1,10 +1,8 @@
 package com.project.pairdesksystem;
 
-import com.project.pairdesksystem.buinesslayer.Feature.FeatureService;
 import com.project.pairdesksystem.datalayer.Feature.Feature;
 import com.project.pairdesksystem.datalayer.Feature.FeaturesRepository;
 
-import javassist.NotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +31,7 @@ public class PairdesksystemApplicationTests {
             f1.setDeadline(date);
             f1.setDescription("Some Feature here");
             f1.setPriority("MEDIUM");
-            f1.setUser_id(1);
+            f1.setUserId(1);
             f1.setProgress(2);
         featRep.save(f1);
         Feature f2 = new Feature();
@@ -43,7 +41,7 @@ public class PairdesksystemApplicationTests {
             f2.setDeadline(date);
             f2.setDescription("Some Feature here");
             f2.setPriority("MEDIUM");
-            f2.setUser_id(1);
+            f2.setUserId(1);
             f2.setProgress(2);
             featRep.save(f2);
     }

@@ -19,7 +19,7 @@ public class Feature {
     @UniqueElements(groups = Feature.class)
     private Integer featureId;
 
-    private Integer user_id;
+    private Integer userId;
 
     private String featureName;
 
@@ -48,12 +48,12 @@ public class Feature {
         this.id = id;
     }
 
-    public Integer getUser_id() {
-        return user_id;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setUserId(Integer user_id) {
+        this.userId = user_id;
     }
 
     public String getFeatureName() {
