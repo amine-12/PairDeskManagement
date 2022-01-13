@@ -1,13 +1,9 @@
 package com.project.pairdesksystem;
 
 import com.project.pairdesksystem.buinesslayer.Feature.FeatureService;
-import com.project.pairdesksystem.buinesslayer.Task.TaskService;
 import com.project.pairdesksystem.datalayer.Feature.Feature;
 import com.project.pairdesksystem.datalayer.Feature.FeaturesRepository;
-import com.project.pairdesksystem.datalayer.Task.Task;
-import com.project.pairdesksystem.datalayer.Task.TaskRepository;
 import javassist.NotFoundException;
-import lombok.var;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +12,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ExtendWith(SpringExtension.class)
@@ -48,7 +42,7 @@ public class FeatureServiceTests {
         f1.setDeadline(date);
         f1.setDescription("Some Feature here");
         f1.setPriority("MEDIUM");
-        f1.setUser_id(1);
+        f1.setUserId(1);
         f1.setProgress(2);
 
         boolean foundAndDeleted = false;
@@ -72,6 +66,7 @@ public class FeatureServiceTests {
         Feature f1 = new Feature();
         Date date = new Date();
         String resultName = "MysFeatureTest";
+        int testUserId = 1;
 
         f1.setId(10);
         f1.setFeatureId(20);
@@ -79,12 +74,13 @@ public class FeatureServiceTests {
         f1.setDeadline(date);
         f1.setDescription("Some Feature here");
         f1.setPriority("MEDIUM");
-        f1.setUser_id(1);
+        f1.setUserId(1);
         f1.setProgress(2);
 
         fservice.createFeature(f1);
 
         assertEquals(fservice.getFeatureByFeatureId(f1.getFeatureId()).getFeatureName(), resultName);
+        assertEquals(fservice.getFeatureByFeatureId(f1.getFeatureId()).getUserId(), testUserId);
     }
 
     @Test
@@ -92,6 +88,7 @@ public class FeatureServiceTests {
         Feature f1 = new Feature();
         Date date = new Date();
 
+        int testUserId = 2;
         int id = 1291;
 
         f1.setId(id);
@@ -100,7 +97,7 @@ public class FeatureServiceTests {
         f1.setDeadline(date);
         f1.setDescription("Some Feature here");
         f1.setPriority("MEDIUM");
-        f1.setUser_id(1);
+        f1.setUserId(1);
         f1.setProgress(2);
 
         Feature f2 = new Feature();
@@ -111,12 +108,13 @@ public class FeatureServiceTests {
         f2.setDeadline(date);
         f2.setDescription("Some Feature here2");
         f2.setPriority("HIGH");
-        f2.setUser_id(1);
+        f2.setUserId(2);
         f2.setProgress(3);
 
         fservice.updateFeature(f1, f2);
 
         assertEquals(fservice.getFeatureByFeatureId(f1.getFeatureId()).getFeatureName(), "MysFeatureTest2");
+        assertEquals(fservice.getFeatureByFeatureId(f1.getFeatureId()).getUserId(), testUserId);
     }
 
     @Test

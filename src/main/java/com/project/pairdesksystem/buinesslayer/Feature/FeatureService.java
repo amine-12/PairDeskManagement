@@ -2,6 +2,7 @@ package com.project.pairdesksystem.buinesslayer.Feature;
 
 import com.project.pairdesksystem.datalayer.Feature.Feature;
 import com.project.pairdesksystem.datalayer.Feature.FeatureDTO;
+import com.project.pairdesksystem.datalayer.Task.Task;
 import javassist.NotFoundException;
 
 import java.util.List;
@@ -11,6 +12,8 @@ public interface FeatureService {
     Feature createFeature(Feature feature);
     Feature getFeatureByFeatureId(int featureId) throws NotFoundException;
     FeatureDTO getFeatureDTOByFeatureId(int featureId) throws NotFoundException;
+    List<Feature> getFeaturesByUserId(int userId) throws NotFoundException;
+    List<FeatureDTO> getFeatureDTOByUserId(int userId) throws NotFoundException;
 
     List<FeatureDTO> getAllFeaturesDTO();
     FeatureDTO createFeatureDTO(FeatureDTO featureDTO);

@@ -14,7 +14,7 @@ import java.util.Date;
 public class FeatureDTO {
     private Integer featureId;
     private Integer task_id;
-    private Integer user_id;
+    private Integer userId;
     private String featureName;
     private String priority;
     private int progress;

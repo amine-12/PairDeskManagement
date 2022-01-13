@@ -6,11 +6,11 @@
     <form class="form1" v-on:submit.prevent="submitForm">
       <p id="error" class="error-message"  align="center" style="color: red"/>
       <div id="username" class="error-message"  align="left" style="color: red;margin-left: 46px;"/>
-      <input  v-model="form.username" class="un" type="text" align="center" placeholder="Username">
+      <input  v-model="form.username" id="usernameLogin" class="un" type="text" align="center" placeholder="Username">
 
       <div id="password" class="error-message"  align="left" style="color: red;margin-left: 46px;"/>
-      <input v-model="form.password" class="pass" type="password" align="center" placeholder="Password">
-      <button class="submit" align="center">Sign in</button>
+      <input v-model="form.password" id="passwordLogin" class="pass" type="password" align="center" placeholder="Password">
+      <button id="loginBtn" class="submit" align="center">Sign in</button>
       <p class="forgot" align="center"><a href="#">Forgot Password?</a></p>
     </form>
   </div>

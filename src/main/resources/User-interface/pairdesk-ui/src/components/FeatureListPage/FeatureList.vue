@@ -252,6 +252,16 @@ body {
           </div>
         </div>
 
+        <div class="form-group" id="inputFeatureUser">
+          <label class="col-md-4 control-label" for="priority">Assign to User: </label>
+          <div class="col-md-4">
+            <select id="user" name="user" class="form-control" v-model="form.userId">
+              <option v-for="user in users" v-bind:key="user.userId" v-bind:value="user.userId">{{ user.username }}</option>
+            </select>
+            <p v-if="!userIsValid" class="error-message" style="color: red">User Required</p>
+          </div>
+        </div>
+
         <div class="form-group">
           <label class="col-md-4 control-label" for="submit"></label>
           <div class="col-md-4">
@@ -277,14 +287,15 @@ export default {
         featureName: '',
         priority: '',
         description: '',
-        deadline: ''
+        deadline: '',
+        userId: ''
       },
       yourConfig: {
         headers: {
           Authorization: localStorage.getItem("user-token")
         }
       },
-
+      users: [],
       isVisible: false}
   },
   mounted()
@@ -292,6 +303,7 @@ export default {
       axios.get("http://localhost:8080/features/api/all", this.yourConfig).then((resp) => {
         this.list = resp.data;
         console.log(this.$route.name)
+        console.log(this.list)
       }).catch((error) => {
         if (error.response.status === 401) {
           console.log("token expired")
@@ -300,6 +312,15 @@ export default {
         console.log(error)
       }).finally(() => {
     });
+
+    try {
+      axios.get("http://localhost:8080/users/api/all", this.yourConfig).then((resp) => {
+        this.users = resp.data;
+      })
+    }
+    catch(error){
+      console.log(error)
+    }
   },
   computed: {
     featureNameIsValid() {
@@ -308,6 +329,10 @@ export default {
 
     descriptionIsValid() {
       return !!this.form.description
+    },
+
+    userIsValid(){
+      return !!this.form.userId
     },
 
     formIsValid() {
@@ -330,14 +355,12 @@ export default {
       return 'background-color: red;'
     },
     submitForm() {
-      if(this.formIsValid) {
+      if(this.formIsValid && this.userIsValid) {
 
         console.log("form is valid")
         axios.put('http://localhost:8080/features/api/update/' + this.fid, this.form, this.yourConfig)
             .then((resp) => {
               this.form = resp.data;
-              console.log(this.fid);
-              console.log(resp);
             })
             .catch((error) => {
               if (error.response.status === 401) {

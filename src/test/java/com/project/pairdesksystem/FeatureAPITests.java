@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.Date;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -30,7 +29,7 @@ public class FeatureAPITests {
         f1.setDeadline(date);
         f1.setDescription("Some Feature here");
         f1.setPriority("MEDIUM");
-        f1.setUser_id(1);
+        f1.setUserId(1);
         f1.setProgress(2);
         featRep.save(f1);
         Feature f2 = new Feature();
@@ -40,7 +39,7 @@ public class FeatureAPITests {
         f2.setDeadline(date);
         f2.setDescription("Some Feature here");
         f2.setPriority("MEDIUM");
-        f2.setUser_id(1);
+        f2.setUserId(1);
         f2.setProgress(2);
         featRep.save(f2);
     }
@@ -54,7 +53,12 @@ public class FeatureAPITests {
     void get_All_Features(){
         featRep.findAll();
         assertEquals(featRep.findAll().size(), 2);
+    }
 
+    @Test
+    void get_All_Features_By_User_Id(){
+        featRep.findAllByUserId(99404);
+        assertEquals(featRep.findAll().size(), 2);
     }
 
     @Test

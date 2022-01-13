@@ -8,7 +8,7 @@
               <div class="media-body">
 
             <h1 class="m-b-20">{{ info.featureName }}</h1>
-                <h5 class="media-heading mb-0 mt-0">Assigned to: </h5></div>
+                <h5 class="media-heading mb-0 mt-0">Assigned to: {{ assigned_user.username }}</h5></div>
             <h2 class="m-b-5">Priority</h2>
             <h4 id="pC">{{info.priority}}</h4>
             <h3 class="m-b-5">Description</h3>
@@ -48,6 +48,7 @@ export default {
   {
     return {
       info:[],
+      assigned_user: [],
       user: JSON.parse(localStorage.getItem('userInfo')),
       value: 45,
       max: 100,
@@ -73,6 +74,18 @@ export default {
           document.getElementById("pC").style.color = "red"
         }
         this.formattedDate = new Date(this.info.deadline)
+
+        try{
+          axios.get("http://localhost:8080/users/api/" + this.info.userId, this.yourConfig).then((resp) => {
+            console.log(this.info.userId)
+            this.assigned_user = resp.data;
+            console.log(this.assigned_user)
+          })
+        }
+        catch(error)
+        {
+          console.log(error)
+        }
       }).catch((error) => {
         if (error.response.status === 401) {
           console.log("token expired")
