@@ -3,6 +3,8 @@ package com.project.pairdesksystem.buinesslayer.Feature;
 import com.project.pairdesksystem.datalayer.Feature.Feature;
 import com.project.pairdesksystem.datalayer.Feature.FeatureDTO;
 import com.project.pairdesksystem.datalayer.Feature.FeaturesRepository;
+import com.project.pairdesksystem.datalayer.Task.Task;
+import com.project.pairdesksystem.datalayer.Task.TaskRepository;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Set;
 
 @Service
@@ -18,6 +21,7 @@ import java.util.Set;
 public class FeatureServiceImpl implements FeatureService{
     private final FeaturesRepository featuresRepository;
     private final FeatureMapper featureMapper;
+    private final TaskRepository taskRepository;
 
     @Override
     public List<Feature> getAllFeatures() {
@@ -88,6 +92,24 @@ public class FeatureServiceImpl implements FeatureService{
             featuresRepository.delete(feature);
 
         log.debug("feature deleted");
+    }
+
+    @Override
+    public double getFeatureProgress(int featureId) {
+
+        List<Task> taskList=taskRepository.findAllByFeatureId(featureId);
+        double totalTaskSize=taskList.size();
+        int iterator=0;
+        double totalCompleteTasks=0;
+
+        while(iterator<totalTaskSize){
+            if(taskList.get(iterator).getStatus().equals("DONE")){
+                totalCompleteTasks++;
+            }
+            iterator++;
+        }
+        //System.out.println(completedTask + " / " + totalTasks);
+        return (totalCompleteTasks/totalTaskSize)*100;
     }
 
 

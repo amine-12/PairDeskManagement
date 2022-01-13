@@ -1,8 +1,41 @@
 <template>
-  <div class="main-container row center" >
-  <div class="cards">
-    <h1>{{this.user.username}}</h1>
+  <div class="main-container row center">
+    <div class="cards">
+      <h1>{{ this.user.username }}</h1>
+
     </div>
+    <div class="heading">
+      <h1 class="heading__title">Overview Panel</h1>
+    </div>
+
+
+    <div class="card card-1">
+      <router-link class="nav-links" to="/features" >
+    <table class="table table">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Feature Overview</th>
+
+      </tr>
+      </thead>
+
+
+      <tr v-for="feature in list" v-bind:key="feature.featureId">
+
+
+        <td>{{ feature.featureName }}</td>
+
+        <td>{{ feature.description }}</td>
+        <!--  <div id="id" hidden>{{feature.featureId}}</div>-->
+        <td> progression here</td>
+
+
+      </tr>
+    </table></router-link>
+    </div>
+
+
+
   </div>
 
 </template>
@@ -18,23 +51,22 @@ export default {
       user: JSON.parse(localStorage.getItem('userInfo'))
     }
   },
-  mounted()
-  {
+  mounted() {
     let yourConfig = {
       headers: {
         Authorization: localStorage.getItem("user-token")
       }
     }
-      axios.get("http://localhost:8080/features/api/all",yourConfig).then((resp) => {
-        this.list = resp.data;
-      }).catch((error) => {
-        if (error.response.status === 401) {
-          console.log("token expired")
-          this.$router.push('/login')
-        }
-        console.log(error)
-      }).finally(() => {
-      });
+    axios.get("http://localhost:8080/features/api/all", yourConfig).then((resp) => {
+      this.list = resp.data;
+    }).catch((error) => {
+      if (error.response.status === 401) {
+        console.log("token expired")
+        this.$router.push('/login')
+      }
+      console.log(error)
+    }).finally(() => {
+    });
 
   },
 }
@@ -93,7 +125,7 @@ body {
   margin: 20px;
   padding: 20px;
   width: 100%;
-  min-height: 150px;
+  min-height: 350px;
   display: grid;
   grid-template-rows: 20px 50px 1fr 50px;
   border-radius: 10px;
@@ -144,6 +176,7 @@ body {
   font-weight: 400;
   color: #5e5fb8;
 }
+
 .card__body {
   grid-row: 3;
   font-size: medium;
@@ -184,7 +217,9 @@ body {
   padding: 0 10px;
 }
 
-.row {margin: 0 -5px;}
+.row {
+  margin: 0 -5px;
+}
 
 .row:after {
   content: "";
@@ -206,6 +241,7 @@ body {
   width: 70%;
   padding: 10px;
 }
+
 /* RESPONSIVE */
 
 @media (max-width: 1600px) {

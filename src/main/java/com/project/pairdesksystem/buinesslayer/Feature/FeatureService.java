@@ -19,4 +19,6 @@ public interface FeatureService {
     FeatureDTO updateFeatureWithDTO(int featureId, FeatureDTO featureDTO) throws NotFoundException;
 
     void deleteFeature(int featureId);
+
+    double getFeatureProgress(int featureId);
 }
