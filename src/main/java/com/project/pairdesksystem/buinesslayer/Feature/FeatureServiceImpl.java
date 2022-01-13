@@ -67,6 +67,9 @@ public class FeatureServiceImpl implements FeatureService{
         if (updateFeature.getDeadline() != null) {
             feature.setDeadline(updateFeature.getDeadline());
         }
+        if (updateFeature.getUser_id() != null) {
+            feature.setUser_id(updateFeature.getUser_id());
+        }
 
         return featuresRepository.save(feature);
     }
