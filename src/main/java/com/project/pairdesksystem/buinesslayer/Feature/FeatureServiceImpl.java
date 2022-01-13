@@ -123,6 +123,8 @@ public class FeatureServiceImpl implements FeatureService{
             iterator++;
         }
         //System.out.println(completedTask + " / " + totalTasks);
+        if(totalTaskSize ==0)
+            return 0;
         return (totalCompleteTasks/totalTaskSize)*100;
     }
 
