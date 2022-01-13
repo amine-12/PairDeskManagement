@@ -69,10 +69,11 @@ public class FeatureAPITests {
     @Test
     void get_Feature_Progress(){
         featRep.findAll();
+        Feature feat = featRep.findById(1).get();
+        assertEquals(feat.getFeatureName(), "MyFeature");
 
-        assertEquals(featRep.findAll().size(), 2);
-        assertEquals(featRep.findAll().size(), 2);
-        
+        assertEquals(feat.getProgress(), 2);
+
     }
 
 }
