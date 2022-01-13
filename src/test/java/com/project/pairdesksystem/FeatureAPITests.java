@@ -68,11 +68,25 @@ public class FeatureAPITests {
     }
     @Test
     void get_Feature_Progress(){
-        featRep.findAll();
-        Feature feat = featRep.findById(1).get();
-        assertEquals(feat.getFeatureName(), "MyFeature");
+        featRep.deleteAll();
 
-        assertEquals(feat.getProgress(), 2);
+        Feature f2 = new Feature();
+        Date date = new Date();
+
+        f2.setId(2);
+        f2.setFeatureName("MyFeature2");
+        f2.setDeadline(date);
+        f2.setDescription("Some Feature here");
+        f2.setPriority("MEDIUM");
+        f2.setUserId(1);
+        f2.setProgress(2);
+        featRep.save(f2);
+
+
+        assertEquals(f2.getFeatureName(), "MyFeature2");
+
+        assertEquals(f2.getProgress(), 2);
+        featRep.deleteAll();
 
     }
 
