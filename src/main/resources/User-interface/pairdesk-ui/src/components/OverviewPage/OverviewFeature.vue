@@ -9,29 +9,23 @@
     </div>
 
 
-    <div class="card card-1">
-      <router-link class="nav-links" to="/features" >
+    <div style="overflow-y:auto;" class="card card-1">
+
     <table class="table table">
       <thead class="thead-dark">
       <tr>
         <th scope="col">Feature Overview</th>
-
       </tr>
       </thead>
-
-
       <tr v-for="feature in list" v-bind:key="feature.featureId">
-
 
         <td>{{ feature.featureName }}</td>
 
         <td>{{ feature.description }}</td>
         <!--  <div id="id" hidden>{{feature.featureId}}</div>-->
         <td> progression here</td>
-
-
       </tr>
-    </table></router-link>
+    </table>
     </div>
 
 
@@ -124,7 +118,7 @@ body {
 .card {
   margin: 20px;
   padding: 20px;
-  width: 100%;
+  width: 500px;
   min-height: 350px;
   display: grid;
   grid-template-rows: 20px 50px 1fr 50px;
