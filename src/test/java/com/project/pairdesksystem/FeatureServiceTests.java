@@ -91,6 +91,7 @@ public class FeatureServiceTests {
         Feature f1 = new Feature();
         Date date = new Date();
 
+        int testUserId = 2;
         int id = 1291;
 
         f1.setId(id);
@@ -110,11 +111,12 @@ public class FeatureServiceTests {
         f2.setDeadline(date);
         f2.setDescription("Some Feature here2");
         f2.setPriority("HIGH");
-        f2.setUser_id(1);
+        f2.setUser_id(2);
         f2.setProgress(3);
 
         fservice.updateFeature(f1, f2);
 
         assertEquals(fservice.getFeatureByFeatureId(f1.getFeatureId()).getFeatureName(), "MysFeatureTest2");
+        assertEquals(fservice.getFeatureByFeatureId(f1.getFeatureId()).getUser_id(), testUserId);
     }
 }
