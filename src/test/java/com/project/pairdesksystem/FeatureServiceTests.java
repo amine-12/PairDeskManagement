@@ -1,8 +1,11 @@
 package com.project.pairdesksystem;
 
 import com.project.pairdesksystem.buinesslayer.Feature.FeatureService;
+import com.project.pairdesksystem.buinesslayer.Task.TaskService;
 import com.project.pairdesksystem.datalayer.Feature.Feature;
 import com.project.pairdesksystem.datalayer.Feature.FeaturesRepository;
+import com.project.pairdesksystem.datalayer.Task.Task;
+import com.project.pairdesksystem.datalayer.Task.TaskRepository;
 import javassist.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -136,7 +139,7 @@ public class FeatureServiceTests {
         f1.setDeadline(date);
         f1.setDescription("Some Feature here");
         f1.setPriority("MEDIUM");
-        f1.setUser_id(1);
+        f1.setUserId(1);
         f1.setProgress(2);
         featureRepo.save(f1);
         Task t = new Task(12, 12345, f1.getFeatureId(), "test1", "HIGH", "DONE", "desc");
