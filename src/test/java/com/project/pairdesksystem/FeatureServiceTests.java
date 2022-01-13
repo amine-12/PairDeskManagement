@@ -157,7 +157,7 @@ public class FeatureServiceTests {
         Task t = new Task(12, 12345, 1111, "test1", "HIGH", "DONE", "description");
         Task t2 = new Task(13, 11111, 1111, "test2", "HIGH", "DONE", "description");
 
-        
+
         assertEquals(tservice.getTaskByTaskId(t.getTaskId()).getStatus(), "DONE");
         System.out.println(fservice.getFeatureProgress(1111));
 
