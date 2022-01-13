@@ -31,6 +31,9 @@ public class FeatureServiceTests {
     @Autowired
     private FeaturesRepository featureRepo;
 
+    @Autowired
+    private TaskService tservice;
+
 
     @Test
     void delete_Feature_with_Service() throws Exception {
@@ -114,5 +117,50 @@ public class FeatureServiceTests {
         fservice.updateFeature(f1, f2);
 
         assertEquals(fservice.getFeatureByFeatureId(f1.getFeatureId()).getFeatureName(), "MysFeatureTest2");
+    }
+
+    @Test
+    void update_Feature_Progress() throws NotFoundException {
+
+        // I create a feature then a task for that feature
+        //since the feature has only one task with the status "DONE"
+        //it should return 100 (100%) (as you can tell by the last line of this test)
+        Feature f1 = new Feature();
+        Date date = new Date();
+
+        int id = 1111;
+
+        f1.setId(id);
+        f1.setFeatureId(20);
+        f1.setFeatureName("MysFeatureTest");
+        f1.setDeadline(date);
+        f1.setDescription("Some Feature here");
+        f1.setPriority("MEDIUM");
+        f1.setUser_id(1);
+        f1.setProgress(2);
+
+        Feature f2 = new Feature();
+
+        f2.setId(id);
+        f2.setFeatureId(64);
+        f2.setFeatureName("MysFeatureTest2");
+        f2.setDeadline(date);
+        f2.setDescription("Some Feature here2");
+        f2.setPriority("HIGH");
+        f2.setUser_id(1);
+        f2.setProgress(3);
+
+        fservice.updateFeature(f1, f2);
+
+        assertEquals(fservice.getFeatureByFeatureId(f1.getFeatureId()).getFeatureName(), "MysFeatureTest2");
+
+        Task t = new Task(12, 12345, 1111, "test1", "HIGH", "DONE", "description");
+        Task t2 = new Task(13, 11111, 1111, "test2", "HIGH", "DONE", "description");
+
+        
+        assertEquals(tservice.getTaskByTaskId(t.getTaskId()).getStatus(), "DONE");
+        System.out.println(fservice.getFeatureProgress(1111));
+
+        assertEquals(fservice.getFeatureProgress(1111), 100);
     }
 }
