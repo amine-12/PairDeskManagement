@@ -30,10 +30,10 @@ public class FeatureServiceTests {
     private FeatureService fservice;
     @Autowired
     private FeaturesRepository featureRepo;
-
     @Autowired
-    private TaskService tservice;
-
+    public TaskService tservice;
+    @Autowired
+    public TaskRepository taskRepo;
 
     @Test
     void delete_Feature_with_Service() throws Exception {
@@ -122,6 +122,8 @@ public class FeatureServiceTests {
     @Test
     void update_Feature_Progress() throws NotFoundException {
 
+        featureRepo.deleteAll();
+        taskRepo.deleteAll();
         // I create a feature then a task for that feature
         //since the feature has only one task with the status "DONE"
         //it should return 100 (100%) (as you can tell by the last line of this test)
@@ -138,29 +140,24 @@ public class FeatureServiceTests {
         f1.setPriority("MEDIUM");
         f1.setUser_id(1);
         f1.setProgress(2);
+        featureRepo.save(f1);
+        Task t = new Task(12, 12345, f1.getFeatureId(), "test1", "HIGH", "DONE", "desc");
 
-        Feature f2 = new Feature();
 
-        f2.setId(id);
-        f2.setFeatureId(64);
-        f2.setFeatureName("MysFeatureTest2");
-        f2.setDeadline(date);
-        f2.setDescription("Some Feature here2");
-        f2.setPriority("HIGH");
-        f2.setUser_id(1);
-        f2.setProgress(3);
+        taskRepo.save(t);
 
-        fservice.updateFeature(f1, f2);
+        assertEquals(fservice.getFeatureByFeatureId(f1.getFeatureId()).getFeatureName(), "MysFeatureTest");
 
-        assertEquals(fservice.getFeatureByFeatureId(f1.getFeatureId()).getFeatureName(), "MysFeatureTest2");
 
-        Task t = new Task(12, 12345, 1111, "test1", "HIGH", "DONE", "description");
-        Task t2 = new Task(13, 11111, 1111, "test2", "HIGH", "DONE", "description");
+        System.out.println(t.getTaskId());
 
 
         assertEquals(tservice.getTaskByTaskId(t.getTaskId()).getStatus(), "DONE");
-        System.out.println(fservice.getFeatureProgress(1111));
+        System.out.println(fservice.getFeatureProgress(f1.getFeatureId()));
 
-        assertEquals(fservice.getFeatureProgress(1111), 100);
+        assertEquals(fservice.getFeatureProgress(f1.getFeatureId()), 100);
+
+        featureRepo.deleteAll();
+        taskRepo.deleteAll();
     }
 }
