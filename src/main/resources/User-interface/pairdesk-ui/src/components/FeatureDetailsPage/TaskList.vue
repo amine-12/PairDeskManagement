@@ -10,6 +10,7 @@
         </div>
         <div class="card-body">
           <div class="table-responsive">
+            <div class="text-dark"> Overall Progress : {{ progress }} %</div>
             <table class="table table-striped">
               <tbody><tr>
 
@@ -32,7 +33,7 @@
 
 
 
-                  <a class="btn btn-danger btn-action" @click="deleteTask(task.taskId)" data-toggle="tooltip" title=""
+                  <a class="btn btn-danger btn-action" @click="deleteTask(task.taskId);" data-toggle="tooltip" title=""
                      data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?"
                      data-confirm-yes="alert('Deleted')" data-original-title="Delete">
                     <i class="fas fa-trash"></i></a>
@@ -118,6 +119,7 @@ export default {
   data()
   {
     return {
+      progress:undefined,
       list:undefined,
       tid:undefined,
       tid2:undefined,
@@ -150,6 +152,13 @@ export default {
       axios.get("http://localhost:8080/features/api/tasks/" +  this.$route.params.featureId, this.yourConfig).then((resp) => {
         this.list = resp.data;
       })
+
+      axios.get("http://localhost:8080/features/api/progress/" + this.$route.params.featureId, this.yourConfig).then((resp) => {
+        this.progress = resp.data;
+
+        console.log(this.progress);
+      });
+
     }
     catch(error){
       console.log(error)

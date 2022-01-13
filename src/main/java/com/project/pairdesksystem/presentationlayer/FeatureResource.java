@@ -76,4 +76,12 @@ public class FeatureResource {
         featureService.deleteFeature(featureId);
     }
 
+    @CrossOrigin
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @GetMapping("/api/progress/{featureId}")
+    public double getFeatureProgress(@PathVariable int featureId) throws NotFoundException {
+
+    return featureService.getFeatureProgress(featureId);
+    }
+
 }

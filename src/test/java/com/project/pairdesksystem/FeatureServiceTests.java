@@ -1,8 +1,11 @@
 package com.project.pairdesksystem;
 
 import com.project.pairdesksystem.buinesslayer.Feature.FeatureService;
+import com.project.pairdesksystem.buinesslayer.Task.TaskService;
 import com.project.pairdesksystem.datalayer.Feature.Feature;
 import com.project.pairdesksystem.datalayer.Feature.FeaturesRepository;
+import com.project.pairdesksystem.datalayer.Task.Task;
+import com.project.pairdesksystem.datalayer.Task.TaskRepository;
 import javassist.NotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,7 +27,10 @@ public class FeatureServiceTests {
     private FeatureService fservice;
     @Autowired
     private FeaturesRepository featureRepo;
-
+    @Autowired
+    public TaskService tservice;
+    @Autowired
+    public TaskRepository taskRepo;
 
     @Test
     void delete_Feature_with_Service() throws Exception {
@@ -112,5 +118,47 @@ public class FeatureServiceTests {
 
         assertEquals(fservice.getFeatureByFeatureId(f1.getFeatureId()).getFeatureName(), "MysFeatureTest2");
         assertEquals(fservice.getFeatureByFeatureId(f1.getFeatureId()).getUserId(), testUserId);
+    }
+
+    @Test
+    void update_Feature_Progress() throws NotFoundException {
+
+        featureRepo.deleteAll();
+        taskRepo.deleteAll();
+        // I create a feature then a task for that feature
+        //since the feature has only one task with the status "DONE"
+        //it should return 100 (100%) (as you can tell by the last line of this test)
+        Feature f1 = new Feature();
+        Date date = new Date();
+
+        int id = 1111;
+
+        f1.setId(id);
+        f1.setFeatureId(20);
+        f1.setFeatureName("MysFeatureTest");
+        f1.setDeadline(date);
+        f1.setDescription("Some Feature here");
+        f1.setPriority("MEDIUM");
+        f1.setUserId(1);
+        f1.setProgress(2);
+        featureRepo.save(f1);
+        Task t = new Task(12, 12345, f1.getFeatureId(), "test1", "HIGH", "DONE", "desc");
+
+
+        taskRepo.save(t);
+
+        assertEquals(fservice.getFeatureByFeatureId(f1.getFeatureId()).getFeatureName(), "MysFeatureTest");
+
+
+        System.out.println(t.getTaskId());
+
+
+        assertEquals(tservice.getTaskByTaskId(t.getTaskId()).getStatus(), "DONE");
+        System.out.println(fservice.getFeatureProgress(f1.getFeatureId()));
+
+        assertEquals(fservice.getFeatureProgress(f1.getFeatureId()), 100);
+
+        featureRepo.deleteAll();
+        taskRepo.deleteAll();
     }
 }
