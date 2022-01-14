@@ -11,6 +11,9 @@
         <div class="card-body">
           <div class="table-responsive">
             <div class="text-dark"> Overall Progress : {{ progress }} %</div>
+            <div class="progress">
+              <div id="progress-bar" class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
             <table class="table table-striped">
               <tbody><tr>
 
@@ -155,7 +158,8 @@ export default {
 
       axios.get("http://localhost:8080/features/api/progress/" + this.$route.params.featureId, this.yourConfig).then((resp) => {
         this.progress = resp.data;
-
+        this.progress=this.progress.toFixed(1);
+        document.getElementById("progress-bar").style.width = this.progress+"%";
         console.log(this.progress);
       });
 
