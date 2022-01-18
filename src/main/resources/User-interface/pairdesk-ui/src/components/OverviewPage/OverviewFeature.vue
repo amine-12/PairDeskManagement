@@ -9,7 +9,7 @@
     </div>
 
 
-    <div style="overflow-y:auto;" class="card card-1">
+    <div style="overflow-y:auto;" class="card card-1" v-if="user.roles[0] === 'ROLE_ADMIN'">
 
     <table class="table table">
       <thead class="thead-dark">
@@ -28,7 +28,24 @@
     </table>
     </div>
 
+    <div style="overflow-y:auto;" class="card card-1">
 
+      <table class="table table">
+        <thead class="thead-dark">
+        <tr>
+          <th scope="col">Features assigned to you</th>
+        </tr>
+        </thead>
+        <tr v-for="feature in userSpecificList" v-bind:key="feature.featureId">
+
+          <td>{{ feature.featureName }}</td>
+
+          <td>{{ feature.description }}</td>
+          <!--  <div id="id" hidden>{{feature.featureId}}</div>-->
+          <td> progression here</td>
+        </tr>
+      </table>
+    </div>
 
   </div>
 
@@ -42,6 +59,7 @@ export default {
   data() {
     return {
       list: undefined,
+      userSpecificList: undefined,
       user: JSON.parse(localStorage.getItem('userInfo'))
     }
   },
@@ -53,6 +71,17 @@ export default {
     }
     axios.get("http://localhost:8080/features/api/all", yourConfig).then((resp) => {
       this.list = resp.data;
+    }).catch((error) => {
+      if (error.response.status === 401) {
+        console.log("token expired")
+        this.$router.push('/login')
+      }
+      console.log(error)
+    }).finally(() => {
+    });
+
+    axios.get("http://localhost:8080/features/api/users/" + this.user.userId, yourConfig).then((resp) => {
+      this.userSpecificList = resp.data;
     }).catch((error) => {
       if (error.response.status === 401) {
         console.log("token expired")

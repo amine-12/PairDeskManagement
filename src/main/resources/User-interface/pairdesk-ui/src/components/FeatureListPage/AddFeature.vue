@@ -4,7 +4,7 @@
   <div class="col-xs-1" align="center">
     <label class="col-md-4 control-label" for="submit"></label>
     <div class="col-md-4">
-      <button v-on:click="hideShowFunction()" @click="goto()" id="viewFeatureCreationForm" name="viewFeatureCreationForm" class="btn btn-primary">Add a new feature</button>
+      <button v-on:click="hideShowFunction()" @click="goto()" id="viewFeatureCreationForm" name="viewFeatureCreationForm" class="btn btn-primary" v-if="currentUser.roles[0] === 'ROLE_ADMIN'">Add a new feature</button>
     </div>
   </div>
   <p></p>
@@ -90,6 +90,7 @@ export default {
         deadline: '',
         userId: ''
       },
+      currentUser: JSON.parse(localStorage.getItem('userInfo')),
       users: [],
       isVisible: false
     }
@@ -131,7 +132,6 @@ export default {
         axios.post('http://localhost:8080/features/api/add', this.form, this.yourConfig)
             .then((resp) => {
               this.form = resp.data;
-              console.log(this.users[0])
               console.log(this.form);
             })
             .catch((error) => {
