@@ -188,7 +188,7 @@ body {
     <div class="heading">
     <h1 class="heading__title">Features List</h1>
   </div>
-    <div class="main-container row center" >
+    <div class="main-container row center" v-if="currentUser.roles[0] === 'ROLE_ADMIN'">
 
       <div class="column" v-for="feature in list" v-bind:key="feature.featureId">
         <div class="cards">
@@ -198,15 +198,32 @@ body {
             <h2 class="card__body">{{ feature.description }}</h2>
             <p id="id" hidden>{{feature.featureId}}</p>
             <div style="text-align: right" class="card__title" id="editDeleteButtonsDiv">
-              <button id="editButton" v-on:click="getId(feature.featureId); hideShowFunction();" @click="goto()" style="background: transparent; border: none;" name="editFeatureButton">
+              <button id="editButton" v-on:click="getId(feature.featureId); hideShowFunction();" @click="goto()" style="background: transparent; border: none;" name="editFeatureButton" v-if="currentUser.roles[0] === 'ROLE_ADMIN'">
                 <img src="@/assets/pencil.png" alt="Edit Feature" style="height: 30px; width: 30px"/>
               </button>
-              <button @click="deleteFeature(feature.featureId)" style="background: transparent; border: none;" name="deleteFeatureButton">
+              <button @click="deleteFeature(feature.featureId)" style="background: transparent; border: none;" name="deleteFeatureButton" id="deleteFeatureButtonId" v-if="currentUser.roles[0] === 'ROLE_ADMIN'">
                 <img src="@/assets/delete.png" alt="Delete Feature" style="height: 30px; width: 30px"/>
               </button>
               <span v-bind:style="getStatus(feature.priority)" id="statusDot" style="float: left;" class="dot"></span>
               <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }" style="float: left; margin-left: 2%;" class="heading__link "> <h2 class="card__title">{{ feature.featureName }}</h2></router-link>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-container row center" v-if="currentUser.roles[0] === 'ROLE_USER'">
+    <div class="column" v-for="feature in userSpecificList" v-bind:key="feature.featureId">
+      <div class="cards">
+
+        <div class="card card-1">
+          <!--            <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }" class="heading__link "> <h2 class="card__title">{{ feature.featureName }}</h2></router-link>-->
+          <h2 class="card__body">{{ feature.description }}</h2>
+          <p id="id2" hidden>{{feature.featureId}}</p>
+          <div style="text-align: right" class="card__title" id="editDeleteButtonsDiv2">
+            <span v-bind:style="getStatus(feature.priority)" id="statusDot2" style="float: left;" class="dot"></span>
+            <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }" style="float: left; margin-left: 2%;" class="heading__link "> <h2 class="card__title">{{ feature.featureName }}</h2></router-link>
           </div>
         </div>
       </div>
@@ -282,6 +299,7 @@ export default {
   data() {
     return {
       list:undefined,
+      userSpecificList: undefined,
       fid:undefined,
       form: {
         featureName: '',
@@ -290,6 +308,7 @@ export default {
         deadline: '',
         userId: ''
       },
+      currentUser: JSON.parse(localStorage.getItem('userInfo')),
       yourConfig: {
         headers: {
           Authorization: localStorage.getItem("user-token")
@@ -311,6 +330,17 @@ export default {
         }
         console.log(error)
       }).finally(() => {
+    });
+
+    axios.get("http://localhost:8080/features/api/users/" + this.currentUser.userId, this.yourConfig).then((resp) => {
+      this.userSpecificList = resp.data;
+    }).catch((error) => {
+      if (error.response.status === 401) {
+        console.log("token expired")
+        this.$router.push('/login')
+      }
+      console.log(error)
+    }).finally(() => {
     });
 
     try {
