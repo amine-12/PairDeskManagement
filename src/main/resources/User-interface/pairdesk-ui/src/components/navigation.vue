@@ -1,4 +1,5 @@
 <template>
+  <div class="body">
   <nav class="navbar-personalized" style="z-index: 1; background-color: #2b3d8c;">
     <ul class="navbar-nav">
       <li class="logo">
@@ -106,7 +107,7 @@
         </a>
       </li>
 
-      <li class="nav-item">
+      <li class="nav-item" v-if="currentUser.roles[0] === 'ROLE_ADMIN'">
         <a href="./budget.html" class="nav-links">
           <svg
               aria-hidden="true"
@@ -154,7 +155,7 @@
               ></path>
             </g>
           </svg>
-          <span class="link-text">USERS</span>
+          <span class="link-text">{{user}}</span>
         </router-link>
         </a>
 
@@ -191,20 +192,31 @@
       </li>
     </ul>
   </nav>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'navigation',
-  computed:{
+  data(){
+    return{
+      currentUser: JSON.parse(localStorage.getItem('userInfo')),
+      user: ''
+    }
+  },mounted() {
+    if(this.currentUser.roles[0] === 'ROLE_USER'){
+      this.user = "PROFILE"
+    }else {
+      this.user = "USERS"
+    }
 
   }
 }
 
 </script>
 
-<style>
-:root {
+<style scoped>
+.body {
   font-size: 16px;
   font-family: 'Open Sans';
   --text-primary: #ffffff;
@@ -214,22 +226,22 @@ export default {
   --transition-speed: 600ms;
 }
 
-body {
-  color: black;
+.body {
+  color: white;
   background-color: rgb(226, 226, 226);
   margin: 0;
   padding: 0;
 }
 
-body::-webkit-scrollbar {
+.body::-webkit-scrollbar {
   width: 0.5rem;
 }
 
-body::-webkit-scrollbar-track {
+.body::-webkit-scrollbar-track {
   background: #1e1e24;
 }
 
-body::-webkit-scrollbar-thumb {
+.body::-webkit-scrollbar-thumb {
   background: #6649b8;
 }
 

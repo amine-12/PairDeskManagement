@@ -38,6 +38,9 @@ dependencies {
 // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.6.1'
 
+    // https://mvnrepository.com/artifact/org.passay/passay
+    implementation group: 'org.passay', name: 'passay', version: '1.6.1'
+
     implementation("org.mapstruct:mapstruct:${mapstructVersion}")
     compileOnly "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"

@@ -1,12 +1,5 @@
 <template>
   <div class="main-container row center">
-    <div class="cards">
-      <h1>{{ this.user.username }}</h1>
-
-    </div>
-    <div class="heading">
-      <h1 class="heading__title">Overview Panel</h1>
-    </div>
 
 
     <div style="overflow-y:auto;" class="card card-1" v-if="user.roles[0] === 'ROLE_ADMIN'">
