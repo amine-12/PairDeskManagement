@@ -1,5 +1,5 @@
 <template>
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
   <div class="container-a" style="margin-left:12%;margin-right: 5%; height: 150%">
     <h1 style="float: none">User Profile</h1>
     <div class="container-b">
@@ -149,7 +149,7 @@ a{
   transform: scale(1.02);
 }
 
-@media all and (max-width: 767px) {
+@media all and (max-width: 600px) {
   .responsive-table .table-header {
     display: none;
   }

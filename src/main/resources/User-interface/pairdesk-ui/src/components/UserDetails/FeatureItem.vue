@@ -1,7 +1,7 @@
 <template>
   <div class="col" data-label="featureName">{{info.featureName}}</div>
-  <div class="w3-border col col-8">
-    <div class="w3-blue" style="height:24px; text-align: center" v-bind:style="'width: ' + progress + '%'">{{progress}}%</div>
+  <div class="border col col-8">
+    <div style="height:24px; text-align: center; background-color: #0d6efd; color: white" v-bind:style="'width: ' + progress + '%'">{{progress}}%</div>
   </div>
 </template>
 
@@ -45,5 +45,9 @@ export default {
 </script>
 
 <style scoped>
-
+.border{
+  border-style: solid;
+  border-color: #1e1e24;
+  border-style: ;
+}
 </style>

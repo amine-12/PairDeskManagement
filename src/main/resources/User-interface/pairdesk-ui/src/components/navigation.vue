@@ -396,13 +396,5 @@ main {
     left: 0px;
   }
 }
-
-
-
-.title{
-  font-size: 3rem;
-  margin: 0;
-  text-transform: uppercase;
-}
 </style>
 
