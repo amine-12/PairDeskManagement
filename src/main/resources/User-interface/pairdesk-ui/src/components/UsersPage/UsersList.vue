@@ -12,7 +12,7 @@
         <div class="col col-3">Username</div>
         <div class="col col-4">Actions</div>
       </li>
-      <div v-for="user in list" v-bind:key="user.userId">
+      <div v-for="user in userList" v-bind:key="user.userId">
         <router-link :to="{ name: 'UsersDetail', params: { userId: user.userId } }">
         <li class="table-row" >
             <div class="col col-1" data-label="User Id">{{user.userId}}</div>
@@ -31,11 +31,11 @@
 import axios from "axios";
 import AddUserForm from "@/components/UsersPage/AddUserForm";
 export default {
-  name: "UsersList",
+  name: "UsersuserList",
   components: {AddUserForm},
   data() {
     return {
-      list:undefined,
+      userList:undefined,
       fid:undefined,
       yourConfig: {
         headers: {
@@ -80,8 +80,8 @@ export default {
   mounted()
   {
     axios.get("http://localhost:8080/users/api/all", this.yourConfig).then((resp) => {
-      this.list = resp.data;
-      console.log(this.list)
+      this.userList = resp.data;
+      console.log(this.userList)
     }).catch((error) => {
       if (error.response.status === 401) {
         console.log("token expired")

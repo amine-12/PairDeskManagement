@@ -108,7 +108,7 @@
       </li>
 
       <li class="nav-item" v-if="currentUser.roles[0] === 'ROLE_ADMIN'">
-        <a href="./budget.html" class="nav-links">
+        <a class="nav-links">
           <svg
               aria-hidden="true"
               focusable="false"
@@ -155,7 +155,7 @@
               ></path>
             </g>
           </svg>
-          <span class="link-text">{{user}}</span>
+          <span class="link-text">{{userTxt}}</span>
         </router-link>
         </a>
 
@@ -201,13 +201,13 @@ export default {
   data(){
     return{
       currentUser: JSON.parse(localStorage.getItem('userInfo')),
-      user: ''
+      userTxt: ''
     }
   },mounted() {
     if(this.currentUser.roles[0] === 'ROLE_USER'){
-      this.user = "PROFILE"
+      this.userTxt = "PROFILE"
     }else {
-      this.user = "USERS"
+      this.userTxt = "USERS"
     }
 
   }

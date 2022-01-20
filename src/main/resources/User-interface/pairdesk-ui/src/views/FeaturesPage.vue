@@ -11,9 +11,11 @@
 <script>
 import FeatureList from "@/components/FeatureListPage/FeatureList";
 import AddFeature from "@/components/FeatureListPage/AddFeature";
+import Navigation from "@/components/navigation";
+
 export default {
   name: "FeaturesPage",
-  components: {FeatureList,AddFeature}
+  components: {FeatureList,AddFeature,Navigation}
 }
 </script>
 
