@@ -46,7 +46,6 @@ public class FeatureServiceTests {
         f1.setDescription("Some Feature here");
         f1.setPriority("MEDIUM");
         f1.setUserId(1);
-        f1.setProgress(2);
 
         boolean foundAndDeleted = false;
 
@@ -78,7 +77,6 @@ public class FeatureServiceTests {
         f1.setDescription("Some Feature here");
         f1.setPriority("MEDIUM");
         f1.setUserId(1);
-        f1.setProgress(2);
 
         fservice.createFeature(f1);
 
@@ -101,7 +99,6 @@ public class FeatureServiceTests {
         f1.setDescription("Some Feature here");
         f1.setPriority("MEDIUM");
         f1.setUserId(1);
-        f1.setProgress(2);
 
         Feature f2 = new Feature();
 
@@ -112,7 +109,6 @@ public class FeatureServiceTests {
         f2.setDescription("Some Feature here2");
         f2.setPriority("HIGH");
         f2.setUserId(2);
-        f2.setProgress(3);
 
         fservice.updateFeature(f1, f2);
 
@@ -140,7 +136,6 @@ public class FeatureServiceTests {
         f1.setDescription("Some Feature here");
         f1.setPriority("MEDIUM");
         f1.setUserId(1);
-        f1.setProgress(2);
         featureRepo.save(f1);
         Task t = new Task(12, 12345, f1.getFeatureId(), "test1", "HIGH", "DONE", "desc");
 

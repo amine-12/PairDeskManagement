@@ -19,7 +19,6 @@
 //import static org.junit.jupiter.api.Assertions.assertEquals;
 //
 //@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-//@DataJpaTest
 //@ExtendWith(SpringExtension.class)
 //public class LoginServiceTests {
 //    @Autowired
@@ -27,25 +26,14 @@
 //    @Autowired
 //    private UserRepository userRepository;
 //
-//    @BeforeEach
-//    public void setUpDb(){
-//        User user = new User();
-//        user.setId(52356L);
-//        user.setUserId(97645L);
-//        user.setEmail("testuser@gmail.com");
-//        user.setUsername("testuser");
-//        user.setPassword("password");
-//        Set<Role> role = new HashSet<>();
-//        role.add(new Role(ERole.ROLE_ADMIN));
-//        user.setRoles(role);
-//        userRepository.save(user);
-//
-//    }
 //
 //    @Test
 //    void get_all_users() throws NotFoundException {
-//        UserDTO userDTO = userService.getUserDTOByUserId(97645L);
-//        System.out.println(userDTO.getUsername() + " ffasefa");
-//        assertEquals( userDTO.getUsername(), "testuser");
+//        User user2 = new User("username","test@hotmail.com","12345678");
+//        user2.setUserId(12345L);
+//        userRepository.save(user2);
+//        System.out.println(user2.getUsername() + " ffasefa");
+//        List<UserDTO> list = userService.getAllUsersDTO();
+//        assertEquals( list.size(), 1);
 //    }
 //}

@@ -15,6 +15,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DataJpaTest
 public class LoginAuthAPITests {
@@ -56,6 +57,38 @@ public class LoginAuthAPITests {
         userRepository.findAll();
         assertEquals(userRepository.findAll().size(), 2);
     }
+    @Test
+    void get_User_By_Id(){
+        User user2 = new User("username","test@hotmail.com","12345678");
+        user2.setUserId(12345L);
+        userRepository.save(user2);
+        Optional<User> u = userRepository.findByUserId(user2.getUserId());
+        assertEquals(u.get().getUsername(), "username");
+    }
 
+    @Test
+    void get_User_By_Username(){
+        User user2 = new User("test","test@hotmail.com","12345678");
+        user2.setUserId(12345L);
+        userRepository.save(user2);
+        Optional<User> u = userRepository.findByUsername("test");
+        assertEquals(u.get().getEmail(), "test@hotmail.com");
+    }
+
+    @Test
+    void exist_By_Email(){
+        User user2 = new User("test","test@hotmail.com","12345678");
+        user2.setUserId(12345L);
+        userRepository.save(user2);
+        assertTrue(userRepository.existsByEmail("test@hotmail.com"));
+    }
+
+    @Test
+    void exist_By_Username(){
+        User user2 = new User("test","test@hotmail.com","12345678");
+        user2.setUserId(12345L);
+        userRepository.save(user2);
+        assertTrue(userRepository.existsByUsername("test"));
+    }
 
 }
