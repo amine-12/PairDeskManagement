@@ -6,6 +6,7 @@
 <script>
 import UsersList from "@/components/UsersPage/UsersList";
 import Navigation from "@/components/navigation";
+
 export default {
   name: "UsersPage",
   data(){

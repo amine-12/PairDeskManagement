@@ -1,7 +1,6 @@
 <template>
   <div class="main-container row center">
 
-
     <div style="overflow-y:auto;" class="card card-1" v-if="user.roles[0] === 'ROLE_ADMIN'">
 
     <table class="table table">

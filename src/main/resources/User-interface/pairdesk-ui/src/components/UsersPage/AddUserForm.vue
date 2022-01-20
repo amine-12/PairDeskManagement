@@ -16,7 +16,7 @@
               <label class="col-md-7 control-label" for="taskName">Username:</label>
               <div class="col-md-7">
                 <input style="width: 100%" id="taskName" name="Username" type="text" placeholder="Username" class="form-control input-md" v-model="form.username">
-                <p v-if="!featureNameIsValid" class="error-message" style="color: red">Username Required</p>
+                <p v-if="!userNameIsValid" class="error-message" style="color: red">Username Required</p>
               </div>
             </div>
 
@@ -24,7 +24,7 @@
               <label class="col-md-6  control-label" for="description">Email</label>
               <div class="col-md-7 ">
                 <input style="width: 100%" id="description" name="email" type="text" placeholder="Email" class="form-control input-md" v-model="form.email">
-                <p v-if="!descriptionIsValid" class="error-message" style="color: red">Email Required</p>
+                <p v-if="!descrptionIsValid" class="error-message" style="color: red">Email Required</p>
               </div>
             </div>
 
@@ -62,9 +62,8 @@ export default {
         username: '',
         email: '',
         password: '',
-        role: ['user']
+        roles: ['user']
       },
-      isVisible: false,
       yourConfig: {
         headers: {
           Authorization: localStorage.getItem("user-token")
@@ -78,16 +77,16 @@ export default {
   },
   computed: {
 
-    featureNameIsValid() {
+    userNameIsValid() {
       return !!this.form.username
     },
 
-    descriptionIsValid() {
+    descrptionIsValid() {
       return !!this.form.email
     },
 
     formIsValid() {
-      return this.featureNameIsValid && this.descriptionIsValid
+      return this.userNameIsValid && this.descrptionIsValid
     }//may also use vuelidate in the future to perform input validation
   },
   methods: {
