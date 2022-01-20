@@ -1,8 +1,10 @@
 package com.project.pairdesksystem.User.models;
 
-import com.project.pairdesksystem.datalayer.Feature.Feature;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.validator.constraints.UniqueElements;
+import org.springframework.data.annotation.CreatedDate;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -24,7 +26,7 @@ public class User extends UserDTO {
     private Long id;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @UniqueElements(groups = Feature.class)
+    @UniqueElements(groups = User.class)
     private Long userId;
 
     @NotBlank
@@ -45,6 +47,21 @@ public class User extends UserDTO {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+
+    @CreationTimestamp
+    @Column(name="CREATED_TIME")
+    private Date creationTime;
+
+    @Override
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    @Override
+    public void setCreationTime(Date creationTime) {
+        this.creationTime =  creationTime;
+    }
 
     public User() {
     }

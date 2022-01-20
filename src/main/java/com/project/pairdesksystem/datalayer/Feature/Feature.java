@@ -25,8 +25,6 @@ public class Feature {
 
     private String priority;
 
-    private int progress;
-
     private String description;
 
     private Date deadline;
@@ -70,14 +68,6 @@ public class Feature {
 
     public void setPriority(String priority) {
         this.priority = priority;
-    }
-
-    public int getProgress() {
-        return progress;
-    }
-
-    public void setProgress(int progress) {
-        this.progress = progress;
     }
 
     public String getDescription() {

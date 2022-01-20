@@ -53,6 +53,7 @@ public class FeatureResource {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasRole('ADMIN')")
     public FeatureDTO updateFeature(@PathVariable int featureId, @RequestBody FeatureDTO featureRequest) throws NotFoundException {
         return featureService.updateFeatureWithDTO(featureId,featureRequest);
     }
@@ -64,6 +65,7 @@ public class FeatureResource {
             path = "/api/add"
     ) // Map ONLY POST Requests
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('ADMIN')")
     public FeatureDTO addNewFeature (@RequestBody FeatureDTO feature) {
         LOG.debug("THIS IS THE ID: " + feature.getFeatureId());
         return featureService.createFeatureDTO(feature);
@@ -71,6 +73,7 @@ public class FeatureResource {
 
     @CrossOrigin
     @DeleteMapping("/api/{featureId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteFeature(@PathVariable int featureId) throws NotFoundException {
         FeatureDTO featureDTO = featureService.getFeatureDTOByFeatureId(featureId);
         featureService.deleteFeature(featureId);
@@ -80,8 +83,7 @@ public class FeatureResource {
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     @GetMapping("/api/progress/{featureId}")
     public double getFeatureProgress(@PathVariable int featureId) throws NotFoundException {
-
-    return featureService.getFeatureProgress(featureId);
+        return featureService.getFeatureProgress(featureId);
     }
 
 }

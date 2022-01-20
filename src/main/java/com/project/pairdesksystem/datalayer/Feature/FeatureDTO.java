@@ -13,11 +13,9 @@ import java.util.Date;
 @AllArgsConstructor
 public class FeatureDTO {
     private Integer featureId;
-    private Integer task_id;
     private Integer userId;
     private String featureName;
     private String priority;
-    private int progress;
     private String description;
     private Date deadline;
 }
