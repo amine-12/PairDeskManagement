@@ -8,10 +8,10 @@
         <p><span style="font-weight: bold">Email: </span>{{info.email}}</p>
         <p><span style="font-weight: bold">Account Created at:</span> {{formattedDate}}</p>
       </div>
-      <div class="card-u">
+      <div class="card-u" style="height: 320px;overflow-y:auto">
         <h3>Assigned Features</h3>
-        <ul class="responsive-table" style="padding-left: 0px;">
-          <div v-for="feature in featuresList" v-bind:key="feature.featureId">
+        <ul class="responsive-table" style="padding-left: 0px;" v-if="featuresList && featuresList.length > 0">
+          <div  v-for="feature in featuresList" v-bind:key="feature.featureId" >
             <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }">
               <li class="table-row " >
                 <feature-item v-bind:feature-id="feature.featureId"></feature-item>
@@ -19,14 +19,15 @@
             </router-link>
           </div>
         </ul>
+        <div v-else>
+          <h3 style="text-align: center;margin-top: 10%">No Assigned Features</h3>
+        </div>
       </div>
     </div>
 
     <div class="container-c">
       <div class="card-i" >
-        <h3 style="float: left">Invoice</h3>
-        <p style="float: left"><span style="font-weight: bold">Generated:</span> <span style="font-size: small">Tue Jan 18 2022 17:48:25 GMT-0500 (Eastern Standard Time)</span></p>
-        <p style="float: left"><span style="font-weight: bold">Pay Period:</span> Tue Jan 18 2022 to Tue Jan 30 2022</p>
+        <invoice></invoice>
 
       </div>
     </div>
@@ -37,13 +38,15 @@
 <script>
 import axios from "axios";
 import FeatureItem from "@/components/UserDetails/FeatureItem";
+import Invoice from "@/components/UserDetails/Invoice";
 export default {
   name: "UserDetails",
-  components: {FeatureItem},
+  components: {Invoice, FeatureItem},
   data()
   {
     return {
       info:[],
+      isListEmpty: false,
       featuresList:[],
       mapped: null,
       formattedDate: '',
@@ -55,32 +58,35 @@ export default {
 
     }
   },
-    mounted() {
-      axios.get("http://localhost:8080/users/api/" + this.$route.params.userId,this.yourConfig).then((resp) => {
-        this.info = resp.data;
-        this.formattedDate = new Date(this.info.creationTime)
-        console.log(this.info)
-      }).catch((error) => {
-        if (error.response.status === 401) {
-          console.log("token expired")
-          this.$router.push('/login')
+  mounted() {
+    axios.get("http://localhost:8080/users/api/" + this.$route.params.userId,this.yourConfig).then((resp) => {
+      this.info = resp.data;
+      this.formattedDate = new Date(this.info.creationTime)
+      console.log(this.info)
+    }).catch((error) => {
+      if (error.response.status === 401) {
+        console.log("token expired")
+        this.$router.push('/login')
+      }
+      console.log(error)
+    }).finally(() => {
+
+    });
+
+    axios.get("http://localhost:8080/features/api/users/" + this.$route.params.userId,this.yourConfig).then((resp) => {
+        this.featuresList = resp.data;
+        if(this.featuresList == null){
+          this.isListEmpty = true
         }
-        console.log(error)
-      }).finally(() => {
+    }).catch((error) => {
+      if (error.response.status === 401) {
+        console.log("token expired")
+        this.$router.push('/login')
+      }
+      console.log(error)
+    }).finally(() => {
 
-      });
-
-      axios.get("http://localhost:8080/features/api/users/" + this.$route.params.userId,this.yourConfig).then((resp) => {
-          this.featuresList = resp.data;
-      }).catch((error) => {
-        if (error.response.status === 401) {
-          console.log("token expired")
-          this.$router.push('/login')
-        }
-        console.log(error)
-      }).finally(() => {
-
-      });
+    });
   }
 }
 </script>
@@ -171,4 +177,5 @@ a{
     text-align: right;
   }
 }
+
 </style>

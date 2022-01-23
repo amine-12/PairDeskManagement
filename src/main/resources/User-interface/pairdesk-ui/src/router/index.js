@@ -2,10 +2,11 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/Overview.vue'
 
 const routes = [
+
   {
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/LoginPage.vue')
+    component: () => import('../views/LoginPage.vue')
   },
   {
     path: '/',
@@ -16,20 +17,9 @@ const routes = [
     }
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-    meta: {
-      requiresAuth: true
-    }
-  },
-  {
     path: '/features',
     name: 'Features',
-    component: () => import(/* webpackChunkName: "about" */ '../views/FeaturesPage.vue'),
+    component: () => import('../views/FeaturesPage.vue'),
     meta: {
       requiresAuth: true
     }
@@ -37,7 +27,7 @@ const routes = [
   {
     path: '/users',
     name: 'Users',
-    component: () => import(/* webpackChunkName: "about" */ '../views/UsersPage.vue'),
+    component: () => import('../views/UsersPage.vue'),
     meta: {
       requiresAuth: true
     }
@@ -46,7 +36,7 @@ const routes = [
     path: '/features/:featureId',
     name: 'FeaturesDetail',
     params: true,
-    component: () => import(/* webpackChunkName: "about" */ '../views/FeatureDetailPage.vue'),
+    component: () => import('../views/FeatureDetailPage.vue'),
     meta: {
       requiresAuth: true
     }
@@ -55,7 +45,7 @@ const routes = [
     path: '/users/:userId',
     name: 'UsersDetail',
     params: true,
-    component: () => import(/* webpackChunkName: "about" */ '../views/UserDetailsPage.vue'),
+    component: () => import('../views/UserDetailsPage.vue'),
     meta: {
       requiresAuth: true
     }

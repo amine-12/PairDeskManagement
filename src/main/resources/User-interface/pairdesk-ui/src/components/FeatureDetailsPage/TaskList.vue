@@ -14,7 +14,7 @@
             <div class="progress">
               <div id="progress-bar" class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
-            <table class="table table-striped">
+            <table class="table table-striped" v-if="list && list.length > 0">
               <tbody><tr>
 
                 <th>Task Name</th>
@@ -34,19 +34,20 @@
                      data-toggle="tooltip" title="" data-original-title="Edit">
                     <i class="fas fa-pencil-alt"></i></a>
 
-
-
                   <a class="btn btn-danger btn-action" @click="deleteTask(task.taskId);" data-toggle="tooltip" title=""
                      data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?"
                      data-confirm-yes="alert('Deleted')" data-original-title="Delete">
                     <i class="fas fa-trash"></i></a>
 
-                  <a class="btn btn-success btn-action" v-on:click="completeTask(task.taskId)" data-toggle="tooltip" title="" data-original-title="Complete" id="completeButton"><i class="fas fa-check"></i></a>
+                  <a class="btn btn-success btn-action" v-on:click="completeTask(task.taskId, task.status)" data-toggle="tooltip" title="" data-original-title="Complete" id="completeButton"><i class="fas fa-check"></i></a>
 
                 </td>
               </tr>
               </tbody>
             </table>
+            <div v-else>
+              <h3 style="text-align: center;margin-top: 2%">No Tasks</h3>
+            </div>
           </div>
         </div>
       </div>
@@ -136,7 +137,7 @@ export default {
         taskName: this.taskName,
         description: this.description,
         priority: this.priority,
-        status: "DONE"
+        status: ''
       },
       form3: {
         featureId: this.$route.params.featureId,
@@ -160,7 +161,6 @@ export default {
         this.progress = resp.data;
         this.progress=this.progress.toFixed(1);
         document.getElementById("progress-bar").style.width = this.progress+"%";
-        console.log(this.progress);
       });
 
     }
@@ -207,56 +207,59 @@ export default {
       return 'color: red;'
     },
     deleteTask(taskId) {
-      let confirmed = confirm("Are you sure you would like to delete this task ");
-
-      if(confirmed){
-        console.log("task id : " +taskId);
-        console.log("task form is valid");
-
-        axios.delete('http://localhost:8080/features/api/tasks/' + taskId, this.yourConfig)
-            .then((resp) => {
-              this.form = resp.data;
-              console.log(this.form);
-            }).catch((error) => {
-          if (error.response.status === 401) {
-            console.log("token expired")
-            this.$router.push('/login')
-          }
-          console.log(error)
-        }).finally(() => {
-        });
-      }
-      window.location.reload()
+      this.$swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios.delete('http://localhost:8080/features/api/tasks/' + taskId, this.yourConfig)
+              .then((resp) => {
+                this.form = resp.data;
+                console.log(this.form);
+              }).catch((error) => {
+            if (error.response.status === 401) {
+              console.log("token expired")
+              this.$router.push('/login')
+            }
+            console.log(error)
+          }).finally(() => {
+          });
+          this.$swal.fire(
+              'Deleted!',
+              'The task has been deleted.',
+              'success'
+          ).then((result2) => {
+            if (result2.isConfirmed) {
+              window.location.reload()
+            }
+          })
+        }
+      })
     },
     setBackground(status) {
       if(status === "DONE"){
         return "background-color: #97f7ac";
       }
     },
-    completeTask(id) {
-      let confirmed = confirm("Is this task complete?");
+    completeTask(id,status) {
       this.tid = id;
-      console.log(this.tid)
-      if(confirmed){
 
-        axios.get("http://localhost:8080/features/api/task/" + id, this.yourConfig).then((resp) => {
-          this.info = resp.data;
-          console.log(this.description)
-          console.log(this.info)
-        }).catch((error) => {
-          if (error.response.status === 401) {
-            console.log("token expired")
-            this.$router.push('/login')
-          }
-          console.log(error)
-        }).finally(() => {
-        });
+        if(status === "TODO"){
+          this.form2.status = "DONE"
+        }
 
+        if(status === "DONE"){
+          this.form2.status = "TODO"
+        }
         axios.put('http://localhost:8080/features/api/tasks/update/' + id, this.form2, this.yourConfig)
             .then((resp) => {
               this.form2 = resp.data;
-              console.log(this.tid);
-              console.log(resp);
+
             })
             .catch((error) => {
               console.log(error)});
@@ -348,7 +351,6 @@ export default {
       window.location.reload();
 
     }
-  }
 }
 
 </script>
@@ -539,4 +541,5 @@ body{
   min-width: 35px;
   min-height: 35px;
 }
+
 </style>

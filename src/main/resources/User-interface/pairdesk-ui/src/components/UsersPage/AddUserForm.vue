@@ -131,7 +131,6 @@ export default {
         await axios.post('http://localhost:8080/api/auth/signup', this.form, this.yourConfig)
             .then((resp) => {
               this.form = resp.data;
-              console.log(this.form);
             })
             .catch((error) => {
               if (error.response.status === 401) {

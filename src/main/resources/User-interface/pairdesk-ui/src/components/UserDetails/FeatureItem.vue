@@ -25,7 +25,6 @@ export default {
   mounted() {
     axios.get("http://localhost:8080/features/api/" + this.featureId,this.yourConfig).then((resp) => {
       this.info = resp.data;
-      console.log(this.featureId)
     }).catch((error) => {
       if (error.response.status === 401) {
         console.log("token expired")
@@ -38,7 +37,6 @@ export default {
     axios.get("http://localhost:8080/features/api/progress/" + this.featureId, this.yourConfig).then((resp) => {
       this.progress = resp.data;
       this.progress = this.progress.toFixed(1);
-      console.log(this.progress);
     });
   }
 }
@@ -48,6 +46,5 @@ export default {
 .border{
   border-style: solid;
   border-color: #1e1e24;
-  border-style: ;
 }
 </style>

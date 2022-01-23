@@ -58,6 +58,14 @@
         </div>
       </div>
 
+      <div class="form-group" id="inputPrice">
+        <label class="col-md-4 control-label" for="price">Price</label>
+        <div class="col-md-4">
+          <input id="price" name="Price" type="text" placeholder="Price" class="form-control input-md" v-model="form.price">
+          <p v-if="!priceIsValid" class="error-message" style="color: red">Price Required</p>
+        </div>
+      </div>
+
       <div class="form-group" id="inputFeatureSubmit">
         <label class="col-md-4 control-label" for="submit"></label>
         <div class="col-md-4">
@@ -85,6 +93,7 @@ export default {
       },
       form: {
         featureName: '',
+        price: '',
         priority: '',
         description: '',
         deadline: '',
@@ -120,13 +129,17 @@ export default {
       return !!this.form.userId
     },
 
+    priceIsValid(){
+      return !!this.form.price
+    },
+
     formIsValid() {
       return this.featureNameIsValid && this.descriptionIsValid
     }//may also use vuelidate in the future to perform input validation
   },
   methods: {
     submitForm() {
-      if(this.formIsValid && this.userIsValid) {
+      if(this.formIsValid && this.userIsValid && this.priceIsValid) {
 
         console.log("form is valid")
         axios.post('http://localhost:8080/features/api/add', this.form, this.yourConfig)
@@ -162,5 +175,17 @@ export default {
 </script>
 
 <style scoped>
+::-webkit-scrollbar {
+  width: 10px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #2b3d8c;
+}
 </style>
