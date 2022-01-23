@@ -19,7 +19,6 @@ public class InvoiceDTO {
     private Date creationTime;
     private Double invoicePay;
 
-
     public Integer getInvoiceId() {
         return invoiceId;
     }

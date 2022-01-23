@@ -10,9 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-
-
 
 @Service
 @RequiredArgsConstructor
@@ -58,8 +57,8 @@ public class FeatureServiceImpl implements FeatureService{
 
     @Override
     public List<FeatureDTO> getAllFeaturesDTO() {
-        List<Feature> vetList = getAllFeatures();
-        return featureMapper.featureListToFeatureDTOList(vetList);
+        List<Feature> featureList = getAllFeatures();
+        return featureMapper.featureListToFeatureDTOList(featureList);
     }
 
     @Override
@@ -122,10 +121,33 @@ public class FeatureServiceImpl implements FeatureService{
             }
             iterator++;
         }
-        //System.out.println(completedTask + " / " + totalTasks);
         if(totalTaskSize ==0)
             return 0;
         return (totalCompleteTasks/totalTaskSize)*100;
+    }
+
+    @Override
+    public List<FeatureDTO> getAllFeaturesDTOCompleted() {
+        List<FeatureDTO> allFeatures = getAllFeaturesDTO();
+        List<FeatureDTO> allFeaturesCompleted = new ArrayList<>();
+        for (FeatureDTO feature : allFeatures){
+            if(getFeatureProgress(feature.getFeatureId()) == 100){
+                allFeaturesCompleted.add(feature);
+            }
+        }
+        return allFeaturesCompleted;
+    }
+
+    @Override
+    public List<FeatureDTO> getAllFeaturesDTOCompletedByUserId(int userId) {
+        List<FeatureDTO> allFeaturesCompleted = getAllFeaturesDTOCompleted();
+        List<FeatureDTO> allFeaturesCompletedByUserId = new ArrayList<>();
+        for (FeatureDTO feature : allFeaturesCompleted){
+            if(feature.getUserId() == userId){
+                allFeaturesCompletedByUserId.add(feature);
+            }
+        }
+        return allFeaturesCompletedByUserId;
     }
 
 

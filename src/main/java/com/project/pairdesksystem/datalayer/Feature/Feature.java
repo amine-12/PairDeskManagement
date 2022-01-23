@@ -29,6 +29,16 @@ public class Feature {
 
     private Date deadline;
 
+    private Double price;
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
     public Integer getId() {
         return id;
     }

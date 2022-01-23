@@ -24,4 +24,8 @@ public interface FeatureService {
     void deleteFeature(int featureId);
 
     double getFeatureProgress(int featureId);
+
+    List<FeatureDTO> getAllFeaturesDTOCompleted();
+
+    List<FeatureDTO> getAllFeaturesDTOCompletedByUserId(int userId);
 }

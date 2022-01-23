@@ -18,4 +18,5 @@ public class FeatureDTO {
     private String priority;
     private String description;
     private Date deadline;
+    private Double price;
 }

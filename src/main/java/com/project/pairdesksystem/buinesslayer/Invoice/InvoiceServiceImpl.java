@@ -1,5 +1,8 @@
 package com.project.pairdesksystem.buinesslayer.Invoice;
 
+import com.project.pairdesksystem.buinesslayer.Feature.FeatureService;
+import com.project.pairdesksystem.buinesslayer.Feature.FeatureServiceImpl;
+import com.project.pairdesksystem.datalayer.Feature.FeatureDTO;
 import com.project.pairdesksystem.datalayer.Invoice.Invoice;
 import com.project.pairdesksystem.datalayer.Invoice.InvoiceDTO;
 import com.project.pairdesksystem.datalayer.Invoice.InvoiceRepository;
@@ -8,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +21,8 @@ import java.util.Optional;
 public class InvoiceServiceImpl implements InvoiceService{
     private final InvoiceRepository invoiceRepository;
     private final InvoiceMapper invoiceMapper;
+    private final FeatureService featureService;
+
 
     @Override
     public List<Invoice> getAllInvoices() {
@@ -57,5 +63,15 @@ public class InvoiceServiceImpl implements InvoiceService{
     public InvoiceDTO createInvoiceDTO(InvoiceDTO invoiceDTO) {
         Invoice invoice = invoiceMapper.invoiceDTOToInvoice(invoiceDTO);
         return invoiceMapper.invoiceToInvoiceDTO(createInvoice(invoice));
+    }
+
+    @Override
+    public double getTotalPriceByUserId(int userId) {
+        List<FeatureDTO> featureDTOS = featureService.getAllFeaturesDTOCompletedByUserId(userId);
+        List<Double> prices = new ArrayList<>();
+        for (FeatureDTO feature : featureDTOS){
+           prices.add(feature.getPrice());
+        }
+        return prices.stream().mapToDouble(Double::doubleValue).sum();
     }
 }
