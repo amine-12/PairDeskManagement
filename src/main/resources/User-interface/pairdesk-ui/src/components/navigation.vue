@@ -108,7 +108,7 @@
       </li>
 
       <li class="nav-item" v-if="currentUser.roles[0] === 'ROLE_ADMIN'">
-        <a class="nav-links">
+        <a id="reportsNavId" class="nav-links">
           <svg
               aria-hidden="true"
               focusable="false"
@@ -135,7 +135,7 @@
 
       <li class="nav-item">
 
-        <a >
+        <a id="usersNavLinkId">
           <router-link class="nav-links" to="/users">
           <svg
               aria-hidden="true"

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col"><h2 style="float: left;">All Users</h2></div>
-      <div class="col"><button v-on:click="displayComponent" type="button"  class="btn btn-primary add-btn">Add User</button></div>
+      <div class="col"><button v-on:click="displayComponent" type="button" id="addUserBtnId" class="btn btn-primary add-btn">Add User</button></div>
     </div>
     <add-user-form></add-user-form>
     <ul class="responsive-table" style="padding-left: 0px;">
