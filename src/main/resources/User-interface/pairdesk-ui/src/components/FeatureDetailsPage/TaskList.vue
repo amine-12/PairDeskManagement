@@ -259,7 +259,6 @@ export default {
         axios.put('http://localhost:8080/features/api/tasks/update/' + id, this.form2, this.yourConfig)
             .then((resp) => {
               this.form2 = resp.data;
-
             })
             .catch((error) => {
               console.log(error)});

@@ -68,9 +68,14 @@ public class InvoiceServiceImpl implements InvoiceService{
     @Override
     public double getTotalPriceByUserId(int userId) {
         List<FeatureDTO> featureDTOS = featureService.getAllFeaturesDTOCompletedByUserId(userId);
+
         List<Double> prices = new ArrayList<>();
         for (FeatureDTO feature : featureDTOS){
-           prices.add(feature.getPrice());
+            if(feature.getPrice() == null){
+                prices.add(0.0);
+            }else {
+                prices.add(feature.getPrice());
+            }
         }
         return prices.stream().mapToDouble(Double::doubleValue).sum();
     }

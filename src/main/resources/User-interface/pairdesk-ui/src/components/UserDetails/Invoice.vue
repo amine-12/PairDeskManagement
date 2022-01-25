@@ -9,7 +9,7 @@
               <td class="content-wrap aligncenter">
                 <table width="100%" cellpadding="0" cellspacing="0">
                   <tbody><tr>
-                    <td class="content-block">
+                    <td class="">
                       <h2>Invoice</h2>
                     </td>
                   </tr>
@@ -17,19 +17,19 @@
                     <td class="content-block">
                       <table class="invoice">
                         <tbody><tr>
-                          <td>Anna Smith<br>Invoice #12345<br>June 01 2015</td>
+                          <td>Anna Smith<br>Invoice #{{ invoiceId }}<br>{{ creationDate }}</td>
                         </tr>
                         <tr>
                           <td>
                             <table class="invoice-items" cellpadding="0" cellspacing="0">
                               <tbody>
-                              <tr>
-                                <td>Service 1</td>
-                                <td class="alignright">$ 20.00</td>
+                              <tr v-for="feature in featuresListPay" v-bind:key="feature.featureId">
+                                <td>{{ feature.featureName }}</td>
+                                <td class="alignright">$ {{ feature.price }}</td>
                               </tr>
                               <tr class="total">
                                 <td class="alignright" width="80%">Total</td>
-                                <td class="alignright">$ 36.00</td>
+                                <td class="alignright">$ {{ payout }}</td>
                               </tr>
                               </tbody>
                             </table>
@@ -61,8 +61,82 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: "Invoice"
+  name: "Invoice",
+  data(){
+    return{
+      invoiceId:'',
+      creationDate:'',
+      invoice:[],
+      payout:0,
+      featuresListPay:[],
+      yourConfig: {
+        headers: {
+          Authorization: localStorage.getItem("user-token")
+        }
+      }
+    }
+  },
+  mounted() {
+
+    axios.get("http://localhost:8080/features/api/users/" + this.$route.params.userId,this.yourConfig).then((resp) => {
+      this.featuresListPay = resp.data;
+      if(this.featuresListPay == null){
+        this.isListEmpty = true
+      }
+    }).catch((error) => {
+      if (error.response.status === 401) {
+        this.$router.push('/login')
+      }
+      console.log(error)
+    }).finally(() => {
+
+    });
+
+    axios.get("http://localhost:8080/invoices/api/user/payout/" + this.$route.params.userId,this.yourConfig).then((resp) => {
+      this.payout = resp.data;
+      console.log(this.payout)
+    }).catch((error) => {
+      if (error.response.status === 401) {
+        this.$router.push('/login')
+      }
+      console.log(error)
+    })
+
+    let form = {
+      userId: this.$route.params.userId,
+      invoicePay: this.payout,
+    }
+
+    axios.get("http://localhost:8080/invoices/api/user/" + this.$route.params.userId,this.yourConfig).then((resp) => {
+      this.invoice = resp.data;
+      this.invoiceId = this.invoice.invoiceId
+      this.creationDate = new Date(this.invoice.creationTime)
+      if(this.invoice === ""){
+        axios.post('http://localhost:8080/invoices/api/add', form, this.yourConfig)
+            .then((resp) => {
+              this.form = resp.data;
+            })
+            .catch((error) => {
+              if (error.response.status === 401) {
+                this.$router.push('/login')
+              }
+              console.log(error)
+            }).finally(() => {
+        });
+      }
+      console.log(this.invoice)
+    }).catch((error) => {
+      if (error.response.status === 401) {
+        this.$router.push('/login')
+      }
+      console.log(error)
+    })
+
+
+  }
 }
 </script>
 

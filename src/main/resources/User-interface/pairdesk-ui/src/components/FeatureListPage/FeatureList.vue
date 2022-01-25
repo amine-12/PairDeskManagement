@@ -339,7 +339,6 @@ export default {
         console.log(this.$route.name)
       }).catch((error) => {
         if (error.response.status === 401) {
-          console.log("token expired")
           this.$router.push('/login')
         }
         console.log(error)
@@ -350,7 +349,6 @@ export default {
       this.userSpecificList = resp.data;
     }).catch((error) => {
       if (error.response.status === 401) {
-        console.log("token expired")
         this.$router.push('/login')
       }
       console.log(error)

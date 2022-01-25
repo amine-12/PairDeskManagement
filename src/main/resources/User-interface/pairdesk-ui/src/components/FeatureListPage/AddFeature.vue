@@ -140,15 +140,12 @@ export default {
   methods: {
     submitForm() {
       if(this.formIsValid && this.userIsValid && this.priceIsValid) {
-
-        console.log("form is valid")
         axios.post('http://localhost:8080/features/api/add', this.form, this.yourConfig)
             .then((resp) => {
               this.form = resp.data;
             })
             .catch((error) => {
               if (error.response.status === 401) {
-                console.log("token expired")
                 this.$router.push('/login')
               }
               console.log(error)

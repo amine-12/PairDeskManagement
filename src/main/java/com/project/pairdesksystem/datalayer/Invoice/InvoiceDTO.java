@@ -17,7 +17,6 @@ public class InvoiceDTO {
     private Integer userId;
     @CreationTimestamp
     private Date creationTime;
-    private Double invoicePay;
 
     public Integer getInvoiceId() {
         return invoiceId;
@@ -41,13 +40,5 @@ public class InvoiceDTO {
 
     public void setCreationTime(Date creationTime) {
         this.creationTime = creationTime;
-    }
-
-    public Double getInvoicePay() {
-        return invoicePay;
-    }
-
-    public void setInvoicePay(Double invoicePay) {
-        this.invoicePay = invoicePay;
     }
 }
