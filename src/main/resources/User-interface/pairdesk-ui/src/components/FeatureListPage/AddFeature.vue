@@ -132,7 +132,6 @@ export default {
         axios.post('http://localhost:8080/features/api/add', this.form, this.yourConfig)
             .then((resp) => {
               this.form = resp.data;
-              console.log(this.form);
             })
             .catch((error) => {
               if (error.response.status === 401) {

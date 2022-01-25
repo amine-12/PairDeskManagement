@@ -35,18 +35,12 @@ public class UserServiceTests {
         user.setPassword("12345");
         user.setUserId(98701L);
         userRepository.save(user);
-        System.out.println(user.getUserId());
 
         List users = userService.getAllUsersDTO();
 
         userService.deleteByUserId(user.getUserId());
 
         List usersDeleted = userService.getAllUsersDTO();
-
-        System.out.println("Hello");
-        System.out.println(user.getUserId());
-        System.out.println(users.size());
-        System.out.println(usersDeleted.size());
 
         if(usersDeleted.size() < users.size()){
             userWasDeleted = true;
