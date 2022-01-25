@@ -1,6 +1,9 @@
 package com.project.pairdesksystem.User.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "roles")
 public class Role {
@@ -15,6 +18,9 @@ public class Role {
     public Role() {
 
     }
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles", cascade = CascadeType.PERSIST)
+    protected Set<User> users = new HashSet<>();
 
     public Role(ERole name) {
         this.name = name;

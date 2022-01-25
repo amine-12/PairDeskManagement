@@ -42,12 +42,21 @@ public class User extends UserDTO {
     @Size(max = 120)
     private String password;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(	name = "user_roles",
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    public void addRole(Role r){
+        roles.add(r);
+        r.users.add(this);
+    }
+
+    public void removeRole(Role r){
+        roles.remove(r);
+        r.users.remove(this);
+    }
 
     @CreationTimestamp
     @Column(name="CREATED_TIME")
@@ -76,10 +85,10 @@ public class User extends UserDTO {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Long userId) {//public void setUserId(Long userId)
         Random rand = new Random();
-        long l = rand.nextInt(99999);
-        this.userId = l;
+        userId = Long.valueOf(rand.nextInt(99999));
+        this.userId = userId;
     }
 
     public Long getId() {

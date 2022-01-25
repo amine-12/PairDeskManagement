@@ -3,10 +3,10 @@ package com.project.pairdesksystem.User.repository;
 import java.util.Optional;
 
 import com.project.pairdesksystem.User.models.User;
-import com.project.pairdesksystem.User.models.UserDTO;
-import com.project.pairdesksystem.datalayer.Feature.Feature;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import javax.transaction.Transactional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -17,4 +17,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Boolean existsByEmail(String email);
 
     Optional<User> findByUserId(long userId);
+
+    @Transactional
+    void deleteByUserId(long userId);
 }
