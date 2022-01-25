@@ -1,6 +1,7 @@
 package com.project.pairdesksystem.User.models;
 
 import com.project.pairdesksystem.User.repository.UserRepository;
+import com.project.pairdesksystem.datalayer.Feature.Feature;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,5 +33,14 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserDTO getUserDTOByUserId(long userId) throws NotFoundException {
         return userMapper.userToUserDTO(getUserByUserId(userId));
+    }
+
+    @Override
+    public void deleteByUserId(long userId) {
+        User user = userRepository.findByUserId(userId).orElse(new User());
+        if(user.getUserId() != null)
+            userRepository.deleteByUserId(userId);
+
+        log.debug("user deleted");
     }
 }
