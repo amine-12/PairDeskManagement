@@ -3,21 +3,18 @@
 
     <div style="overflow-y:auto;" class="card card-1" v-if="user.roles[0] === 'ROLE_ADMIN'">
 
-    <table class="table table">
-      <thead class="thead-dark">
-      <tr>
-        <th scope="col">Feature Overview</th>
-      </tr>
-      </thead>
-      <tr v-for="feature in list" v-bind:key="feature.featureId">
+      <table class="table table">
+        <thead class="thead-dark">
+        <tr>
+          <th scope="col">Feature Overview</th>
+        </tr>
+        </thead>
+        <tr v-for="feature in list" v-bind:key="feature.featureId">
 
-        <td>{{ feature.featureName }}</td>
+          <feature-overview-item v-bind:feature-id="feature.featureId"></feature-overview-item>
 
-        <td>{{ feature.description }}</td>
-        <!--  <div id="id" hidden>{{feature.featureId}}</div>-->
-        <td> progression here</td>
-      </tr>
-    </table>
+        </tr>
+      </table>
     </div>
 
     <div style="overflow-y:auto;" class="card card-1">
@@ -30,11 +27,7 @@
         </thead>
         <tr v-for="feature in userSpecificList" v-bind:key="feature.featureId">
 
-          <td>{{ feature.featureName }}</td>
-
-          <td>{{ feature.description }}</td>
-          <!--  <div id="id" hidden>{{feature.featureId}}</div>-->
-          <td> progression here</td>
+          <feature-overview-item v-bind:feature-id="feature.featureId"></feature-overview-item>
         </tr>
       </table>
     </div>
@@ -45,9 +38,10 @@
 
 <script>
 import axios from "axios";
-
+import FeatureOverviewItem from "@/components/OverviewPage/FeatureOverviewItem";
 export default {
   name: "OverviewFeature",
+  components: {FeatureOverviewItem},
   data() {
     return {
       list: undefined,
