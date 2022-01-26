@@ -4,7 +4,6 @@ import com.project.pairdesksystem.User.models.ERole;
 import com.project.pairdesksystem.User.models.Role;
 import com.project.pairdesksystem.User.models.User;
 import com.project.pairdesksystem.User.repository.UserRepository;
-import com.project.pairdesksystem.datalayer.Task.Task;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

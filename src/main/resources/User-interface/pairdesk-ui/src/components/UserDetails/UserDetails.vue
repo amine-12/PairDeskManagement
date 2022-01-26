@@ -8,7 +8,7 @@
         <p><span style="font-weight: bold">Email: </span>{{info.email}}</p>
         <p><span style="font-weight: bold">Account Created at:</span> {{formattedDate}}</p>
       </div>
-      <div class="card-u" style="height: 320px;overflow-y:auto">
+      <div class="card-u" style="height: 325px;overflow-y:auto">
         <h3>Assigned Features</h3>
         <ul class="responsive-table" style="padding-left: 0px;" v-if="featuresList && featuresList.length > 0">
           <div  v-for="feature in featuresList" v-bind:key="feature.featureId" >

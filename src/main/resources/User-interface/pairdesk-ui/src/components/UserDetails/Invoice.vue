@@ -1,63 +1,41 @@
 <template>
-  <table>
-    <tbody>
-    <tr>
-      <td class="container" width="600">
-        <div class="content">
-          <table class="main" width="100%" cellpadding="0" cellspacing="0">
-            <tbody><tr>
-              <td class="content-wrap aligncenter">
-                <table width="100%" cellpadding="0" cellspacing="0">
-                  <tbody><tr>
-                    <td class="">
-                      <h2>Invoice</h2>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="content-block">
-                      <table class="invoice">
-                        <tbody><tr>
-                          <td>Anna Smith<br>Invoice #{{ invoiceId }}<br>{{ creationDate }}</td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <table class="invoice-items" cellpadding="0" cellspacing="0">
-                              <tbody>
-                              <tr v-for="feature in featuresListPay" v-bind:key="feature.featureId">
-                                <td>{{ feature.featureName }}</td>
-                                <td class="alignright">$ {{ feature.price }}</td>
-                              </tr>
-                              <tr class="total">
-                                <td class="alignright" width="80%">Total</td>
-                                <td class="alignright">$ {{ payout }}</td>
-                              </tr>
-                              </tbody>
-                            </table>
-                          </td>
-                        </tr>
-                        </tbody></table>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="content-block">
-                      <a href="#">View in browser</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="content-block">
-                      Company Inc. 123 Van Ness, San Francisco 94102
-                    </td>
-                  </tr>
-                  </tbody></table>
-              </td>
-            </tr>
-            </tbody></table>
-          </div>
-      </td>
-      <td></td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="container">
+    <div class="row" style="margin-bottom: 2%">
+      <div class="col" style="float: left;width: auto"><h1 style="text-align: left;float: left">Invoice</h1></div>
+      <div class="col"  style="float: right;margin-top: 1%;width: auto"><h3 style="text-align: right;float: right">Invoice #{{invoiceId}}</h3></div>
+    </div>
+
+    <div class="row">
+      <h4>Invoice Generated At: <span style="font-size: smaller;font-weight: normal">{{creationDate}}</span></h4>
+    </div>
+
+    <div class="row">
+      <h4>Invoice For: <span style="font-size: medium;font-weight: normal">{{info.username}}</span></h4>
+    </div>
+    <div class="row">
+      <h3 style="font-weight: bold;">Features Payout</h3>
+    </div>
+
+    <div class="row" style="width: 80%;margin-left: 8%">
+      <ul class="responsive-table" v-if="featuresListPay && featuresListPay.length > 0">
+        <div style="height: 250px;overflow-y:auto">
+          <li v-for="feature in featuresListPay" v-bind:key="feature.featureId" class="border-bottom">
+            <p>{{ feature.featureName }}</p>
+            <p style="margin-bottom: 2%" class="alignright">$ {{ feature.price }}</p>
+          </li>
+        </div>
+
+        <li class="total border-top border-3" >
+          <p class="alignright" style="font-weight: bold;font-size: large">Total</p>
+          <p class="alignright" style="font-weight: bold;font-size: large">$ {{ payout }}</p>
+        </li>
+      </ul>
+      <div v-else>
+        <h2 style="text-align: center;margin-top: 20%">No Payout</h2>
+      </div>
+    </div>
+
+  </div>
 </template>
 
 <script>
@@ -70,6 +48,7 @@ export default {
       invoiceId:'',
       creationDate:'',
       invoice:[],
+      info:[],
       payout:0,
       featuresListPay:[],
       yourConfig: {
@@ -80,8 +59,20 @@ export default {
     }
   },
   mounted() {
+    axios.get("http://localhost:8080/users/api/" + this.$route.params.userId,this.yourConfig).then((resp) => {
+      this.info = resp.data;
+      this.formattedDate = new Date(this.info.creationTime)
+      console.log(this.info)
+    }).catch((error) => {
+      if (error.response.status === 401) {
+        this.$router.push('/login')
+      }
+      console.log(error)
+    }).finally(() => {
 
-    axios.get("http://localhost:8080/features/api/users/" + this.$route.params.userId,this.yourConfig).then((resp) => {
+    });
+
+    axios.get("http://localhost:8080/features/api/user/completed/" + this.$route.params.userId,this.yourConfig).then((resp) => {
       this.featuresListPay = resp.data;
       if(this.featuresListPay == null){
         this.isListEmpty = true
@@ -141,6 +132,27 @@ export default {
 </script>
 
 <style scoped>
+.responsive-table li {
+  border-radius: 3px;
+  padding: 2px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+.responsive-table .table-header {
+  background-color: #2b3d8c;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: white;
+  margin-top: 2%;
+}
+.responsive-table .table-row {
+  background-color: #fff;
+  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+
+}
+
 /* -------------------------------------
     GLOBAL
     A very basic CSS reset
@@ -151,6 +163,10 @@ export default {
   font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   box-sizing: border-box;
   font-size: 14px;
+}
+
+.row{
+  margin-bottom: 3%;
 }
 
 img {
@@ -221,13 +237,13 @@ body {
 /* -------------------------------------
     TYPOGRAPHY
 ------------------------------------- */
-h1, h2, h3 {
-  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  color: #000;
-  margin: 40px 0 0;
-  line-height: 1.2;
-  font-weight: 400;
-}
+/*h1, h3 {*/
+/*  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;*/
+/*  color: #000;*/
+/*  margin: 40px 0 0;*/
+/*  line-height: 1.2;*/
+/*  font-weight: 400;*/
+/*}*/
 
 h1 {
   font-size: 32px;
@@ -346,6 +362,8 @@ a {
 .invoice td {
   padding: 5px 0;
 }
+
+
 .invoice .invoice-items {
   width: 100%;
 }
