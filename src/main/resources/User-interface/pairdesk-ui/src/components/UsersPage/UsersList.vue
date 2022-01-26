@@ -22,7 +22,7 @@
               <button id="seeUserDetailsBtnId" class="btn btn-primary" style="background: transparent; border: none;">
                 <img src="@/assets/account-details.png" alt="See Details" style="height: 30px; width: 30px"/>
               </button>
-              <button id="deleteUserBtnId" class="btn btn-danger" @click.stop.prevent="deleteUser(user.userId)" style="background: transparent; border: none;">
+              <button id="deleteUserBtnId" class="btn btn-danger" @click.stop.prevent="deleteUser(user.userId,user.username)" style="background: transparent; border: none;">
                 <img src="@/assets/delete.png" alt="Delete User" style="height: 30px; width: 30px"/>
               </button>
             </div>
@@ -79,29 +79,42 @@ export default {
           modal.style.display = "none";
           window.location.reload()
         }
-        // `this` inside methods points to the Vue instance
       }
     },
-    deleteUser(userId) {
-      let confirmed = confirm("Are you sure you would like to delete this user ");
-      console.log("user id : " + userId);
-      if(confirmed){
-        console.log("form is valid")
-
-        axios.delete('http://localhost:8080/users/api/delete/' + userId, this.yourConfig)
-            .then((resp) => {
-              this.form = resp.data;
-              console.log(this.form);
-            }).catch((error) => {
-          if (error.response.status === 401) {
-            console.log("token expired")
-            this.$router.push('/login')
-          }
-          console.log(error)
-        }).finally(() => {
-        });
-        window.location.reload()
-      }
+    deleteUser(userId, username) {
+      this.$swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios.delete('http://localhost:8080/users/api/delete/' + userId, this.yourConfig)
+              .then((resp) => {
+                this.form = resp.data;
+                console.log(this.form);
+              }).catch((error) => {
+            if (error.response.status === 401) {
+              console.log("token expired")
+              this.$router.push('/login')
+            }
+            console.log(error)
+          }).finally(() => {
+          });
+          this.$swal.fire(
+              'Deleted!',
+              'The user account ' + username +' has been deleted.',
+              'success'
+          ).then((result2) => {
+            if (result2.isConfirmed) {
+              window.location.reload()
+            }
+          })
+        }
+      })
     }
   },
   mounted()
