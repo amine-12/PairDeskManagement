@@ -18,6 +18,9 @@ import com.project.pairdesksystem.User.request.LoginRequest;
 import com.project.pairdesksystem.User.request.SignupRequest;
 import com.project.pairdesksystem.User.response.JwtResponse;
 import com.project.pairdesksystem.User.response.MessageResponse;
+import com.project.pairdesksystem.presentationlayer.FeatureResource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +39,9 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
+    private static final Logger LOG = LoggerFactory.getLogger(AuthController.class);
+
+
     @Autowired
     AuthenticationManager authenticationManager;
 
@@ -76,8 +82,22 @@ public class AuthController {
                 roles));
     }
 
-    @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+    @PostMapping("/existing-email")
+    public boolean checkIfEmailExists(@RequestBody String email) {
+        String emailStr = email.replace("%40","@");
+        String emailStrFinal = emailStr.replace("=","");
+        return userRepository.existsByEmail(emailStrFinal);
+    }
+
+    @PostMapping("/existing-username")
+    public boolean checkIfUsernameExists(@RequestBody String username) {
+        String usernameStr = username.replace("=","");
+        return userRepository.existsByUsername(usernameStr);
+    }
+
+
+        @PostMapping("/signup")
+    public ResponseEntity<?> registerUser(@RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()

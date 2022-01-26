@@ -1,4 +1,5 @@
 package com.project.pairdesksystem.datalayer.Invoice;
+import com.project.pairdesksystem.buinesslayer.Invoice.InvoiceService;
 import com.project.pairdesksystem.datalayer.Feature.Feature;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -29,9 +30,6 @@ public class Invoice {
     @CreationTimestamp
     @Column(name="CREATED_TIME")
     private Date creationTime;
-
-    @Column(name="invoice_pay")
-    private Double invoicePay;
 
     public Integer getId() {
         return id;
@@ -64,14 +62,5 @@ public class Invoice {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
-    }
-
-
-    public Double getInvoicePay() {
-        return invoicePay;
-    }
-
-    public void setInvoicePay(Double invoicePay) {
-        this.invoicePay = invoicePay;
     }
 }

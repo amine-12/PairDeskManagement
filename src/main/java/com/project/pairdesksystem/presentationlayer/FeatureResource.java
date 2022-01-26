@@ -86,4 +86,18 @@ public class FeatureResource {
         return featureService.getFeatureProgress(featureId);
     }
 
+    @CrossOrigin
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @GetMapping("/api/user/completed/{userId}")
+    public List<FeatureDTO> getAllFeaturesCompletedByUserId(@PathVariable int userId) throws NotFoundException {
+        return featureService.getAllFeaturesDTOCompletedByUserId(userId);
+    }
+
+    @CrossOrigin
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @GetMapping("/api/completed")
+    public List<FeatureDTO> getAllFeaturesCompleted() {
+        return featureService.getAllFeaturesDTOCompleted();
+    }
+
 }

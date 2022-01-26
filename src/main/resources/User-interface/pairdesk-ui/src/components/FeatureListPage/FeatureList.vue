@@ -182,6 +182,20 @@ body {
   position: relative;
   margin-top: 1%;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #2b3d8c;
+}
 </style>
 <template>
   <div>
@@ -319,12 +333,12 @@ export default {
   },
   mounted()
   {
+
       axios.get("http://localhost:8080/features/api/all", this.yourConfig).then((resp) => {
         this.list = resp.data;
         console.log(this.$route.name)
       }).catch((error) => {
         if (error.response.status === 401) {
-          console.log("token expired")
           this.$router.push('/login')
         }
         console.log(error)
@@ -335,7 +349,6 @@ export default {
       this.userSpecificList = resp.data;
     }).catch((error) => {
       if (error.response.status === 401) {
-        console.log("token expired")
         this.$router.push('/login')
       }
       console.log(error)
@@ -374,6 +387,7 @@ export default {
     //     this.list = resp.data;
     //   })
     // },
+
     getStatus(property){
       if(property === "Low"){
         return 'background-color: green;'
@@ -422,25 +436,39 @@ export default {
       }
     },
     deleteFeature(featureId) {
-      let confirmed = confirm("Are you sure you would like to delete this feature ");
-
-      if(confirmed){
-      console.log("form is valid")
-
-      axios.delete('http://localhost:8080/features/api/' + featureId, this.yourConfig)
-          .then((resp) => {
-            this.form = resp.data;
-            console.log(this.form);
-          }).catch((error) => {
-        if (error.response.status === 401) {
-          console.log("token expired")
-          this.$router.push('/login')
+      this.$swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios.delete('http://localhost:8080/features/api/' + featureId, this.yourConfig)
+              .then((resp) => {
+                this.form = resp.data;
+                console.log(this.form);
+              }).catch((error) => {
+            if (error.response.status === 401) {
+              console.log("token expired")
+              this.$router.push('/login')
+            }
+            console.log(error)
+          }).finally(() => {
+          });
+          this.$swal.fire(
+              'Deleted!',
+              'The feature has been deleted.',
+              'success'
+          ).then((result2) => {
+            if (result2.isConfirmed) {
+              window.location.reload()
+            }
+          })
         }
-        console.log(error)
-      }).finally(() => {
-      });
-        window.location.reload()
-      }
+      })
     }
   }
 }

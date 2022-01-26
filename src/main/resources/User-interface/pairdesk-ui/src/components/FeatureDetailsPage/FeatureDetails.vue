@@ -65,7 +65,6 @@ export default {
 
       axios.get("http://localhost:8080/features/api/" + this.$route.params.featureId,this.yourConfig).then((resp) => {
         this.info = resp.data;
-        console.log("this.$route.meta.Navigation" )
         if(this.info.priority === "Low"){
           document.getElementById("pC").style.color = "green"
         }else if(this.info.priority === "Medium"){
@@ -77,9 +76,7 @@ export default {
 
         try{
           axios.get("http://localhost:8080/users/api/" + this.info.userId, this.yourConfig).then((resp) => {
-            console.log(this.info.userId)
             this.assigned_user = resp.data;
-            console.log(this.assigned_user)
           })
         }
         catch(error)
@@ -88,7 +85,6 @@ export default {
         }
       }).catch((error) => {
         if (error.response.status === 401) {
-          console.log("token expired")
           this.$router.push('/login')
         }
         console.log(error)
@@ -104,5 +100,4 @@ export default {
   margin-right: 10%;
   margin-left: 10%;
 }
-
 </style>

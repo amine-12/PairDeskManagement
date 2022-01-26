@@ -30,7 +30,7 @@ public class InvoiceResource {
     @CrossOrigin
     @GetMapping("/api/all")
     @PreAuthorize("hasRole('ADMIN')")
-    public List<InvoiceDTO> getInvoiceDTOList() {
+    public List<InvoiceDTO> getAllInvoiceDTOList() {
         return invoiceService.getAllInvoiceDTO();
     }
 
@@ -57,6 +57,13 @@ public class InvoiceResource {
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public InvoiceDTO createInvoice (@RequestBody InvoiceDTO invoiceDTO) {
         return invoiceService.createInvoiceDTO(invoiceDTO);
+    }
+
+    @CrossOrigin
+    @GetMapping("/api/user/payout/{userId}")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public double getTotalInvoicePriceByUserId(@PathVariable int userId) throws NotFoundException {
+        return invoiceService.getTotalPriceByUserId(userId);
     }
 
 }

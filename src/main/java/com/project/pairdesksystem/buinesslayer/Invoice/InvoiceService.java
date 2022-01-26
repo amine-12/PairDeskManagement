@@ -18,4 +18,5 @@ public interface InvoiceService {
     InvoiceDTO getInvoiceDTOByInvoiceId(int invoiceId) throws NotFoundException;
     InvoiceDTO createInvoiceDTO(InvoiceDTO invoiceDTO);
 
+    double getTotalPriceByUserId(int userId);
 }
