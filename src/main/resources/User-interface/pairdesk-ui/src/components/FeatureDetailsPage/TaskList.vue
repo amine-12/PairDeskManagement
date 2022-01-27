@@ -233,6 +233,7 @@ export default {
           ).then((result2) => {
             if (result2.isConfirmed) {
               window.location.reload()
+              
             }
           })
         }
