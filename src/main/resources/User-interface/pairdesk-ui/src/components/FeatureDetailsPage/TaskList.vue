@@ -120,13 +120,12 @@ import axios from "axios";
 
 export default {
   name: "TaskList",
-  data()
-  {
+  data() {
     return {
-      progress:undefined,
-      list:undefined,
-      tid:undefined,
-      tid2:undefined,
+      progress: undefined,
+      list: undefined,
+      tid: undefined,
+      tid2: undefined,
       yourConfig: {
         headers: {
           Authorization: localStorage.getItem("user-token")
@@ -150,25 +149,23 @@ export default {
 
 
   },
-  mounted()
-  {
+  mounted() {
     try {
-      axios.get("http://localhost:8080/features/api/tasks/" +  this.$route.params.featureId, this.yourConfig).then((resp) => {
+      axios.get("http://localhost:8080/features/api/tasks/" + this.$route.params.featureId, this.yourConfig).then((resp) => {
         this.list = resp.data;
       })
 
       axios.get("http://localhost:8080/features/api/progress/" + this.$route.params.featureId, this.yourConfig).then((resp) => {
         this.progress = resp.data;
-        this.progress=this.progress.toFixed(1);
-        document.getElementById("progress-bar").style.width = this.progress+"%";
+        this.progress = this.progress.toFixed(1);
+        document.getElementById("progress-bar").style.width = this.progress + "%";
       });
 
-    }
-    catch(error){
+    } catch (error) {
       console.log(error)
     }
   },
-  computed:{
+  computed: {
 
     featureNameIsValid() {
       return !!this.form2.taskName
@@ -196,12 +193,12 @@ export default {
 
   },
 
-  methods:{
-    getStatus(property){
-      if(property === "Low"){
+  methods: {
+    getStatus(property) {
+      if (property === "Low") {
         return 'color: #4CC441;'
       }
-      if(property === "Medium"){
+      if (property === "Medium") {
         return 'color: orange;'
       }
       return 'color: red;'
@@ -242,33 +239,33 @@ export default {
       })
     },
     setBackground(status) {
-      if(status === "DONE"){
+      if (status === "DONE") {
         return "background-color: #97f7ac";
       }
     },
-    completeTask(id,status) {
+    completeTask(id, status) {
       this.tid = id;
 
-        if(status === "TODO"){
-          this.form2.status = "DONE"
-        }
-
-        if(status === "DONE"){
-          this.form2.status = "TODO"
-        }
-        axios.put('http://localhost:8080/features/api/tasks/update/' + id, this.form2, this.yourConfig)
-            .then((resp) => {
-              this.form2 = resp.data;
-            })
-            .catch((error) => {
-              console.log(error)});
-        window.location.reload()
-        return id;
+      if (status === "TODO") {
+        this.form2.status = "DONE"
       }
 
+      if (status === "DONE") {
+        this.form2.status = "TODO"
+      }
+      axios.put('http://localhost:8080/features/api/tasks/update/' + id, this.form2, this.yourConfig)
+          .then((resp) => {
+            this.form2 = resp.data;
+          })
+          .catch((error) => {
+            console.log(error)
+          });
+      window.location.reload()
+      return id;
     },
 
-    displayUpdateForm(id){
+
+    displayUpdateForm(id) {
 
       this.tid2 = id
       var modal = document.getElementById("myModalTaskUpdate");
@@ -285,24 +282,24 @@ export default {
       // }
 
 // When the user clicks on <span> (x), close the modal
-      span.onclick = function() {
+      span.onclick = function () {
         modal.style.display = "none";
         window.location.reload()
       }
 
 // When the user clicks anywhere outside of the modal, close it
-      window.onclick = function(event) {
+      window.onclick = function (event) {
         if (event.target === modal) {
           modal.style.display = "none";
           window.location.reload()
         }
         // `this` inside methods points to the Vue instance
       }
-
     },
 
+
     submitForm() {
-      if(this.formIsValid) {
+      if (this.formIsValid) {
 
         document.getElementById("description").value = "";
         document.getElementById("taskName").value = "";
@@ -320,14 +317,14 @@ export default {
               console.log(error)
             }).finally(() => {
         });
-      }else{
+      } else {
         console.log("form is invalid")
       }
 
     },
 
     submitForm2() {
-      if(this.formIsValid2) {
+      if (this.formIsValid2) {
         console.log("form is valid update")
         axios.put('http://localhost:8080/features/api/tasks/update/' + this.tid2, this.form3, this.yourConfig)
             .then((resp) => {
@@ -344,12 +341,13 @@ export default {
               console.log(error)
             }).finally(() => {
         });
-      }else{
+      } else {
         console.log("form is invalid")
       }
       window.location.reload();
 
     }
+  }
 }
 
 </script>
