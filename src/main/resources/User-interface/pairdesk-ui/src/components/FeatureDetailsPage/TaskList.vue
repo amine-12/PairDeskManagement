@@ -293,7 +293,7 @@ export default {
           modal.style.display = "none";
           window.location.reload()
         }
-        // `this` inside methods points to the Vue instance
+        // `this`inside methods points to the Vue instance
       }
     },
 
