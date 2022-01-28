@@ -6,7 +6,7 @@
       <table class="table table">
         <thead class="thead-dark">
         <tr>
-          <th scope="col">Feature Overview</th>
+          <th scope="col">{{$t('featureOverview') }}</th>
         </tr>
         </thead>
         <tr v-for="feature in list" v-bind:key="feature.featureId">
@@ -22,7 +22,7 @@
       <table class="table table">
         <thead class="thead-dark">
         <tr>
-          <th scope="col">Features assigned to you</th>
+          <th scope="col">{{$t('featureAssignedToYou')}}</th>
         </tr>
         </thead>
         <tr v-for="feature in userSpecificList" v-bind:key="feature.featureId">

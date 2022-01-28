@@ -1,4 +1,6 @@
 {
  "overview": "Overview",
-  "greeting": "Hello !"
+  "greeting": "Hello !",
+ "featureOverview": "Feature Overview",
+ "featureAssignedToYou": "Feature Assigned to you"
 }
