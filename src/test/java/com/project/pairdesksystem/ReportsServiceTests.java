@@ -22,7 +22,7 @@ public class ReportsServiceTests {
     @Test
     void check_Jasper_Report_Is_Filled() throws FileNotFoundException, JRException {
 
-        String successfulExport = "Report was generated and saved on the desktop";
+        String successfulExport = "Report was generated and saved in your downloads folder";
 
         String methodResult = reportService.exportReport("pdf");
 
