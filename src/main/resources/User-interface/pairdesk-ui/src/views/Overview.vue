@@ -1,9 +1,10 @@
 <template>
   <div class="home">
-    <h1 style="margin-left: 10%;margin-top: 2%">Overview</h1>
+    <h1 style="margin-left: 10%;margin-top: 2%">{{$t('overview') }}</h1>
     <navigation></navigation>
     <overview-feature></overview-feature>
   </div>
+
 </template>
 
 <script>
@@ -12,6 +13,6 @@ import OverviewFeature from "@/components/OverviewPage/OverviewFeature";
 import Navigation from "@/components/navigation";
 export default {
   name: 'Home',
-  components: {OverviewFeature,Navigation}
+  components: {OverviewFeature, Navigation},
 }
 </script>
