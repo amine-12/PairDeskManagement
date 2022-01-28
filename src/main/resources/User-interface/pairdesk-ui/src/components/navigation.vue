@@ -109,32 +109,33 @@
 
       <li class="nav-item" v-if="currentUser.roles[0] === 'ROLE_ADMIN'">
         <a id="reportsNavId" class="nav-links">
-          <svg
-              aria-hidden="true"
-              focusable="false"
-              data-prefix="fad"
-              data-icon="space-station-moon-alt"
-              role="img"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              class="svg-inline--fa fa-space-station-moon-alt fa-w-16 fa-5x"
-          >
-            <g class="fa-group">
-              <path
-                  fill="currentColor"
-                  d="M7 19h-6v-11h6v11zm8-18h-6v18h6v-18zm8 11h-6v7h6v-7zm1 9h-24v2h24v-2z"
-                  class="fa-secondary"
-              ></path>
-            </g>
-          </svg>
-          <span class="link-text">REPORTS</span>
+          <router-link class="nav-links" to="/reports">
+              <svg
+                  aria-hidden="true"
+                  focusable="false"
+                  data-prefix="fad"
+                  data-icon="space-station-moon-alt"
+                  role="img"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  class="svg-inline--fa fa-space-station-moon-alt fa-w-16 fa-5x"
+              >
+                <g class="fa-group">
+                  <path
+                      fill="currentColor"
+                      d="M7 19h-6v-11h6v11zm8-18h-6v18h6v-18zm8 11h-6v7h6v-7zm1 9h-24v2h24v-2z"
+                      class="fa-secondary"
+                  ></path>
+                </g>
+              </svg>
+            <span class="link-text">REPORTS</span>
+          </router-link>
         </a>
       </li>
 
 
 
       <li class="nav-item">
-
         <a id="usersNavLinkId">
           <router-link class="nav-links" to="/users">
           <svg
@@ -158,7 +159,6 @@
           <span class="link-text">{{userTxt}}</span>
         </router-link>
         </a>
-
       </li>
 
       <li class="nav-item" >
