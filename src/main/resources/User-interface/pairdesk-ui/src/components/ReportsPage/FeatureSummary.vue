@@ -18,7 +18,7 @@
               </button>
             </div>
           </li>
-        <h4 id="exportedMessage" style="display: none; color: green">File has been exported to Desktop</h4>
+        <h4 id="exportedMessage" style="display: none; color: green">File has been exported to Downloads folder</h4>
       </div>
     </ul>
   </div>
