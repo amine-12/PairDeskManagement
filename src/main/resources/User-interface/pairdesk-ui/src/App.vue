@@ -1,10 +1,28 @@
 <template>
   <router-view/>
+
+  <!--<select style=" position: absolute;
+  top: 8px;
+  right: 16px;
+  font-size: 18px;" v-model="lang">
+    <option value="en">English</option>
+    <option value="fr">Francais</option>
+  </select>-->
+  <language-selector></language-selector>
+
 </template>
 
 <script>
+
+import languageSelector from "./components/languageSelector"
+
 export default {
-  name: 'Home'
+  name: 'Home',
+  components:{
+    languageSelector
+
+  }
+
 }
 </script>
 
