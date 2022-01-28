@@ -9,7 +9,6 @@
 
 <script>
 // @ is an alias to /src
-import { useI18n } from 'vue-i18n';
 import OverviewFeature from "@/components/OverviewPage/OverviewFeature";
 import Navigation from "@/components/navigation";
 
@@ -17,12 +16,8 @@ export default {
 
   name: 'Home',
   components: {OverviewFeature, Navigation},
-  setup() {
-    const {t} = useI18n();
-    return {
-      t,
-    }
 
-  }
+
+
 }
 </script>

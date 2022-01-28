@@ -1,5 +1,11 @@
 <template>
-<div style="margin-left: 50%" name="flags">
+<div style="position: absolute;
+  top: 8px;
+  right: 16px;
+  font-size: 18px;"
+     name="flags">
+
+
 <span style="cursor:pointer" class="font-weight-light" @click="$i18n.locale = 'en'">English </span>
 <img
     src="https://flagcdn.com/16x12/gb.png"
@@ -8,7 +14,7 @@
     width="16"
     height="12"
     alt="United Kingdom">
-<span style="cursor:pointer" class="font-weigh-light" @click="$i18n.locale = 'fr'">Francais </span>
+<span style="cursor:pointer; padding-left: 5px" class="font-weigh-light" @click="$i18n.locale = 'fr'">Francais </span>
 
 <img
     src="https://flagcdn.com/16x12/mf.png"
