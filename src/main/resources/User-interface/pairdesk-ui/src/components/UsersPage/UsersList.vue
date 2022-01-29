@@ -121,7 +121,6 @@ export default {
   {
     axios.get("http://localhost:8080/users/api/all", this.yourConfig).then((resp) => {
       this.userList = resp.data;
-      console.log(this.userList)
     }).catch((error) => {
       if (error.response.status === 401) {
         this.$router.push('/login')

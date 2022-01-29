@@ -84,7 +84,8 @@
         </a>
       </li>
       <li class="nav-item">
-        <a href="./transactions.html" class="nav-links">
+        <a>
+          <router-link class="nav-links" to="/invoices" >
           <svg
               aria-hidden="true"
               focusable="false"
@@ -104,6 +105,7 @@
             </g>
           </svg>
           <span class="link-text">INVOICES</span>
+          </router-link>
         </a>
       </li>
 
