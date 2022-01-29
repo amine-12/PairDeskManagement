@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <div class="row" style="margin-bottom: 2%">
+  <div class="container" id="x">
+    <div class="row" style="margin-bottom: 2%" >
       <div class="col" style="float: left;width: auto"><h1 style="text-align: left;float: left">Invoice</h1></div>
       <div class="col"  style="float: right;margin-top: 1%;width: auto"><h3 style="text-align: right;float: right">Invoice #{{invoiceId}}</h3></div>
     </div>
@@ -21,13 +21,13 @@
         <div style="height: 250px;overflow-y:auto">
           <li v-for="feature in featuresListPay" v-bind:key="feature.featureId" class="border-bottom">
             <p>{{ feature.featureName }}</p>
-            <p style="margin-bottom: 2%" class="alignright">$ {{ feature.price }}</p>
+            <p style="margin-bottom: 2%" class="alignright">$ {{ feature.price.toFixed(2) }}</p>
           </li>
         </div>
 
         <li class="total border-top border-3" >
           <p class="alignright" style="font-weight: bold;font-size: large">Total</p>
-          <p class="alignright" style="font-weight: bold;font-size: large">$ {{ payout }}</p>
+          <p class="alignright" style="font-weight: bold;font-size: large">$ {{ payout.toFixed(2) }}</p>
         </li>
       </ul>
       <div v-else>
@@ -40,7 +40,17 @@
 
 <script>
 import axios from "axios";
-
+// import html2pdf from "html2pdf.js/src";
+// let element = document.getElementById('x');
+// let opt = {
+//   margin:       1,
+//   filename:     'file.pdf',
+//   image:        { type: 'jpeg', quality: 0.98 },
+//   html2canvas:  { scale: 2 },
+//   jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+// };
+//
+// html2pdf(element, opt);
 export default {
   name: "Invoice",
   data(){
@@ -62,7 +72,6 @@ export default {
     axios.get("http://localhost:8080/users/api/" + this.$route.params.userId,this.yourConfig).then((resp) => {
       this.info = resp.data;
       this.formattedDate = new Date(this.info.creationTime)
-      console.log(this.info)
     }).catch((error) => {
       if (error.response.status === 401) {
         this.$router.push('/login')
@@ -88,7 +97,6 @@ export default {
 
     axios.get("http://localhost:8080/invoices/api/user/payout/" + this.$route.params.userId,this.yourConfig).then((resp) => {
       this.payout = resp.data;
-      console.log(this.payout)
     }).catch((error) => {
       if (error.response.status === 401) {
         this.$router.push('/login')
@@ -118,7 +126,6 @@ export default {
             }).finally(() => {
         });
       }
-      console.log(this.invoice)
     }).catch((error) => {
       if (error.response.status === 401) {
         this.$router.push('/login')

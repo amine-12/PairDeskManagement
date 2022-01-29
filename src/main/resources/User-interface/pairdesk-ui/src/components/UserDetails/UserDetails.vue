@@ -1,6 +1,6 @@
 <template>
 
-  <div class="container-a" style="margin-left:12%;margin-right: 5%; height: 150%">
+  <div class="container-a" style="margin-left:12%;margin-right: 5%; height: 150%;margin-top: 3%;">
     <h1 style="float: none">User Profile</h1>
     <div class="container-b">
       <div class="card-u">
