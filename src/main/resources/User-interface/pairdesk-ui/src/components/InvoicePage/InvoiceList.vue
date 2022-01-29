@@ -5,7 +5,7 @@
     </div>
     <ul class="responsive-table" style="padding-left: 0px;">
       <li class="table-header">
-        <div class="col col-1">{{ $t('invoice') }} Id</div>
+        <div class="col col-1">{{ $t('invoice').replace('s','') }} Id</div>
         <div class="col col-2">{{ $t('user') }}</div>
         <div class="col col-3">{{ $t('creation') }}</div>
         <div class="col col-4">Actions</div>
