@@ -1,13 +1,13 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col"><h2 style="float: left;">Invoices</h2></div>
+      <div class="col"><h2 style="float: left;">{{ $t('invoice') }}</h2></div>
     </div>
     <ul class="responsive-table" style="padding-left: 0px;">
       <li class="table-header">
-        <div class="col col-1">Invoice Id</div>
-        <div class="col col-2">User</div>
-        <div class="col col-3">Creation</div>
+        <div class="col col-1">{{ $t('invoice') }} Id</div>
+        <div class="col col-2">{{ $t('user') }}</div>
+        <div class="col col-3">{{ $t('creation') }}</div>
         <div class="col col-4">Actions</div>
       </li>
       <div v-for="invoice in invoices" v-bind:key="invoice.invoiceId">
@@ -55,7 +55,6 @@ export default {
     exportReport(){
       // let route = this.$router.resolve({ path: "/invoices/" + userId });
       // window.open(route.href);
-      this.$refs.invoice.generateReport();
     }
   },
   mounted() {

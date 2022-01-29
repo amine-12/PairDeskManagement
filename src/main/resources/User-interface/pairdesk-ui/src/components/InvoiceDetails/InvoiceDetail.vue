@@ -2,11 +2,11 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <h1  style="margin-top: 3%;margin-left: 39%">Invoice</h1>
+        <h1  style="margin-top: 3%;margin-left: 39%">{{ $t('invoice').replace('s','') }}</h1>
       </div>
 
       <div class="col">
-        <button @click="generateReport" style="float: right;margin-top: 3%;margin-right: 39%"  class="btn btn-primary ">Export as PDF</button>
+        <button @click="generateReport" style="float: right;margin-top: 3%;margin-right: 39%"  class="btn btn-primary ">{{ $t('export') }}</button>
       </div>
 
     </div>
@@ -21,8 +21,8 @@
                 </td>
 
                 <td>
-                  Invoice #{{ invoice.invoiceId }}<br />
-                  Created: {{invoice.creationTime}}<br />
+                  {{ $t('invoice').replace('s','') }} #{{ invoice.invoiceId }}<br />
+                  {{ $t('creation') }}: {{invoice.creationTime}}<br />
                 </td>
               </tr>
             </table>
@@ -52,7 +52,7 @@
         <tr class="heading">
           <td>Services</td>
 
-          <td>Price</td>
+          <td>{{ $t('price') }}</td>
         </tr>
 
         <tr class="item" v-for="feature in featuresListPay" v-bind:key="feature.featureId">

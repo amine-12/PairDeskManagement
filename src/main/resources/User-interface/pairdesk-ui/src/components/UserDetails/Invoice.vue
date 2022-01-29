@@ -1,19 +1,20 @@
 <template>
   <div class="container" id="x">
     <div class="row" style="margin-bottom: 2%" >
-      <div class="col" style="float: left;width: auto"><h1 style="text-align: left;float: left">Invoice</h1></div>
-      <div class="col"  style="float: right;margin-top: 1%;width: auto"><h3 style="text-align: right;float: right">Invoice #{{invoiceId}}</h3></div>
+      <div class="col" style="float: left;width: auto"><h1 style="text-align: left;float: left">{{ $t('invoice').replace('s','') }}</h1></div>
+      <div class="col"  style="float: right;margin-top: 1%;width: auto">
+        <h3 style="text-align: right;float: right">{{ $t('invoice').replace('s','') }} #{{invoiceId}}</h3></div>
     </div>
 
     <div class="row">
-      <h4>Invoice Generated At: <span style="font-size: smaller;font-weight: normal">{{creationDate}}</span></h4>
+      <h4>{{ $t('invoiceCreation') }}: <span style="font-size: smaller;font-weight: normal">{{creationDate}}</span></h4>
     </div>
 
     <div class="row">
-      <h4>Invoice For: <span style="font-size: medium;font-weight: normal">{{info.username}}</span></h4>
+      <h4>{{ $t('invoiceFor') }}: <span style="font-size: medium;font-weight: normal">{{info.username}}</span></h4>
     </div>
     <div class="row">
-      <h3 style="font-weight: bold;">Features Payout</h3>
+      <h3 style="font-weight: bold;">{{ $t('featuresPayout') }}</h3>
     </div>
 
     <div class="row" style="width: 80%;margin-left: 8%">
@@ -31,7 +32,7 @@
         </li>
       </ul>
       <div v-else>
-        <h2 style="text-align: center;margin-top: 20%">No Payout</h2>
+        <h2 style="text-align: center;margin-top: 20%">{{ $t('noPayout') }}</h2>
       </div>
     </div>
 
@@ -40,17 +41,6 @@
 
 <script>
 import axios from "axios";
-// import html2pdf from "html2pdf.js/src";
-// let element = document.getElementById('x');
-// let opt = {
-//   margin:       1,
-//   filename:     'file.pdf',
-//   image:        { type: 'jpeg', quality: 0.98 },
-//   html2canvas:  { scale: 2 },
-//   jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-// };
-//
-// html2pdf(element, opt);
 export default {
   name: "Invoice",
   data(){
