@@ -84,7 +84,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a>
+        <a id="invoicesNavLink">
           <router-link class="nav-links" to="/invoices" >
           <svg
               aria-hidden="true"
