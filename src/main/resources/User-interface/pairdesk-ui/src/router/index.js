@@ -58,6 +58,15 @@ const routes = [
     }
   },
   {
+    path: '/invoiceGeneration/:userId',
+    name: 'InvoiceGeneration',
+    params: true,
+    component: () => import('../views/InvoiceGenerationPage'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '/features/:featureId',
     name: 'FeaturesDetail',
     params: true,

@@ -1,0 +1,258 @@
+<template>
+  <div class="invoice-box" id="invoiceGen">
+    <table>
+      <tr class="top">
+        <td colspan="2">
+          <table>
+            <tr>
+              <td class="title">
+                <img src="../../assets/named-logo.png" alt="Company logo" style="width: 100%; max-width: 300px" />
+              </td>
+
+              <td>
+                {{ $t('invoice').replace('s','') }} #{{ invoice.invoiceId }}<br />
+                {{ $t('creation') }}: {{invoice.creationTime}}<br />
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+      <tr class="information">
+        <td colspan="2">
+          <table>
+            <tr>
+              <td>
+                Pairdesk, Inc.<br />
+                Yassine Rachid<br />
+              </td>
+
+              <td>
+                #{{ user.userId }}<br />
+                {{ user.username }}<br />
+                {{ user.email }}
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+
+
+      <tr class="heading">
+        <td>Services</td>
+
+        <td>{{ $t('price') }}</td>
+      </tr>
+
+      <tr class="item" v-for="feature in featuresListPay" v-bind:key="feature.featureId">
+        <td>{{feature.featureName}}</td>
+
+        <td>{{feature.price.toFixed(2)}} $</td>
+      </tr>
+
+      <tr class="total">
+        <td></td>
+
+        <td class="border-top">Total: {{payout}} $</td>
+      </tr>
+    </table>
+  </div>
+</template>
+
+<script>
+import html2pdf from "html2pdf.js/src";
+import axios from "axios";
+
+export default {
+  name: "InvoiceGeneration"
+    ,methods:{
+      generateReport(){
+
+        let el = document.getElementById('invoiceGen');
+        let opt = {
+          margin:       0,
+          filename:     'invoice_'+ this.user.username +'.pdf',
+          image:        { type: 'jpeg', quality: 0.98 },
+          html2canvas:  { scale: 2 },
+          jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+
+        html2pdf(el, opt);
+      }
+    },
+  data()
+  {
+    return {
+      invoice:[],
+      featuresListPay:[],
+      user:[],
+      date: '',
+      payout: '',
+      yourConfig: {
+        headers: {
+          Authorization: localStorage.getItem("user-token")
+        }
+      }
+    }
+  },
+    async mounted() {
+      await axios.get("http://localhost:8080/invoices/api/user/" + this.$route.params.userId,this.yourConfig).then((resp) => {
+        this.invoice = resp.data;
+        const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+        let d = new Date(this.invoice.creationTime )
+        this.invoice.creationTime = month[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear()
+        console.log(this.invoice)
+      }).catch((error) => {
+        if (error.response.status === 401) {
+          this.$router.push('/login')
+        }
+        console.log(error)
+      })
+
+      await axios.get("http://localhost:8080/users/api/" + this.$route.params.userId,this.yourConfig).then((resp) => {
+        this.user = resp.data;
+      }).catch((error) => {
+        if (error.response.status === 401) {
+          this.$router.push('/login')
+        }
+        console.log(error)
+      }).finally(() => {
+
+      });
+
+      await axios.get("http://localhost:8080/features/api/user/completed/" + this.$route.params.userId,this.yourConfig).then((resp) => {
+        this.featuresListPay = resp.data;
+        if(this.featuresListPay == null){
+          this.isListEmpty = true
+        }
+      }).catch((error) => {
+        if (error.response.status === 401) {
+          this.$router.push('/login')
+        }
+        console.log(error)
+      }).finally(() => {
+
+      });
+
+      await axios.get("http://localhost:8080/invoices/api/user/payout/" + this.$route.params.userId,this.yourConfig).then((resp) => {
+        this.payout = resp.data;
+        this.payout = this.payout.toFixed(2);
+      }).catch((error) => {
+        if (error.response.status === 401) {
+          this.$router.push('/login')
+        }
+        console.log(error)
+      })
+
+      this.generateReport()
+      setTimeout("window.close()",1000)
+    }
+}
+</script>
+
+<style scoped>
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+body {
+  font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: #777;
+}
+
+
+body h3 {
+  font-weight: 300;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-style: italic;
+  color: #555;
+}
+
+body a {
+  color: #06f;
+}
+
+.invoice-box {
+  max-width: 800px;
+  margin: auto;
+  padding: 30px;
+  border: 1px solid #eee;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  font-size: 16px;
+  line-height: 24px;
+  font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+  color: #555;
+}
+
+.invoice-box table {
+  width: 100%;
+  line-height: inherit;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+.invoice-box table td {
+  padding: 5px;
+  vertical-align: top;
+}
+
+.invoice-box table tr td:nth-child(2) {
+  text-align: right;
+}
+
+.invoice-box table tr.top table td {
+  padding-bottom: 20px;
+}
+
+.invoice-box table tr.top table td.title {
+  font-size: 45px;
+  line-height: 45px;
+  color: #333;
+}
+
+.invoice-box table tr.information table td {
+  padding-bottom: 40px;
+}
+
+.invoice-box table tr.heading td {
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+  font-weight: bold;
+}
+
+.invoice-box table tr.details td {
+  padding-bottom: 20px;
+}
+
+.invoice-box table tr.item td {
+  border-bottom: 1px solid #eee;
+}
+
+.invoice-box table tr.item.last td {
+  border-bottom: none;
+}
+
+.invoice-box table tr.total td:nth-child(2) {
+  border-top: 2px solid #eee;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+  .invoice-box table tr.top table td {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+
+  .invoice-box table tr.information table td {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+}
+</style>

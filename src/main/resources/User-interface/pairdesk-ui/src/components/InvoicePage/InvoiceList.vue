@@ -52,9 +52,9 @@ export default {
     }
   },
   methods:{
-    exportReport(){
-      // let route = this.$router.resolve({ path: "/invoices/" + userId });
-      // window.open(route.href);
+    exportReport(userId){
+      let route = this.$router.resolve({ path: "/invoiceGeneration/" + userId });
+      window.open(route.href,'','width=800,height=450');
     }
   },
   mounted() {

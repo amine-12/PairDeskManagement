@@ -114,6 +114,7 @@ export default {
               }
               console.log(error)
             }).finally(() => {
+          window.location.reload()
         });
       }
     }).catch((error) => {

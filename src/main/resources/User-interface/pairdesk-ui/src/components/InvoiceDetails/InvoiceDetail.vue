@@ -96,7 +96,7 @@ export default {
 
       let element = document.getElementById('invoiceData');
       let opt = {
-        margin:       1,
+        margin:       0,
         filename:     'invoice_'+ this.user.username +'.pdf',
         image:        { type: 'jpeg', quality: 0.98 },
         html2canvas:  { scale: 2 },
