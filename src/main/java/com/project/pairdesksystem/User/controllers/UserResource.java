@@ -3,6 +3,7 @@ package com.project.pairdesksystem.User.controllers;
 
 import com.project.pairdesksystem.User.models.UserDTO;
 import com.project.pairdesksystem.User.models.UserService;
+import com.project.pairdesksystem.buinesslayer.Invoice.InvoiceService;
 import com.project.pairdesksystem.datalayer.Feature.FeatureDTO;
 import javassist.NotFoundException;
 import org.passay.CharacterData;
@@ -23,6 +24,9 @@ public class UserResource {
     @Autowired
     UserService userService;
 
+    @Autowired
+    InvoiceService invoiceService;
+
     @CrossOrigin
     @GetMapping("/api/all")
     @PreAuthorize("hasRole('ADMIN')")
@@ -41,6 +45,8 @@ public class UserResource {
     @DeleteMapping("/api/delete/{userId}")
     @PreAuthorize("hasRole('ADMIN')")
     public void deleteUser(@PathVariable long userId) throws NotFoundException {
+        int id = (int)userId;
+        invoiceService.deleteInvoiceByUserId(id);
         userService.deleteByUserId(userId);
     }
 
