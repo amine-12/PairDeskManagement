@@ -19,4 +19,6 @@ public interface InvoiceService {
     InvoiceDTO createInvoiceDTO(InvoiceDTO invoiceDTO);
 
     double getTotalPriceByUserId(int userId);
+
+    void deleteInvoiceByUserId(int userId);
 }

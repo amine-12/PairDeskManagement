@@ -1,13 +1,5 @@
 <template>
   <router-view/>
-
-  <!--<select style=" position: absolute;
-  top: 8px;
-  right: 16px;
-  font-size: 18px;" v-model="lang">
-    <option value="en">English</option>
-    <option value="fr">Francais</option>
-  </select>-->
   <language-selector></language-selector>
 
 </template>
@@ -21,3 +13,17 @@ export default {
   }
 }
 </script>
+
+<style>
+.body::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.body::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+
+.body::-webkit-scrollbar-thumb {
+  background: #6649b8;
+}
+</style>

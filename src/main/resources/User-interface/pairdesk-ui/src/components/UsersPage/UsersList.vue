@@ -1,15 +1,15 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col"><h2 style="float: left;">All Users</h2></div>
-      <div class="col"><button v-on:click="displayComponent" type="button" id="addUserBtnId" class="btn btn-primary add-btn">Add User</button></div>
+      <div class="col"><h2 style="float: left;">{{ $t('user') }}s</h2></div>
+      <div class="col"><button v-on:click="displayComponent" type="button" id="addUserBtnId" class="btn btn-primary add-btn">{{ $t('addUser') }}</button></div>
     </div>
     <add-user-form></add-user-form>
     <ul class="responsive-table" style="padding-left: 0px;">
       <li class="table-header">
-        <div class="col col-1">User Id</div>
+        <div class="col col-1">{{ $t('user') }} Id</div>
         <div class="col col-2">Email</div>
-        <div class="col col-3">Username</div>
+        <div class="col col-3">{{ $t('username') }}</div>
         <div class="col col-4">Actions</div>
       </li>
       <div v-for="user in userList" v-bind:key="user.userId">
@@ -121,7 +121,6 @@ export default {
   {
     axios.get("http://localhost:8080/users/api/all", this.yourConfig).then((resp) => {
       this.userList = resp.data;
-      console.log(this.userList)
     }).catch((error) => {
       if (error.response.status === 401) {
         this.$router.push('/login')

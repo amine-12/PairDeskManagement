@@ -1,19 +1,20 @@
 <template>
-  <div class="container">
-    <div class="row" style="margin-bottom: 2%">
-      <div class="col" style="float: left;width: auto"><h1 style="text-align: left;float: left">Invoice</h1></div>
-      <div class="col"  style="float: right;margin-top: 1%;width: auto"><h3 style="text-align: right;float: right">Invoice #{{invoiceId}}</h3></div>
+  <div class="container" id="x">
+    <div class="row" style="margin-bottom: 2%" >
+      <div class="col" style="float: left;width: auto"><h1 style="text-align: left;float: left">{{ $t('invoice').replace('s','') }}</h1></div>
+      <div class="col"  style="float: right;margin-top: 1%;width: auto">
+        <h3 style="text-align: right;float: right">{{ $t('invoice').replace('s','') }} #{{invoiceId}}</h3></div>
     </div>
 
     <div class="row">
-      <h4>Invoice Generated At: <span style="font-size: smaller;font-weight: normal">{{creationDate}}</span></h4>
+      <h4>{{ $t('invoiceCreation') }}: <span style="font-size: smaller;font-weight: normal">{{creationDate}}</span></h4>
     </div>
 
     <div class="row">
-      <h4>Invoice For: <span style="font-size: medium;font-weight: normal">{{info.username}}</span></h4>
+      <h4>{{ $t('invoiceFor') }}: <span style="font-size: medium;font-weight: normal">{{info.username}}</span></h4>
     </div>
     <div class="row">
-      <h3 style="font-weight: bold;">Features Payout</h3>
+      <h3 style="font-weight: bold;">{{ $t('featuresPayout') }}</h3>
     </div>
 
     <div class="row" style="width: 80%;margin-left: 8%">
@@ -21,17 +22,17 @@
         <div style="height: 250px;overflow-y:auto">
           <li v-for="feature in featuresListPay" v-bind:key="feature.featureId" class="border-bottom">
             <p>{{ feature.featureName }}</p>
-            <p style="margin-bottom: 2%" class="alignright">$ {{ feature.price }}</p>
+            <p style="margin-bottom: 2%" class="alignright">$ {{ feature.price.toFixed(2) }}</p>
           </li>
         </div>
 
         <li class="total border-top border-3" >
           <p class="alignright" style="font-weight: bold;font-size: large">Total</p>
-          <p class="alignright" style="font-weight: bold;font-size: large">$ {{ payout }}</p>
+          <p class="alignright" style="font-weight: bold;font-size: large">$ {{ payout.toFixed(2) }}</p>
         </li>
       </ul>
       <div v-else>
-        <h2 style="text-align: center;margin-top: 20%">No Payout</h2>
+        <h2 style="text-align: center;margin-top: 20%">{{ $t('noPayout') }}</h2>
       </div>
     </div>
 
@@ -40,7 +41,6 @@
 
 <script>
 import axios from "axios";
-
 export default {
   name: "Invoice",
   data(){
@@ -62,7 +62,6 @@ export default {
     axios.get("http://localhost:8080/users/api/" + this.$route.params.userId,this.yourConfig).then((resp) => {
       this.info = resp.data;
       this.formattedDate = new Date(this.info.creationTime)
-      console.log(this.info)
     }).catch((error) => {
       if (error.response.status === 401) {
         this.$router.push('/login')
@@ -88,7 +87,6 @@ export default {
 
     axios.get("http://localhost:8080/invoices/api/user/payout/" + this.$route.params.userId,this.yourConfig).then((resp) => {
       this.payout = resp.data;
-      console.log(this.payout)
     }).catch((error) => {
       if (error.response.status === 401) {
         this.$router.push('/login')
@@ -116,9 +114,9 @@ export default {
               }
               console.log(error)
             }).finally(() => {
+          window.location.reload()
         });
       }
-      console.log(this.invoice)
     }).catch((error) => {
       if (error.response.status === 401) {
         this.$router.push('/login')

@@ -2,5 +2,19 @@
   "overview": "Vue d'ensemble",
   "greeting": "Bonjour",
   "featureOverview": "Aperçu des fonctionnalités",
-  "featureAssignedToYou": "Vos Fonctionnalités"
+  "featureAssignedToYou": "Vos Fonctionnalités",
+  "invoice": "Factures",
+  "user": "Utilisateur",
+  "export": "Exporter en PDF",
+  "price": "Prix",
+  "creation": "Établie",
+  "addUser": "Ajouter un utilisateur",
+  "username": "Nom d'utilisateur",
+  "userprofile": "Profil utilisateur",
+  "accountCreation": "Compte créé à",
+  "invoiceCreation": "Facture générée à",
+  "invoiceFor": "Facture pour",
+  "featuresPayout": "Prix des Fonctionnalités",
+  "noPayout": "Pas de Facture",
+  "noFeatures": "Aucune fonctionnalité attribuée"
 }

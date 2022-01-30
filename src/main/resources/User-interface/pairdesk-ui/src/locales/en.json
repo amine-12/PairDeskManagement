@@ -2,5 +2,19 @@
   "overview": "Overview",
   "greeting": "Hello !",
   "featureOverview": "Feature Overview",
-  "featureAssignedToYou": "Feature Assigned to you"
+  "featureAssignedToYou": "Feature Assigned to you",
+  "invoice": "Invoices",
+  "user": "User",
+  "export": "Export as PDF",
+  "price": "Price",
+  "creation": "Created",
+  "addUser": "Add User",
+  "username": "Username",
+  "userprofile": "User Profile",
+  "accountCreation": "Account Created at",
+  "invoiceCreation": "Invoice Generated At",
+  "invoiceFor": "Invoice For",
+  "featuresPayout": "Features Payout",
+  "noPayout": "No Payout",
+  "noFeatures": "No Assigned Features"
 }

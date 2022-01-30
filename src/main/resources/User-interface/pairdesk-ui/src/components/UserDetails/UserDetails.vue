@@ -1,15 +1,15 @@
 <template>
 
-  <div class="container-a" style="margin-left:12%;margin-right: 5%; height: 150%">
-    <h1 style="float: none">User Profile</h1>
+  <div class="container-a" style="margin-left:12%;margin-right: 5%; height: 150%;margin-top: 3%;">
+    <h1 style="float: none">{{ $t('userprofile') }}</h1>
     <div class="container-b">
       <div class="card-u">
-        <p style="font-size: larger" ><span style="font-weight: bold">Username: </span>{{ info.username }}</p>
+        <p style="font-size: larger" ><span style="font-weight: bold">{{ $t('username') }}: </span>{{ info.username }}</p>
         <p><span style="font-weight: bold">Email: </span>{{info.email}}</p>
-        <p><span style="font-weight: bold">Account Created at:</span> {{formattedDate}}</p>
+        <p><span style="font-weight: bold">{{ $t('accountCreation') }}:</span> {{formattedDate}}</p>
       </div>
       <div class="card-u" style="height: 325px;overflow-y:auto">
-        <h3>Assigned Features</h3>
+        <h3>{{ $t('featureAssignedToYou') }}</h3>
         <ul class="responsive-table" style="padding-left: 0px;" v-if="featuresList && featuresList.length > 0">
           <div  v-for="feature in featuresList" v-bind:key="feature.featureId" >
             <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }">
@@ -20,7 +20,7 @@
           </div>
         </ul>
         <div v-else>
-          <h3 style="text-align: center;margin-top: 10%">No Assigned Features</h3>
+          <h3 style="text-align: center;margin-top: 10%">{{ $t('noFeatures') }}</h3>
         </div>
       </div>
     </div>

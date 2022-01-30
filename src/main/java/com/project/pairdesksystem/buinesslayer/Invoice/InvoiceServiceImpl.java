@@ -79,4 +79,10 @@ public class InvoiceServiceImpl implements InvoiceService{
         }
         return prices.stream().mapToDouble(Double::doubleValue).sum();
     }
+
+    @Override
+    public void deleteInvoiceByUserId(int userId) {
+        Invoice invoice = invoiceRepository.findByUserId(userId);
+        invoiceRepository.delete(invoice);
+    }
 }
