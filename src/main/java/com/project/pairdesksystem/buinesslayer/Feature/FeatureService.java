@@ -5,6 +5,8 @@ import com.project.pairdesksystem.datalayer.Feature.FeatureDTO;
 import com.project.pairdesksystem.datalayer.Task.Task;
 import javassist.NotFoundException;
 
+import java.util.Date;
+import java.util.Dictionary;
 import java.util.List;
 
 public interface FeatureService {
@@ -28,4 +30,9 @@ public interface FeatureService {
     List<FeatureDTO> getAllFeaturesDTOCompleted();
 
     List<FeatureDTO> getAllFeaturesDTOCompletedByUserId(int userId);
+
+    List<Feature> getLateFeatures();
+
+    String getUserNameByUserId(int userId);
+
 }

@@ -1,6 +1,7 @@
 package com.project.pairdesksystem.presentationlayer;
 
 import com.project.pairdesksystem.buinesslayer.Feature.FeatureService;
+import com.project.pairdesksystem.datalayer.Feature.Feature;
 import com.project.pairdesksystem.datalayer.Feature.FeatureDTO;
 import com.project.pairdesksystem.datalayer.Task.TaskDTO;
 import javassist.NotFoundException;
@@ -100,4 +101,17 @@ public class FeatureResource {
         return featureService.getAllFeaturesDTOCompleted();
     }
 
+    @CrossOrigin
+    @GetMapping("/api/lateFeatures")
+    @PreAuthorize("hasRole('ADMIN')")
+    public List<Feature> getLateFeatures() {
+        return featureService.getLateFeatures();
+    }
+
+    @CrossOrigin
+    @GetMapping("/api/user/username/{userId}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String getUserNameByUserId(@PathVariable int userId) {
+        return featureService.getUserNameByUserId(userId);
+    }
 }
