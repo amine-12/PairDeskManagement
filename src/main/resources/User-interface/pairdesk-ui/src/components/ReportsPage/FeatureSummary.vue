@@ -24,7 +24,6 @@
           <div   class="col col-4" data-label="Actions">
             Go to report
             <button id="incidentReportButton" class="btn btn-primary" style="background: transparent; border: none;">
-              <img src="@/assets/file-export.png" alt="Go to report" style="height: 30px; width: 30px"/>
             </button>
           </div>
         </li>

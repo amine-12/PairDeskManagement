@@ -172,8 +172,9 @@ public class FeatureServiceImpl implements FeatureService{
             int month=Integer.parseInt(featureDeadline.substring(6, 7));
             int day=Integer.parseInt(featureDeadline.substring(9, 10));
 
+           double progress= getFeatureProgress(allFeatures.get(i).getFeatureId());
             cal_obj2.set(year,month,day);
-            if(cal_obj2.after(cal_obj1)){
+            if(cal_obj2.after(cal_obj1) || progress==100){
                 allFeatures.remove(i);
             }
         }
