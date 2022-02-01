@@ -18,10 +18,22 @@
               </button>
             </div>
           </li>
+
+        <li style="cursor: pointer" @click="routeToIncidentReport()" class="table-row" >
+          <h4 class="text-danger" >Incident Report</h4>
+          <div   class="col col-4" data-label="Actions">
+            Go to report
+            <button id="incidentReportButton" class="btn btn-primary" style="background: transparent; border: none;">
+            </button>
+          </div>
+        </li>
         <h4 id="exportedMessage" style="display: none; color: green">File has been exported to Downloads folder</h4>
       </div>
     </ul>
   </div>
+
+
+
 </template>
 
 <script>
@@ -53,8 +65,13 @@ export default {
         console.log(error)
       }).finally(() => {
       });
+    },
+    routeToIncidentReport(){
+      this.$router.push('/incidentReport');
     }
-  }
+  },
+
+
 }
 
 </script>

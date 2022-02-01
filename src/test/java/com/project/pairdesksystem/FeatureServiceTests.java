@@ -117,6 +117,41 @@ public class FeatureServiceTests {
     }
 
     @Test
+    void returnDateListOfLateFeatures() throws NotFoundException{
+        Feature f1 = new Feature();
+        Date date = new Date();
+
+        int testUserId = 2;
+        int id = 1291;
+
+        f1.setId(id);
+        f1.setFeatureId(20);
+        f1.setFeatureName("MysFeatureTest");
+        f1.setDeadline(date);
+        f1.setDescription("Some Feature here");
+        f1.setPriority("MEDIUM");
+        f1.setUserId(1);
+
+        Feature f2 = new Feature();
+
+        f2.setId(id);
+        f2.setFeatureId(64);
+        f2.setFeatureName("MysFeatureTest2");
+        f2.setDeadline(date);
+        f2.setDescription("Some Feature here2");
+        f2.setPriority("HIGH");
+        f2.setUserId(2);
+
+        fservice.updateFeature(f1, f2);
+
+        assertEquals(fservice.getFeatureByFeatureId(f1.getFeatureId()).getFeatureName(), "MysFeatureTest2");
+        assertEquals(fservice.getFeatureByFeatureId(f1.getFeatureId()).getUserId(), testUserId);
+
+        assertTrue(fservice.getLateFeatures()!=null);
+
+
+    }
+    @Test
     void update_Feature_Progress() throws NotFoundException {
 
         featureRepo.deleteAll();

@@ -1,5 +1,6 @@
 package com.project.pairdesksystem.buinesslayer.Feature;
 
+import com.project.pairdesksystem.User.repository.UserRepository;
 import com.project.pairdesksystem.datalayer.Feature.Feature;
 import com.project.pairdesksystem.datalayer.Feature.FeatureDTO;
 import com.project.pairdesksystem.datalayer.Feature.FeaturesRepository;
@@ -10,8 +11,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +25,7 @@ public class FeatureServiceImpl implements FeatureService{
     private final FeaturesRepository featuresRepository;
     private final FeatureMapper featureMapper;
     private final TaskRepository taskRepository;
+    private final UserRepository userRepository;
 
     @Override
     public List<Feature> getAllFeatures() {
@@ -150,5 +156,39 @@ public class FeatureServiceImpl implements FeatureService{
         return allFeaturesCompletedByUserId;
     }
 
+    @Override
+    public List<Feature> getLateFeatures() {
+        List<Feature> allFeatures =featuresRepository.findAll();
+
+        Calendar cal_obj1 = Calendar.getInstance();
+        Calendar cal_obj2 = Calendar.getInstance();
+
+
+        for (int i = 0; i < allFeatures.size(); i++) {
+            String featureDeadline= allFeatures.get(i).getDeadline().toString();
+
+
+            int year=Integer.parseInt(featureDeadline.substring(0, 4));;
+            int month=Integer.parseInt(featureDeadline.substring(6, 7));
+            int day=Integer.parseInt(featureDeadline.substring(9, 10));
+
+           double progress= getFeatureProgress(allFeatures.get(i).getFeatureId());
+            cal_obj2.set(year,month,day);
+            if(cal_obj2.after(cal_obj1) || progress==100){
+                allFeatures.remove(i);
+            }
+        }
+
+        return allFeatures;
+
+    }
+
+    @Override
+    public String getUserNameByUserId(int userId) {
+      String name=  userRepository.findByUserId(userId).get().getUsername();
+
+      return name;
+
+    }
 
 }
