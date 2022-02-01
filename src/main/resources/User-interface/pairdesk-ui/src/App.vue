@@ -1,7 +1,6 @@
 <template>
   <router-view/>
   <language-selector></language-selector>
-
 </template>
 
 <script>
