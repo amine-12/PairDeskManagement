@@ -1,18 +1,18 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col"><h2 style="float: left;">Reports</h2></div>
+      <div class="col"><h2 style="float: left;">{{$t('ReportsHeader')}}</h2></div>
     </div>
     <ul class="responsive-table" style="padding-left: 0px;">
       <li class="table-header">
-        <div class="col col-1">Report Type</div>
+        <div class="col col-1">{{$t('reportType')}}</div>
         <div class="col col-4">Actions</div>
       </li>
       <div>
           <li class="table-row" >
-            <h4>Features Summary Report</h4>
+            <h4>{{$t('FeaturesSummaryReportHeader')}}</h4>
             <div class="col col-4" data-label="Actions">
-              Export as PDF
+              {{$t('ExportAsPdf')}}
               <button id="exportAsPdfIconId" @click="exportReport()" class="btn btn-primary" style="background: transparent; border: none;">
                 <img src="@/assets/file-export.png" alt="Export PDF" style="height: 30px; width: 30px"/>
               </button>
@@ -20,14 +20,14 @@
           </li>
 
         <li style="cursor: pointer" @click="routeToIncidentReport()" class="table-row" >
-          <h4 class="text-danger" >Incident Report</h4>
+          <h4 class="text-danger" >{{$t('IncidentReportHeader')}}</h4>
           <div   class="col col-4" data-label="Actions">
-            Go to report
+            {{$t('GoToReportText')}}
             <button id="incidentReportButton" class="btn btn-primary" style="background: transparent; border: none;">
             </button>
           </div>
         </li>
-        <h4 id="exportedMessage" style="display: none; color: green">File has been exported to Downloads folder</h4>
+        <h4 id="exportedMessage" style="display: none; color: green">{{$t('FileExportedText')}}</h4>
       </div>
     </ul>
   </div>

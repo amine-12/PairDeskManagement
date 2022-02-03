@@ -4,7 +4,7 @@
   <div class="col-xs-1" align="center">
     <label class="col-md-4 control-label" for="submit"></label>
     <div class="col-md-4">
-      <button v-on:click="hideShowFunction()" @click="goto()" id="viewFeatureCreationForm" name="viewFeatureCreationForm" class="btn btn-primary" v-if="currentUser.roles[0] === 'ROLE_ADMIN'">Add a new feature</button>
+      <button v-on:click="hideShowFunction()" @click="goto()" id="viewFeatureCreationForm" name="viewFeatureCreationForm" class="btn btn-primary" v-if="currentUser.roles[0] === 'ROLE_ADMIN'">{{$t('AddNewFeature')}}</button>
     </div>
   </div>
   <p></p>
@@ -12,64 +12,64 @@
   <div class="col-xs-1" align="center" id="addFeatureForm" style="display: none">
   <form class="form-horizontal" v-on:submit.prevent="submitForm" @submit="checkForm">
     <fieldset>
-      <h1>New Feature</h1>
+      <h1>{{$t('NewFeatureFormHeader')}}</h1>
 
       <div class="form-group" id="inputFeatureName">
-        <label class="col-md-4 control-label" for="featureName">Feature Name:</label>
+        <label class="col-md-4 control-label" for="featureName">{{$t('InputFeatureName')}}</label>
         <div class="col-md-4">
           <input id="featureName" name="Feature Name" type="text" placeholder="New Feature Name" class="form-control input-md" v-model="form.featureName">
-          <p v-if="!featureNameIsValid" class="error-message" style="color: red">Feature Name Required</p>
+          <p v-if="!featureNameIsValid" class="error-message" style="color: red">{{$t('InputRequiredFeatureName')}}</p>
         </div>
       </div>
 
       <div class="form-group" id="inputFeatureDescription">
-        <label class="col-md-4 control-label" for="description">Description</label>
+        <label class="col-md-4 control-label" for="description">{{$t('InputDescription')}}</label>
         <div class="col-md-4">
           <textarea id="description" name="description" type="text" placeholder="description" class="form-control input-md" v-model="form.description"/>
-          <p v-if="!descriptionIsValid" class="error-message" style="color: red">Description Required</p>
+          <p v-if="!descriptionIsValid" class="error-message" style="color: red">{{$t('InputRequiredDescription')}}</p>
         </div>
       </div>
 
       <div class="form-group" id="inputFeaturePriority">
-        <label class="col-md-4 control-label" for="priority">Priority</label>
+        <label class="col-md-4 control-label" for="priority">{{$t('InputPriority')}}</label>
         <div class="col-md-4">
           <select id="priority" name="priority" class="form-control" v-model="form.priority">
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
+            <option value="Low">{{$t('InputPriorityLow')}}</option>
+            <option value="Medium">{{$t('InputPriorityMedium')}}</option>
+            <option value="High">{{$t('InputPriorityHigh')}}</option>
           </select>
         </div>
       </div>
 
       <div class="form-group" id="inputFeatureDeadline">
-        <label class="col-md-4 control-label" for="deadline">Deadline</label>
+        <label class="col-md-4 control-label" for="deadline">{{$t('InputDeadline')}}</label>
         <div class="col-md-4">
           <input id="deadline" name="deadline" type="datetime-local" placeholder="deadline" class="form-control input-md" v-model="form.deadline">
         </div>
       </div>
 
       <div class="form-group" id="inputFeatureUser">
-        <label class="col-md-4 control-label" for="priority">Assign to User: </label>
+        <label class="col-md-4 control-label" for="priority">{{$t('InputAssignUser')}}</label>
         <div class="col-md-4">
           <select id="user" name="user" class="form-control" v-model="form.userId">
             <option v-for="user in users" v-bind:key="user.userId" v-bind:value="user.userId">{{ user.username }}</option>
           </select>
-          <p v-if="!userIsValid" class="error-message" style="color: red">User Required</p>
+          <p v-if="!userIsValid" class="error-message" style="color: red">{{$t('InputRequiredUser')}}</p>
         </div>
       </div>
 
       <div class="form-group" id="inputPrice">
-        <label class="col-md-4 control-label" for="price">Price</label>
+        <label class="col-md-4 control-label" for="price">{{$t('InputPrice')}}</label>
         <div class="col-md-4">
           <input id="price" name="Price" type="text" placeholder="Price" class="form-control input-md" v-model="form.price">
-          <p v-if="!priceIsValid" class="error-message" style="color: red">Price Required</p>
+          <p v-if="!priceIsValid" class="error-message" style="color: red">{{$t('InputRequiredPrice')}}</p>
         </div>
       </div>
 
       <div class="form-group" id="inputFeatureSubmit">
         <label class="col-md-4 control-label" for="submit"></label>
         <div class="col-md-4">
-          <button :disabled="!formIsValid" id="submit" name="submit" class="btn btn-primary">Create Feature</button>
+          <button :disabled="!formIsValid" id="submit" name="submit" class="btn btn-primary">{{$t('SubmitFeatureButton')}}</button>
         </div>
       </div>
 

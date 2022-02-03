@@ -200,7 +200,7 @@ body {
 <template>
   <div>
     <div class="heading">
-    <h1 class="heading__title">Features List</h1>
+    <h1 class="heading__title">{{$t('FeaturesList')}}</h1>
   </div>
     <div class="main-container row center" v-if="currentUser.roles[0] === 'ROLE_ADMIN'">
 
@@ -247,56 +247,64 @@ body {
   <div class="col-xs-1" align="center" id="updateFormDiv" style="display: none">
     <form class="form-horizontal" v-on:submit.prevent="submitForm" @submit="checkForm">
       <fieldset>
-        <h1>Edit Feature</h1>
+        <h1>{{$t('EditFeatureFormHeader')}}</h1>
 
         <div class="form-group" id="inputUpdateFeatureName">
-          <label class="col-md-4 control-label" for="featureName">Feature Name:</label>
+          <label class="col-md-4 control-label" for="featureName">{{$t('InputFeatureName')}}</label>
           <div class="col-md-4">
             <input id="featureName" name="Feature Name" type="text" placeholder="New Feature Name" class="form-control input-md" v-model="form.featureName">
-            <p v-if="!featureNameIsValid" class="error-message" style="color: red">Feature Name Required</p>
+            <p v-if="!featureNameIsValid" class="error-message" style="color: red">{{$t('InputRequiredFeatureName')}}</p>
           </div>
         </div>
 
         <div class="form-group" id="inputUpdateFeatureDescription">
-          <label class="col-md-4 control-label" for="description">Description</label>
+          <label class="col-md-4 control-label" for="description">{{$t('InputDescription')}}</label>
           <div class="col-md-4">
             <textarea id="description" name="description" type="text" placeholder="description" class="form-control input-md" v-model="form.description"/>
-            <p v-if="!descriptionIsValid" class="error-message" style="color: red">Description Required</p>
+            <p v-if="!descriptionIsValid" class="error-message" style="color: red">{{$t('InputRequiredDescription')}}</p>
           </div>
         </div>
 
         <div class="form-group" id="inputUpdateFeaturePriority">
-          <label class="col-md-4 control-label" for="priority">Priority</label>
+          <label class="col-md-4 control-label" for="priority">{{$t('InputPriority')}}</label>
           <div class="col-md-4">
             <select id="priority" name="priority" class="form-control" v-model="form.priority">
-              <option value="Low">Low</option>
-              <option value="Medium">Medium</option>
-              <option value="High">High</option>
+              <option value="Low">{{$t('InputPriorityLow')}}</option>
+              <option value="Medium">{{$t('InputPriorityMedium')}}</option>
+              <option value="High">{{$t('InputPriorityHigh')}}</option>
             </select>
           </div>
         </div>
 
         <div class="form-group" id="inputUpdateFeatureDeadline">
-          <label class="col-md-4 control-label" for="deadline">Deadline</label>
+          <label class="col-md-4 control-label" for="deadline">{{$t('InputDeadline')}}</label>
           <div class="col-md-4">
             <input id="deadline" name="deadline" type="datetime-local" placeholder="deadline" class="form-control input-md" v-model="form.deadline">
           </div>
         </div>
 
         <div class="form-group" id="inputFeatureUser">
-          <label class="col-md-4 control-label" for="priority">Assign to User: </label>
+          <label class="col-md-4 control-label" for="priority">{{$t('InputAssignUser')}}</label>
           <div class="col-md-4">
             <select id="user" name="user" class="form-control" v-model="form.userId">
               <option v-for="user in users" v-bind:key="user.userId" v-bind:value="user.userId">{{ user.username }}</option>
             </select>
-            <p v-if="!userIsValid" class="error-message" style="color: red">User Required</p>
+            <p v-if="!userIsValid" class="error-message" style="color: red">{{$t('InputRequiredUser')}}</p>
+          </div>
+        </div>
+
+        <div class="form-group" id="inputPrice">
+          <label class="col-md-4 control-label" for="price">{{$t('InputPrice')}}</label>
+          <div class="col-md-4">
+            <input id="price" name="Price" type="text" placeholder="Price" class="form-control input-md" v-model="form.price">
+            <p v-if="!priceIsValid" class="error-message" style="color: red">{{$t('InputRequiredPrice')}}</p>
           </div>
         </div>
 
         <div class="form-group">
           <label class="col-md-4 control-label" for="submit"></label>
           <div class="col-md-4">
-            <button :disabled="!formIsValid" id="submit" name="submit" class="btn btn-primary">Update Feature</button>
+            <button :disabled="!formIsValid" id="submit" name="submit" class="btn btn-primary">{{$t('SubmitEditButton')}}</button>
           </div>
         </div>
 
@@ -317,6 +325,7 @@ export default {
       fid:undefined,
       form: {
         featureName: '',
+        price: '',
         priority: '',
         description: '',
         deadline: '',
@@ -377,9 +386,13 @@ export default {
       return !!this.form.userId
     },
 
+    priceIsValid(){
+      return !!this.form.price
+    },
+
     formIsValid() {
       return this.featureNameIsValid && this.descriptionIsValid
-    }//may also use vuelidate in the future to perform input validation
+    }
   },
   methods: {
     // getFeatureById() {
@@ -398,7 +411,7 @@ export default {
       return 'background-color: red;'
     },
     submitForm() {
-      if(this.formIsValid && this.userIsValid) {
+      if(this.formIsValid && this.userIsValid && this.priceIsValid) {
 
         console.log("form is valid")
         axios.put('http://localhost:8080/features/api/update/' + this.fid, this.form, this.yourConfig)

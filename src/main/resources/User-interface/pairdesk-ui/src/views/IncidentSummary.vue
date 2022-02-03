@@ -3,14 +3,14 @@
   <navigation></navigation>
 <div style="margin-left: 6.5%">
 <div id="incidentReport" >
-  <h1>Incident Report</h1>
+  <h1>{{$t('IncidentReportHeader')}}</h1>
   <table style=" width: 100%;" class="table table-striped">
     <thead>
     <tr>
-      <th class="text text-secondary" >Feature</th>
-      <th class="text text-secondary" >Due Date</th>
-      <th>Assigned User</th>
-      <th>Current Progress(%)</th>
+      <th class="text text-secondary" >{{$t('FeatureText')}}</th>
+      <th class="text text-secondary" >{{$t('DueDate')}}</th>
+      <th>{{$t('AssignedUser')}}</th>
+      <th>{{$t('CurrentProgress')}}</th>
     </tr>
     </thead>
     <tbody>
@@ -26,7 +26,7 @@
     </tbody>
   </table>
 </div>
-  <button @click="generateReport()" class="btn btn-primary">Export to PDF</button>
+  <button @click="generateReport()" class="btn btn-primary">{{$t('ExportAsPdf')}}</button>
 </div>
 
 
