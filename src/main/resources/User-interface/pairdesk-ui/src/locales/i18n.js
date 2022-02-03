@@ -10,8 +10,6 @@ const i18n = createI18n({
     messages: {
         en: en,
         fr: fr,
-
-
     }
 
 });

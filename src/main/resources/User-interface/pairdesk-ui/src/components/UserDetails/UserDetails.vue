@@ -1,5 +1,4 @@
 <template>
-
   <div class="container-a" style="margin-left:12%;margin-right: 5%; height: 150%;margin-top: 3%;">
     <h1 style="float: none">{{ $t('userprofile') }}</h1>
     <div class="container-b">
@@ -28,7 +27,6 @@
     <div class="container-c">
       <div class="card-i" >
         <invoice></invoice>
-
       </div>
     </div>
 
