@@ -46,7 +46,8 @@ public class UserResource {
     @PreAuthorize("hasRole('ADMIN')")
     public void deleteUser(@PathVariable long userId) throws NotFoundException {
         int id = (int)userId;
-        invoiceService.deleteInvoiceByUserId(id);
+        if(invoiceService.getInvoicesByUserId(id) != null)
+            invoiceService.deleteInvoiceByUserId(id);
         userService.deleteByUserId(userId);
     }
 
