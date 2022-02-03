@@ -45,8 +45,6 @@ public class UserResource {
     @DeleteMapping("/api/delete/{userId}")
     @PreAuthorize("hasRole('ADMIN')")
     public void deleteUser(@PathVariable long userId) throws NotFoundException {
-        int id = (int)userId;
-        invoiceService.deleteInvoiceByUserId(id);
         userService.deleteByUserId(userId);
     }
 
