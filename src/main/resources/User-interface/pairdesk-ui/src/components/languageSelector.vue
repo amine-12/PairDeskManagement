@@ -14,7 +14,7 @@
         width="16"
         height="12"
         alt="United Kingdom">
-    <span style="cursor:pointer; padding-left: 5px" class="font-weigh-light" @click="$i18n.locale = 'fr'">Francais </span>
+    <span style="cursor:pointer; padding-left: 5px" class="font-weigh-light" @click="$i18n.locale = 'fr'">Français </span>
 
     <img
         src="https://flagcdn.com/16x12/mf.png"
