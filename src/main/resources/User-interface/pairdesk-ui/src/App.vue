@@ -1,4 +1,4 @@
-<template>
+<template class="body">
   <router-view/>
   <language-selector></language-selector>
 </template>
