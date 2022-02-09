@@ -17,6 +17,13 @@
   "featuresPayout": "Features Payout",
   "noPayout": "No Payout",
   "noFeatures": "No Assigned Features",
+  "priority": "Priority",
+  "assigned": "Assigned to",
+  "deadline": "Deadline",
+  "tasks": "Tasks",
+  "tasksName": "Tasks Name",
+  "STATUS": "STATUS"
+  "noFeatures": "No Assigned Features",
   "FeaturesList": "Features List",
   "AddNewFeature": "Add a new feature",
   "NewFeatureFormHeader": "New Feature",

@@ -17,7 +17,7 @@
             <table class="table table-striped" v-if="list && list.length > 0">
               <tbody><tr>
 
-                <th>Task Name</th>
+                <th>{{ $t('tasksName') }}</th>
                 <th>DESCRIPTION</th>
                 <th>PRIORITY</th>
                 <th>STATUS</th>
