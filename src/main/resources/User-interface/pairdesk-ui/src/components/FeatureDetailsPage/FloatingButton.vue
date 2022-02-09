@@ -146,6 +146,7 @@ export default {
               console.log(error)
             }).finally(() => {
         });
+        window.location.reload()
       }else{
         console.log("form is invalid")
       }

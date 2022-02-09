@@ -212,7 +212,7 @@ body {
             <h2 class="card__body">{{ feature.description }}</h2>
             <p id="id" hidden>{{feature.featureId}}</p>
             <div style="text-align: right" class="card__title" id="editDeleteButtonsDiv">
-              <button id="editButton" v-on:click="getId(feature.featureId); hideShowFunction();" @click="goto()" style="background: transparent; border: none;" name="editFeatureButton" v-if="currentUser.roles[0] === 'ROLE_ADMIN'">
+              <button id="editButton" v-on:click="getId(feature.featureId); hideShowFunction(); prefillUpdateForm()" @click="goto()" style="background: transparent; border: none;" name="editFeatureButton" v-if="currentUser.roles[0] === 'ROLE_ADMIN'">
                 <img src="@/assets/pencil.png" alt="Edit Feature" style="height: 30px; width: 30px"/>
               </button>
               <button @click="deleteFeature(feature.featureId)" style="background: transparent; border: none;" name="deleteFeatureButton" id="deleteFeatureButtonId" v-if="currentUser.roles[0] === 'ROLE_ADMIN'">
@@ -395,11 +395,6 @@ export default {
     }
   },
   methods: {
-    // getFeatureById() {
-    //   axios.get("http://localhost:8080/features/api/" + this.fid).then((resp) => {
-    //     this.list = resp.data;
-    //   })
-    // },
 
     getStatus(property){
       if(property === "Low"){
@@ -432,6 +427,20 @@ export default {
         console.log("form is invalid")
       }
     },
+    prefillUpdateForm(){
+
+      axios.get("http://localhost:8080/features/api/" + this.fid, this.yourConfig).then((resp) => {
+        this.form = resp.data;
+        //Will perhaps use momentJs to reformat the deadline datetime saved format.
+      }).catch((error) => {
+        if (error.response.status === 401) {
+          this.$router.push('/login')
+        }
+        console.log(error)
+      }).finally(() => {
+      });
+    },
+
     goto() {
       window.scrollTo(0, document.body.scrollHeight);
     },
