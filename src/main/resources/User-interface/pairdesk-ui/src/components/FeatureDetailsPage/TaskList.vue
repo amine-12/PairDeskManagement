@@ -30,7 +30,7 @@
                 <td>{{ task.status }}</td>
                 <td>
 
-                  <a class="btn btn-primary btn-action mr-1"  @click="displayUpdateForm(task.taskId)"
+                  <a class="btn btn-primary btn-action mr-1"  @click="displayUpdateForm(task.taskId); prefillUpdateForm(task.taskId)"
                      data-toggle="tooltip" title="" data-original-title="Edit">
                     <i class="fas fa-pencil-alt"></i></a>
 
@@ -264,6 +264,21 @@ export default {
       return id;
     },
 
+    prefillUpdateForm(id){
+
+      this.tid2 = id
+
+      axios.get("http://localhost:8080/features/api/task/" + this.tid2, this.yourConfig).then((resp) => {
+        this.form3 = resp.data;
+        //Will perhaps use momentJs to reformat the deadline datetime saved format.
+      }).catch((error) => {
+        if (error.response.status === 401) {
+          this.$router.push('/login')
+        }
+        console.log(error)
+      }).finally(() => {
+      });
+    },
 
     displayUpdateForm(id) {
 
