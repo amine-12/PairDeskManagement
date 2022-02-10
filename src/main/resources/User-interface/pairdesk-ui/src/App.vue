@@ -25,4 +25,18 @@ export default {
 .body::-webkit-scrollbar-thumb {
   background: #6649b8;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #2b3d8c;
+}
 </style>
