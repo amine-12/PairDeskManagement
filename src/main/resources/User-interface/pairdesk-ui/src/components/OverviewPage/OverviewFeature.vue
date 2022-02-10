@@ -1,47 +1,95 @@
 <template>
-  <div class="main-container row center">
+  <div class="container-a">
 
-    <div style="overflow-y:auto;" class="card card-1" v-if="user.roles[0] === 'ROLE_ADMIN'">
+    <div  class="row" >
+      <div class="card-u col" v-if="user.roles[0] === 'ROLE_ADMIN'">
+        <h3>{{ $t('featureOverview') }}</h3>
+        <div style="height: 450px;overflow-y:auto">
+          <ul class="responsive-table" style="padding-left: 0px;" v-if="list && list.length > 0">
+            <div  v-for="feature in list" v-bind:key="feature.featureId" >
+              <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }">
+                <li class="table-row " style="width: 98%;margin-left: 1%">
+                  <feature-item v-bind:feature-id="feature.featureId" ></feature-item>
+                </li>
+              </router-link>
+            </div>
+          </ul>
+          <div v-else>
+            <h3 style="text-align: center;margin-top: 10%">{{ $t('noFeatures') }}</h3>
+          </div>
+        </div>
+      </div>
 
-      <table class="table table">
-        <thead class="thead-dark">
-        <tr>
-          <th scope="col">{{$t('featureOverview') }}</th>
-        </tr>
-        </thead>
-        <tr v-for="feature in list" v-bind:key="feature.featureId">
-
-          <feature-overview-item v-bind:feature-id="feature.featureId"></feature-overview-item>
-
-        </tr>
-      </table>
+      <div class="card-u col" >
+        <h3>{{ $t('featureAssignedToYou') }}</h3>
+        <div style="height: 450px;overflow-y:auto">
+          <ul class="responsive-table" style="padding-left: 0px;" v-if="userSpecificList && userSpecificList.length > 0">
+            <div  v-for="feature in userSpecificList" v-bind:key="feature.featureId" >
+              <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }">
+                <li class="table-row " style="width: 98%;margin-left: 1%">
+                  <feature-item v-bind:feature-id="feature.featureId" ></feature-item>
+                </li>
+              </router-link>
+            </div>
+          </ul>
+          <div v-else>
+            <h3 style="text-align: center;margin-top: 25%">{{ $t('noFeatures') }}</h3>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div style="overflow-y:auto;" class="card card-1">
 
-      <table class="table table">
-        <thead class="thead-dark">
-        <tr>
-          <th scope="col">{{$t('featureAssignedToYou')}}</th>
-        </tr>
-        </thead>
-        <tr v-for="feature in userSpecificList" v-bind:key="feature.featureId">
+    <div  class="row" style="margin-bottom: 2%">
+      <div class="card-u col" v-if="user.roles[0] === 'ROLE_ADMIN'">
+        <h3>{{ $t('featureOverview') }}</h3>
+        <div style="height: 450px;overflow-y:auto">
+          <ul class="responsive-table" style="padding-left: 0px;" v-if="list && list.length > 0">
+            <div  v-for="feature in list" v-bind:key="feature.featureId" >
+              <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }">
+                <li class="table-row " style="width: 98%;margin-left: 1%">
+                  <schedule-item v-bind:feature-id="feature.featureId" ></schedule-item>
+                </li>
+              </router-link>
+            </div>
+          </ul>
+          <div v-else>
+            <h3 style="text-align: center;margin-top: 10%">{{ $t('noFeatures') }}</h3>
+          </div>
+        </div>
+      </div>
 
-          <feature-overview-item v-bind:feature-id="feature.featureId"></feature-overview-item>
-        </tr>
-      </table>
+      <div class="card-u col" >
+        <h3>{{ $t('featureAssignedToYou') }}</h3>
+        <div style="height: 450px;overflow-y:auto">
+          <ul class="responsive-table" style="padding-left: 0px;" v-if="userSpecificList && userSpecificList.length > 0">
+            <div  v-for="feature in userSpecificList" v-bind:key="feature.featureId" >
+              <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }">
+                <li class="table-row " style="width: 98%;margin-left: 1%">
+                  <schedule-item v-bind:feature-id="feature.featureId" ></schedule-item>
+                </li>
+              </router-link>
+            </div>
+          </ul>
+          <div v-else>
+            <h3 style="text-align: center;margin-top: 25%">{{ $t('noFeatures') }}</h3>
+          </div>
+        </div>
+      </div>
     </div>
+
+
 
   </div>
-
 </template>
 
 <script>
 import axios from "axios";
-import FeatureOverviewItem from "@/components/OverviewPage/FeatureOverviewItem";
+import FeatureItem from "@/components/UserDetails/FeatureItem";
+import ScheduleItem from "@/components/OverviewPage/ScheduleItem";
 export default {
   name: "OverviewFeature",
-  components: {FeatureOverviewItem},
+  components: {FeatureItem, ScheduleItem},
   data() {
     return {
       list: undefined,
@@ -82,6 +130,18 @@ export default {
 </script>
 
 <style scoped>
+.body::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.body::-webkit-scrollbar-track {
+  background: #1e1e24;
+}
+
+.body::-webkit-scrollbar-thumb {
+  background: #6649b8;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -91,139 +151,6 @@ export default {
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
   Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-}
-
-/*.main-container {*/
-/*  padding-left: 20%;*/
-/*}*/
-
-/* HEADING */
-
-.heading {
-  text-align: center;
-}
-
-.heading__title {
-  font-weight: 600;
-}
-
-.heading__credits {
-  margin: 10px 0px;
-  color: #888888;
-  font-size: 25px;
-  transition: all 0.5s;
-}
-
-.heading__link {
-  text-decoration: none;
-}
-
-.heading__credits .heading__link {
-  color: inherit;
-}
-
-/* CARDS */
-
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.card {
-  margin: 20px;
-  padding: 20px;
-  width: 500px;
-  min-height: 350px;
-  display: grid;
-  grid-template-rows: 20px 50px 1fr 50px;
-  border-radius: 10px;
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
-  transition: all 0.2s;
-}
-
-.card:hover {
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
-  transform: scale(1.01);
-}
-
-.card__link,
-.card__exit,
-.card__icon {
-  position: relative;
-  text-decoration: none;
-  color: rgba(0, 0, 0, 0.9);
-}
-
-.card__link::after {
-  position: absolute;
-  top: 25px;
-  left: 0;
-  content: "";
-  width: 0%;
-  height: 3px;
-  background-color: rgba(255, 255, 255, 0.6);
-  transition: all 0.5s;
-}
-
-.card__link:hover::after {
-  width: 100%;
-}
-
-/*.card__exit {*/
-/*  grid-row: 1/2;*/
-/*  justify-self: end;*/
-/*}*/
-
-/*.card__icon {*/
-/*  grid-row: 2/3;*/
-/*  font-size: 30px;*/
-/*}*/
-
-.card__title {
-  grid-row: 1;
-  font-weight: 400;
-  color: #5e5fb8;
-}
-
-.card__body {
-  grid-row: 3;
-  font-size: medium;
-  font-weight: 400;
-  color: #5e5fb8;
-}
-
-.card__apply {
-  grid-row: 4;
-  align-self: center;
-}
-
-/* CARD BACKGROUNDS */
-
-.card-1 {
-  background: #dfe2f0;
-}
-
-.card-2 {
-  background: radial-gradient(#fbc1cc, #fa99b2);
-}
-
-.card-3 {
-  background: radial-gradient(#76b2fe, #b69efe);
-}
-
-.card-4 {
-  background: radial-gradient(#60efbc, #58d5c9);
-}
-
-.card-5 {
-  background: radial-gradient(#f588d8, #c0a3e5);
-}
-
-.column {
-  float: left;
-  width: 50%;
-  padding: 0 10px;
 }
 
 .row {
@@ -243,14 +170,6 @@ body {
     margin-bottom: 20px;
   }
 }
-
-
-.center {
-  margin: auto;
-  width: 70%;
-  padding: 10px;
-}
-
 /* RESPONSIVE */
 
 @media (max-width: 1600px) {
@@ -259,4 +178,73 @@ body {
   }
 }
 
+
+
+.card-u {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+  width: 95%;
+  min-height: 450px;
+  margin: 3% 20px 20px;
+}
+
+.container-a{
+  margin-left:10%;
+  margin-right: 4%;
+}
+
+.responsive-table li {
+  border-radius: 3px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+.responsive-table .table-header {
+  background-color: #2b3d8c;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: white;
+  margin-top: 2%;
+}
+.responsive-table .table-row {
+  background-color: #fff;
+  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+
+}
+
+a{
+  text-decoration: none;
+  color: #1e1e24;
+  font-size: medium;
+}
+
+.table-row:hover {
+  /*transform: scale(1.02);*/
+}
+
+@media all and (max-width: 600px) {
+  .responsive-table .table-header {
+    display: none;
+  }
+  .responsive-table li {
+    display: block;
+  }
+  .responsive-table .col {
+    flex-basis: 100%;
+  }
+  .responsive-table .col {
+    display: flex;
+    padding: 10px 0;
+  }
+  .responsive-table .col:before {
+    color: #6c7a89;
+    padding-right: 10px;
+    content: attr(data-label);
+    flex-basis: 50%;
+    text-align: right;
+  }
+}
 </style>
