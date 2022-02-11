@@ -6,22 +6,22 @@
     <div class="col-md-12 col-12 col-sm-12">
       <div class="card1">
         <div class="card-header">
-          <h4>Tasks</h4>
+          <h4>{{ $t('tasks') }}</h4>
         </div>
         <div class="card-body">
           <div class="table-responsive">
-            <div class="text-dark"> Overall Progress : {{ progress }} %</div>
+            <div class="text-dark"> {{ $t('CurrentProgress') }} : {{ progress }} %</div>
             <div class="progress">
               <div id="progress-bar" class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <table class="table table-striped" v-if="list && list.length > 0">
               <tbody><tr>
 
-                <th>{{ $t('tasksName') }}</th>
+                <th>{{ $t('tasksName').toUpperCase() }}</th>
                 <th>DESCRIPTION</th>
-                <th>PRIORITY</th>
-                <th>STATUS</th>
-                <th>Action</th>
+                <th>{{ $t('priority').toUpperCase() }}</th>
+                <th>{{ $t('STATUS') }}</th>
+                <th>ACTION</th>
               </tr>
               <tr v-for="task in list" v-bind:key="task.featureId" id="rowForTask" v-bind:style="setBackground(task.status)">
                 <td>{{ task.taskName }}</td>

@@ -54,5 +54,14 @@
   "DueDate": "Due Date",
   "AssignedUser": "Assigned User",
   "CurrentProgress": "Current Progress(%)",
+  "newTask": "New Task",
+  "taskName": "Task Name",
+  "taskRequired": "Task Name Required",
+  "descriptionRequired": "Description Required",
+  "createTask": "Create Task",
+  "low": "Low",
+  "medium": "Medium",
+  "high": "High"
+  "CurrentProgress": "Current Progress(%)",
   "featureAdminOverview": "Admin Overview"
 }

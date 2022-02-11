@@ -54,5 +54,14 @@
   "DueDate": "Date Limite",
   "AssignedUser": "Utilisateur assigné",
   "CurrentProgress": "Progrès en cours(%)",
+  "newTask": "Nouvelle tâche",
+  "taskName": "Nom de la tâche",
+  "taskRequired": "Nom de tâche requis",
+  "descriptionRequired": "Description Obligatoire",
+  "createTask": "Créer une tâche",
+  "low": "Faible",
+  "medium": "Moyenne",
+  "high": "Haute"
+  "CurrentProgress": "Progrès en cours(%)",
   "featureAdminOverview": "Vue d'ensemble d'administateur"
 }
