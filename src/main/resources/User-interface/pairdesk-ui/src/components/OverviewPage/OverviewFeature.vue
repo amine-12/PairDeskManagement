@@ -39,10 +39,10 @@
       </div>
     </div>
 
-    <h2>{{ $t('featureAdminOverview') }}</h2>
+
     <div  class="row" style="margin-bottom: 2%">
       <div class="card-u col" v-if="user.roles[0] === 'ROLE_ADMIN'">
-        <h3 class="text-secondary">{{ $t('featureOverview') }}</h3>
+        <h3>{{ $t('featureOverview') }}</h3>
         <div style="height: 450px;overflow-y:auto">
           <ul class="responsive-table" style="padding-left: 0px;" v-if="list && list.length > 0">
             <div  v-for="feature in list" v-bind:key="feature.featureId" >
@@ -60,7 +60,7 @@
       </div>
 
       <div class="card-u col" >
-        <h3 class="text-secondary">{{ $t('featureAssignedToYou') }}</h3>
+        <h3>{{ $t('featureAssignedToYou') }}</h3>
         <div style="height: 450px;overflow-y:auto">
           <ul class="responsive-table" style="padding-left: 0px;" v-if="userSpecificList && userSpecificList.length > 0">
             <div  v-for="feature in userSpecificList" v-bind:key="feature.featureId" >

@@ -17,7 +17,7 @@
       <div class="form-group" id="inputFeatureName">
         <label class="col-md-4 control-label" for="featureName">{{$t('InputFeatureName')}}</label>
         <div class="col-md-4">
-          <input id="featureName" name="Feature Name" type="text" placeholder="New Feature Name" class="form-control input-md" v-model="form.featureName">
+          <input id="featureName" name="Feature Name" type="text" placeholder="New Feature Name" class="form-control input-md" v-model="form.featureName" maxlength="12">
           <p v-if="!featureNameIsValid" class="error-message" style="color: red">{{$t('InputRequiredFeatureName')}}</p>
         </div>
       </div>
@@ -165,7 +165,7 @@ export default {
       }
     },
     goto() {
-      window.scrollTo(0, document.body.scrollHeight);
+      window.scrollTo(0, 120);
     }
   }
 }
