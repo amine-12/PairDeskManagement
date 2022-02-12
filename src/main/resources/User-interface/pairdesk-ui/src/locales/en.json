@@ -53,5 +53,6 @@
   "FeatureText": "Feature",
   "DueDate": "Due Date",
   "AssignedUser": "Assigned User",
-  "CurrentProgress": "Current Progress(%)"
+  "CurrentProgress": "Current Progress(%)",
+  "featureAdminOverview": "Admin Overview"
 }

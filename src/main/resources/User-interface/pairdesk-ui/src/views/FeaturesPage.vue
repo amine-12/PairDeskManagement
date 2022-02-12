@@ -3,9 +3,13 @@
     <navigation/>
   </div>
   <div class="about">
+    <div class="heading">
+      <h1 class="heading__title">{{$t('FeaturesList')}}</h1>
+    </div>
+    <AddFeature/>
     <feature-list></feature-list>
   </div>
-  <AddFeature/>
+
 </template>
 
 <script>

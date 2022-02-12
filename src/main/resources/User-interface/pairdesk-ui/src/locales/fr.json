@@ -53,5 +53,6 @@
   "FeatureText": "Fonctionnalité",
   "DueDate": "Date Limite",
   "AssignedUser": "Utilisateur assigné",
-  "CurrentProgress": "Progrès en cours(%)"
+  "CurrentProgress": "Progrès en cours(%)",
+  "featureAdminOverview": "Vue d'ensemble d'administateur"
 }

@@ -199,9 +199,7 @@ body {
 </style>
 <template>
   <div>
-    <div class="heading">
-    <h1 class="heading__title">{{$t('FeaturesList')}}</h1>
-  </div>
+
     <div class="main-container row center" v-if="currentUser.roles[0] === 'ROLE_ADMIN'">
 
       <div class="column" v-for="feature in list" v-bind:key="feature.featureId">
