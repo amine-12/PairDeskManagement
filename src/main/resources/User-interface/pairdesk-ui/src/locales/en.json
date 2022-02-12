@@ -61,6 +61,13 @@
   "createTask": "Create Task",
   "low": "Low",
   "medium": "Medium",
+  "high": "High",
+  "dashboard": "DASHBOARD",
+  "feature": "FEATURES",
+  "invoices": "INVOICES",
+  "reports": "REPORTS",
+  "users": "USERS",
+  "logout": "Log out"
   "high": "High"
   "CurrentProgress": "Current Progress(%)",
   "featureAdminOverview": "Admin Overview"

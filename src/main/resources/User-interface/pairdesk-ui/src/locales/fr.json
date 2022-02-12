@@ -61,6 +61,13 @@
   "createTask": "Créer une tâche",
   "low": "Faible",
   "medium": "Moyenne",
+  "high": "Haute",
+  "dashboard": "Accueil",
+  "feature": "Fonctionnalité",
+  "invoices": "FACTURES",
+  "reports": "RAPPORTS",
+  "users": "UTILISATEURS",
+  "logout": "déconnecter"
   "high": "Haute"
   "CurrentProgress": "Progrès en cours(%)",
   "featureAdminOverview": "Vue d'ensemble d'administateur"
