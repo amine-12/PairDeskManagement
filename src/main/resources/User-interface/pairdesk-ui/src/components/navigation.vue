@@ -158,7 +158,7 @@
               ></path>
             </g>
           </svg>
-          <span class="link-text">{{userTxt}}</span>
+          <span class="link-text">{{$t('users')}}</span>
         </router-link>
         </a>
       </li>

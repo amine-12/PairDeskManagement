@@ -1,8 +1,8 @@
 {
   "overview": "Overview",
   "greeting": "Hello !",
-  "featureOverview": "Feature Overview",
-  "featureAssignedToYou": "Feature Assigned to you",
+  "featureOverview": "Features Overview",
+  "featureAssignedToYou": "Features Assigned to you",
   "invoice": "Invoices",
   "user": "User",
   "export": "Export as PDF",
@@ -71,4 +71,7 @@
   "high": "High"
   "CurrentProgress": "Current Progress(%)",
   "featureAdminOverview": "Admin Overview"
+  "logout": "Log out",
+  "featureOverviewSchedule": "Features Overview Schedule",
+  "featureSchedule": "Schedule of Features Assigned to you"
 }
