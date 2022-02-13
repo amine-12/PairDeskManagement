@@ -23,7 +23,6 @@
   "tasks": "Tasks",
   "tasksName": "Tasks Name",
   "STATUS": "STATUS",
-  "noFeatures": "No Assigned Features",
   "FeaturesList": "Features List",
   "AddNewFeature": "Add a new feature",
   "NewFeatureFormHeader": "New Feature",
@@ -53,7 +52,6 @@
   "FeatureText": "Feature",
   "DueDate": "Due Date",
   "AssignedUser": "Assigned User",
-  "CurrentProgress": "Current Progress(%)",
   "newTask": "New Task",
   "taskName": "Task Name",
   "taskRequired": "Task Name Required",
@@ -67,11 +65,8 @@
   "invoices": "INVOICES",
   "reports": "REPORTS",
   "users": "USERS",
-  "logout": "Log out"
-  "high": "High"
-  "CurrentProgress": "Current Progress(%)",
-  "featureAdminOverview": "Admin Overview"
   "logout": "Log out",
+  "featureAdminOverview": "Admin Overview",
   "featureOverviewSchedule": "Features Overview Schedule",
   "featureSchedule": "Schedule of Features Assigned to you"
 }
