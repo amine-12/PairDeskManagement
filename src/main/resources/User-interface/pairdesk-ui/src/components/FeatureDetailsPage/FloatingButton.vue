@@ -16,12 +16,12 @@
 
         <form class="form-horizontal" v-on:submit.prevent="submitForm" @submit="checkForm">
           <fieldset id="formContainer">
-            <h1>New Task</h1>
+            <h1>{{ $t('newTask') }}</h1>
             <div class="form-group">
-              <label class="col-md-6 control-label" for="taskName">Task Name:</label>
+              <label class="col-md-6 control-label" for="taskName">{{ $t('taskName') }}:</label>
               <div class="col-md-6">
                 <input style="width: 100%" id="taskName" name="Feature Name" type="text" placeholder="New Task Name" class="form-control input-md" v-model="form.taskName">
-                <p v-if="!featureNameIsValid" class="error-message" style="color: red">Task Name Required</p>
+                <p v-if="!featureNameIsValid" class="error-message" style="color: red">{{ $t('taskRequired') }}</p>
               </div>
             </div>
 
@@ -29,17 +29,17 @@
               <label class="col-md-6  control-label" for="description">Description</label>
               <div class="col-md-6 ">
                 <textarea id="description" name="description" type="text" placeholder="description" class="form-control input-md" v-model="form.description"/>
-                <p v-if="!descriptionIsValid" class="error-message" style="color: red">Description Required</p>
+                <p v-if="!descriptionIsValid" class="error-message" style="color: red">{{ $t('descriptionRequired') }}</p>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-6  control-label" for="priority">Priority</label>
+              <label class="col-md-6  control-label" for="priority">{{ $t('priority') }}</label>
               <div class="col-md-6 ">
                 <select id="priority" name="priority" class="form-control" v-model="form.priority">
-                  <option value="Low">Low</option>
-                  <option value="Medium">Medium</option>
-                  <option value="High">High</option>
+                  <option value="Low">{{ $t('low') }}</option>
+                  <option value="Medium">{{ $t('medium') }}</option>
+                  <option value="High">{{ $t('high') }}</option>
                 </select>
               </div>
             </div>
@@ -47,7 +47,7 @@
             <div class="form-group">
               <label class="col-md-6  control-label" for="submit"></label>
               <div class="col-md-6 ">
-                <button :disabled="!formIsValid" id="submit" name="submit" class="btn btn-primary" style="margin-right: 15%">Create Task</button>
+                <button :disabled="!formIsValid" id="submit" name="submit" class="btn btn-primary" style="margin-right: 15%">{{ $t('createTask') }}</button>
                 <button type="reset" style="float: right" class="btn btn-primary">Reset</button>
               </div>
             </div>

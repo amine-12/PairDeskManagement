@@ -52,7 +52,7 @@
               ></path>
             </g>
           </svg>
-          <span class="link-text">OVERVIEW</span>
+          <span class="link-text">{{$t('dashboard').toUpperCase()}}</span>
           </router-link>
         </a>
       </li>
@@ -79,7 +79,7 @@
 
             </g>
           </svg>
-          <span class="link-text">FEATURES</span>
+          <span class="link-text">{{$t('feature').toUpperCase()}}</span>
           </router-link>
         </a>
       </li>
@@ -104,7 +104,7 @@
               ></path>
             </g>
           </svg>
-          <span class="link-text">INVOICES</span>
+          <span class="link-text">{{$t('invoices')}}</span>
           </router-link>
         </a>
       </li>
@@ -130,7 +130,7 @@
                   ></path>
                 </g>
               </svg>
-            <span class="link-text">REPORTS</span>
+            <span class="link-text">{{$t('reports')}}</span>
           </router-link>
         </a>
       </li>
@@ -158,7 +158,7 @@
               ></path>
             </g>
           </svg>
-          <span class="link-text">{{userTxt}}</span>
+          <span class="link-text">{{$t('users')}}</span>
         </router-link>
         </a>
       </li>
@@ -188,7 +188,7 @@
               ></path>
             </g>
           </svg>
-          <span class="link-text">Log out</span>
+          <span class="link-text">{{$t('logout')}}</span>
           </router-link>
         </a>
       </li>
@@ -198,6 +198,9 @@
 </template>
 
 <script>
+
+import i18n from "@/locales/i18n";
+
 export default {
   name: 'navigation',
   data(){
@@ -209,9 +212,8 @@ export default {
     if(this.currentUser.roles[0] === 'ROLE_USER'){
       this.userTxt = "PROFILE"
     }else {
-      this.userTxt = "USERS"
+      this.userTxt = i18n.global.t('users')
     }
-
   }
 }
 

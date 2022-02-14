@@ -8,15 +8,15 @@
               <div class="media-body">
 
             <h1 class="m-b-20">{{ info.featureName }}</h1>
-                <h5 class="media-heading mb-0 mt-0">Assigned to: {{ assigned_user.username }}</h5></div>
-            <h2 class="m-b-5">Priority</h2>
+                <h5 class="media-heading mb-0 mt-0">{{ $t('AssignedUser') }}: {{ assigned_user.username }}</h5></div>
+            <h2 class="m-b-5">{{ $t('priority') }}</h2>
             <h4 id="pC">{{info.priority}}</h4>
             <h3 class="m-b-5">Description</h3>
             <p class="text-muted">{{info.description}}</p>
             <ul class="list-inline task-dates m-b-0 mt-5">
 
               <li>
-                <h3 class="m-b-5">Deadline</h3>
+                <h3 class="m-b-5">{{ $t('InputDeadline') }}</h3>
                 <p>{{ formattedDate}}</p>
 
               </li>

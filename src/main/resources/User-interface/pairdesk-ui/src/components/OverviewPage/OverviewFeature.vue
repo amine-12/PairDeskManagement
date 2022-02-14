@@ -20,7 +20,7 @@
         </div>
       </div>
 
-      <div class="card-u col" >
+      <div class="card-u col" v-if="user.roles[0] === 'ROLE_ADMIN'">
         <h3>{{ $t('featureAssignedToYou') }}</h3>
         <div style="height: 450px;overflow-y:auto">
           <ul class="responsive-table" style="padding-left: 0px;" v-if="userSpecificList && userSpecificList.length > 0">
@@ -40,9 +40,9 @@
     </div>
 
 
-    <div  class="row" style="margin-bottom: 2%">
+    <div  class="row" style="margin-bottom: 2%" >
       <div class="card-u col" v-if="user.roles[0] === 'ROLE_ADMIN'">
-        <h3>{{ $t('featureOverview') }}</h3>
+        <h3>{{ $t('featureAssignedToYou') }}</h3>
         <div style="height: 450px;overflow-y:auto">
           <ul class="responsive-table" style="padding-left: 0px;" v-if="list && list.length > 0">
             <div  v-for="feature in list" v-bind:key="feature.featureId" >
@@ -59,8 +59,8 @@
         </div>
       </div>
 
-      <div class="card-u col" >
-        <h3>{{ $t('featureAssignedToYou') }}</h3>
+      <div class="card-u col" v-if="user.roles[0] === 'ROLE_ADMIN'">
+        <h3>{{ $t('featureSchedule') }}</h3>
         <div style="height: 450px;overflow-y:auto">
           <ul class="responsive-table" style="padding-left: 0px;" v-if="userSpecificList && userSpecificList.length > 0">
             <div  v-for="feature in userSpecificList" v-bind:key="feature.featureId" >
@@ -78,6 +78,45 @@
       </div>
     </div>
 
+
+
+    <div  class="row" style="margin-bottom: 2%" v-if="user.roles[0] === 'ROLE_USER'">
+      <div class="card-u col">
+        <h3>{{ $t('featureAssignedToYou') }}</h3>
+        <div style="height: 600px;overflow-y:auto">
+          <ul class="responsive-table" style="padding-left: 0px;" v-if="userSpecificList && userSpecificList.length > 0">
+            <div  v-for="feature in userSpecificList" v-bind:key="feature.featureId" >
+              <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }">
+                <li class="table-row " style="width: 98%;margin-left: 1%">
+                  <feature-item v-bind:feature-id="feature.featureId" ></feature-item>
+                </li>
+              </router-link>
+            </div>
+          </ul>
+          <div v-else>
+            <h3 style="text-align: center;margin-top: 25%">{{ $t('noFeatures') }}</h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-u col" >
+        <h3>{{ $t('featureSchedule') }}</h3>
+        <div style="height: 600px;overflow-y:auto">
+          <ul class="responsive-table" style="padding-left: 0px;" v-if="userSpecificList && userSpecificList.length > 0">
+            <div  v-for="feature in userSpecificList" v-bind:key="feature.featureId" >
+              <router-link :to="{ name: 'FeaturesDetail', params: { featureId: feature.featureId } }">
+                <li class="table-row " style="width: 98%;margin-left: 1%">
+                  <schedule-item v-bind:feature-id="feature.featureId" ></schedule-item>
+                </li>
+              </router-link>
+            </div>
+          </ul>
+          <div v-else>
+            <h3 style="text-align: center;margin-top: 25%">{{ $t('noFeatures') }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
   </div>
