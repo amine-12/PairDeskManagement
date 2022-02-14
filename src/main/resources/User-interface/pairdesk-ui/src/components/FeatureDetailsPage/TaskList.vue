@@ -60,7 +60,7 @@
     <!-- Modal content -->
     <div class="modal-content">
       <div class="modal-header">
-        <span id="close">&times;</span>
+        <span id="closeUpdateTaskButton" class="close">&times;</span>
 
       </div>
       <div  class="modal-body">
@@ -290,7 +290,7 @@ export default {
 //       var btn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
-      var span = document.getElementById("close")[0];
+      var span = document.getElementById("closeUpdateTaskButton");
 
 // When the user clicks the button, open the modal
 //       btn.onclick = function() {
