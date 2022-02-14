@@ -55,23 +55,23 @@
   </div>
 
 
-  <div id="myModalTaskUpdate" class="modal" style="display: none">
+  <div id="myModalTaskUpdate" class="topright, modal" style=" width: 40%; display:none; margin-left: 900px;">
 
     <!-- Modal content -->
     <div class="modal-content">
       <div class="modal-header">
-        <span class="close">&times;</span>
+        <span id="close">&times;</span>
 
       </div>
-      <div class="modal-body">
+      <div  class="modal-body">
         <form class="form-horizontal" @submit="checkForm" v-on:submit.prevent="submitForm2">
           <fieldset>
-            <h1>Update this Task</h1>
+            <h1>Update Task</h1>
             <div class="form-group">
               <label class="col-md-4 control-label" for="taskName">Task Name:</label>
               <div class="col-md-4">
                 <input id="taskName" v-model="form3.taskName" class="form-control input-md" name="Feature Name"
-                       placeholder="New Task Name" type="text">
+                       placeholder="New Task Name" maxlength="40" type="text">
                 <p v-if="!featureNameIsValid2" class="error-message" style="color: red">Task Name Required</p>
               </div>
             </div>
@@ -100,9 +100,10 @@
               <label class="col-md-4 control-label" for="submit"></label>
               <div class="col-md-4">
                 <button v-on:click="updateTask" id="submit" :disabled="!formIsValid2" class="btn btn-primary" name="submit"
-                        style="margin-right: 15%">Update Task
+                        style="margin-right: 15%; margin-bottom: 10px;">Update Task
                 </button>
-                <button class="btn btn-primary" type="reset">Reset</button>
+
+                <button class="btn btn-light" type="reset">Reset</button>
               </div>
             </div>
           </fieldset>
@@ -289,7 +290,7 @@ export default {
 //       var btn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
-      var span = document.getElementsByClassName("close")[0];
+      var span = document.getElementById("close")[0];
 
 // When the user clicks the button, open the modal
 //       btn.onclick = function() {
@@ -554,4 +555,10 @@ body{
   min-height: 35px;
 }
 
+.topright {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  font-size: 18px;
+}
 </style>
