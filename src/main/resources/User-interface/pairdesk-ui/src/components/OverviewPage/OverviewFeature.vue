@@ -42,7 +42,7 @@
 
     <div  class="row" style="margin-bottom: 2%" >
       <div class="card-u col" v-if="user.roles[0] === 'ROLE_ADMIN'">
-        <h3>{{ $t('featureAssignedToYou') }}</h3>
+        <h3>{{ $t('featureOverviewSchedule') }}</h3>
         <div style="height: 450px;overflow-y:auto">
           <ul class="responsive-table" style="padding-left: 0px;" v-if="list && list.length > 0">
             <div  v-for="feature in list" v-bind:key="feature.featureId" >
