@@ -19,9 +19,8 @@ import java.util.List;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 public class InvoiceResource {
-    @Autowired
+
     private final InvoiceService invoiceService;
-    private static final Logger LOG = LoggerFactory.getLogger(FeatureResource.class);
 
     public InvoiceResource(InvoiceService invoiceService) {
         this.invoiceService = invoiceService;

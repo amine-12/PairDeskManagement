@@ -62,7 +62,7 @@ export default {
       }
     }
 
-    axios.get("http://localhost:8080/features/api/lateFeatures", yourConfig).then((resp) => {
+    axios.get("http://3.99.41.187/features/api/lateFeatures", yourConfig).then((resp) => {
       this.list = resp.data;
     }).catch((error) => {
       if (error.response.status === 401) {

@@ -96,7 +96,7 @@ export default {
     }
   },
     async mounted() {
-      await axios.get("http://localhost:8080/invoices/api/user/" + this.$route.params.userId,this.yourConfig).then((resp) => {
+      await axios.get("http://3.99.41.187/invoices/api/user/" + this.$route.params.userId,this.yourConfig).then((resp) => {
         this.invoice = resp.data;
         const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
         let d = new Date(this.invoice.creationTime )
@@ -109,7 +109,7 @@ export default {
         console.log(error)
       })
 
-      await axios.get("http://localhost:8080/users/api/" + this.$route.params.userId,this.yourConfig).then((resp) => {
+      await axios.get("http://3.99.41.187/users/api/" + this.$route.params.userId,this.yourConfig).then((resp) => {
         this.user = resp.data;
       }).catch((error) => {
         if (error.response.status === 401) {
@@ -120,7 +120,7 @@ export default {
 
       });
 
-      await axios.get("http://localhost:8080/features/api/user/completed/" + this.$route.params.userId,this.yourConfig).then((resp) => {
+      await axios.get("http://3.99.41.187/features/api/user/completed/" + this.$route.params.userId,this.yourConfig).then((resp) => {
         this.featuresListPay = resp.data;
         if(this.featuresListPay == null){
           this.isListEmpty = true
@@ -134,7 +134,7 @@ export default {
 
       });
 
-      await axios.get("http://localhost:8080/invoices/api/user/payout/" + this.$route.params.userId,this.yourConfig).then((resp) => {
+      await axios.get("http://3.99.41.187/invoices/api/user/payout/" + this.$route.params.userId,this.yourConfig).then((resp) => {
         this.payout = resp.data;
         this.payout = this.payout.toFixed(2);
       }).catch((error) => {

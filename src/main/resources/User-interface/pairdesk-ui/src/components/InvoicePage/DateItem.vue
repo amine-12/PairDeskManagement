@@ -21,7 +21,7 @@ export default {
     }
   },
   mounted() {
-    axios.get("http://localhost:8080/invoices/api/user/" + this.userId,this.yourConfig).then((resp) => {
+    axios.get("http://3.99.41.187/invoices/api/user/" + this.userId,this.yourConfig).then((resp) => {
       this.invoice = resp.data;
       let d = new Date(this.invoice.creationTime )
       this.date = (d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear()

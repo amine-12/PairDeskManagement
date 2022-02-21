@@ -21,7 +21,7 @@ data(){
         Authorization: localStorage.getItem("user-token")
       }
     }
-    axios.get("http://localhost:8080/features/api/user/username/" + this.userId, yourConfig).then((resp) => {
+    axios.get("http://3.99.41.187/features/api/user/username/" + this.userId, yourConfig).then((resp) => {
       this.tableUserName = resp.data;
 
     })

@@ -20,7 +20,7 @@ export default {
   },
   props: ['userId'],
   mounted() {
-    axios.get("http://localhost:8080/users/api/" + this.userId,this.yourConfig).then((resp) => {
+    axios.get("http://3.99.41.187/users/api/" + this.userId,this.yourConfig).then((resp) => {
       this.info = resp.data;
     }).catch((error) => {
       if (error.response.status === 401) {

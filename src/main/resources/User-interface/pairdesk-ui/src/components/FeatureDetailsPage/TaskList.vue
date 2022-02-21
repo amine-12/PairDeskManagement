@@ -152,11 +152,11 @@ export default {
   },
   mounted() {
     try {
-      axios.get("http://localhost:8080/features/api/tasks/" + this.$route.params.featureId, this.yourConfig).then((resp) => {
+      axios.get("http://3.99.41.187/features/api/tasks/" + this.$route.params.featureId, this.yourConfig).then((resp) => {
         this.list = resp.data;
       })
 
-      axios.get("http://localhost:8080/features/api/progress/" + this.$route.params.featureId, this.yourConfig).then((resp) => {
+      axios.get("http://3.99.41.187/features/api/progress/" + this.$route.params.featureId, this.yourConfig).then((resp) => {
         this.progress = resp.data;
         this.progress = this.progress.toFixed(1);
         document.getElementById("progress-bar").style.width = this.progress + "%";
@@ -215,7 +215,7 @@ export default {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          axios.delete('http://localhost:8080/features/api/tasks/' + taskId, this.yourConfig)
+          axios.delete('http://3.99.41.187/features/api/tasks/' + taskId, this.yourConfig)
               .then((resp) => {
                 this.form = resp.data;
                 console.log(this.form);
@@ -254,7 +254,7 @@ export default {
       if (status === "DONE") {
         this.form2.status = "TODO"
       }
-      axios.put('http://localhost:8080/features/api/tasks/update/' + id, this.form2, this.yourConfig)
+      axios.put('http://3.99.41.187/features/api/tasks/update/' + id, this.form2, this.yourConfig)
           .then((resp) => {
             this.form2 = resp.data;
           })
@@ -269,7 +269,7 @@ export default {
 
       this.tid2 = id
 
-      axios.get("http://localhost:8080/features/api/task/" + this.tid2, this.yourConfig).then((resp) => {
+      axios.get("http://3.99.41.187/features/api/task/" + this.tid2, this.yourConfig).then((resp) => {
         this.form3 = resp.data;
         //Will perhaps use momentJs to reformat the deadline datetime saved format.
       }).catch((error) => {
@@ -320,7 +320,7 @@ export default {
         document.getElementById("description").value = "";
         document.getElementById("taskName").value = "";
         console.log("form is valid")
-        axios.post('http://localhost:8080/features/api/task/add', this.form, this.yourConfig)
+        axios.post('http://3.99.41.187/features/api/task/add', this.form, this.yourConfig)
             .then((resp) => {
               this.form = resp.data;
               console.log(this.form);
@@ -342,7 +342,7 @@ export default {
     submitForm2() {
       if (this.formIsValid2) {
         console.log("form is valid update")
-        axios.put('http://localhost:8080/features/api/tasks/update/' + this.tid2, this.form3, this.yourConfig)
+        axios.put('http://3.99.41.187/features/api/tasks/update/' + this.tid2, this.form3, this.yourConfig)
             .then((resp) => {
               this.form3 = resp.data;
 

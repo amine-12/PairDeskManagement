@@ -55,7 +55,7 @@ export default {
     exportReport(){
       let x = document.getElementById("exportedMessage");
 
-      axios.get("http://localhost:8080/reports/report/" + "pdf", this.yourConfig).then((resp) => {
+      axios.get("http://3.99.41.187/reports/report/" + "pdf", this.yourConfig).then((resp) => {
         this.list = resp.data;
         x.style.display = "block";
       }).catch((error) => {

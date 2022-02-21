@@ -17,7 +17,6 @@ public class FeatureAPITests {
     @Autowired
     private FeaturesRepository featRep;
 
-
     @BeforeEach
     public void setUpDb(){
 
