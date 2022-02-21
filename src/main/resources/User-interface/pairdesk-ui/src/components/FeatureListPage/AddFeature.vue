@@ -106,7 +106,7 @@ export default {
   },
   mounted(){
     try {
-      axios.get("http://localhost:8080/users/api/all", this.yourConfig).then((resp) => {
+      axios.get("http://3.99.41.187/users/api/all", this.yourConfig).then((resp) => {
         this.users = resp.data;
       })
     }
@@ -140,7 +140,7 @@ export default {
   methods: {
     submitForm() {
       if(this.formIsValid && this.userIsValid && this.priceIsValid) {
-        axios.post('http://localhost:8080/features/api/add', this.form, this.yourConfig)
+        axios.post('http://3.99.41.187/features/api/add', this.form, this.yourConfig)
             .then((resp) => {
               this.form = resp.data;
             })

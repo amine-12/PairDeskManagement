@@ -54,7 +54,7 @@ export default {
     submitForm() {
       if (this.formIsValid) {
         console.log("form is valid")
-        axios.post('http://localhost:8080/api/auth/signin', this.form)
+        axios.post('http://3.99.41.187/api/auth/signin', this.form)
             .then((resp) => {
               this.form = resp.data;
               const token = resp.data.accessToken

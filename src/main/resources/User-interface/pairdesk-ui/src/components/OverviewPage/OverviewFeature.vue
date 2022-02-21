@@ -142,7 +142,7 @@ export default {
         Authorization: localStorage.getItem("user-token")
       }
     }
-    axios.get("http://localhost:8080/features/api/all", yourConfig).then((resp) => {
+    axios.get("http://3.99.41.187/features/api/all", yourConfig).then((resp) => {
       this.list = resp.data;
     }).catch((error) => {
       if (error.response.status === 401) {
@@ -153,7 +153,7 @@ export default {
     }).finally(() => {
     });
 
-    axios.get("http://localhost:8080/features/api/users/" + this.user.userId, yourConfig).then((resp) => {
+    axios.get("http://3.99.41.187/features/api/users/" + this.user.userId, yourConfig).then((resp) => {
       this.userSpecificList = resp.data;
     }).catch((error) => {
       if (error.response.status === 401) {

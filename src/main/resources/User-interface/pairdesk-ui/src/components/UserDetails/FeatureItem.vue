@@ -23,7 +23,7 @@ export default {
     }
   },
   mounted() {
-    axios.get("http://localhost:8080/features/api/" + this.featureId,this.yourConfig).then((resp) => {
+    axios.get("http://3.99.41.187/features/api/" + this.featureId,this.yourConfig).then((resp) => {
       this.info = resp.data;
     }).catch((error) => {
       if (error.response.status === 401) {
@@ -33,7 +33,7 @@ export default {
     }).finally(() => {
     });
 
-    axios.get("http://localhost:8080/features/api/progress/" + this.featureId, this.yourConfig).then((resp) => {
+    axios.get("http://3.99.41.187/features/api/progress/" + this.featureId, this.yourConfig).then((resp) => {
       this.progress = resp.data;
       this.progress = this.progress.toFixed(1);
     });

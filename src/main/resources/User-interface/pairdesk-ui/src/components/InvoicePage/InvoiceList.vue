@@ -58,7 +58,7 @@ export default {
     }
   },
   mounted() {
-    axios.get("http://localhost:8080/invoices/api/all", this.yourConfig).then((resp) => {
+    axios.get("http://3.99.41.187/invoices/api/all", this.yourConfig).then((resp) => {
       this.invoices = resp.data;
       console.log(this.invoices)
     }).catch((error) => {
