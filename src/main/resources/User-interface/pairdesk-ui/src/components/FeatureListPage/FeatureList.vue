@@ -341,7 +341,7 @@ export default {
   mounted()
   {
 
-      axios.get("http://3.99.41.187/features/api/all", this.yourConfig).then((resp) => {
+      axios.get("http://3.99.41.187:8080/features/api/all", this.yourConfig).then((resp) => {
         this.list = resp.data;
         console.log(this.$route.name)
       }).catch((error) => {
@@ -352,7 +352,7 @@ export default {
       }).finally(() => {
     });
 
-    axios.get("http://3.99.41.187/features/api/users/" + this.currentUser.userId, this.yourConfig).then((resp) => {
+    axios.get("http://3.99.41.187:8080/features/api/users/" + this.currentUser.userId, this.yourConfig).then((resp) => {
       this.userSpecificList = resp.data;
     }).catch((error) => {
       if (error.response.status === 401) {
@@ -363,7 +363,7 @@ export default {
     });
 
     try {
-      axios.get("http://3.99.41.187/users/api/all", this.yourConfig).then((resp) => {
+      axios.get("http://3.99.41.187:8080/users/api/all", this.yourConfig).then((resp) => {
         this.users = resp.data;
       })
     }
@@ -407,7 +407,7 @@ export default {
       if(this.formIsValid && this.userIsValid && this.priceIsValid) {
 
         console.log("form is valid")
-        axios.put('http://3.99.41.187/features/api/update/' + this.fid, this.form, this.yourConfig)
+        axios.put('http://3.99.41.187:8080/features/api/update/' + this.fid, this.form, this.yourConfig)
             .then((resp) => {
               this.form = resp.data;
             })
@@ -427,7 +427,7 @@ export default {
     },
     prefillUpdateForm(){
 
-      axios.get("http://3.99.41.187/features/api/" + this.fid, this.yourConfig).then((resp) => {
+      axios.get("http://3.99.41.187:8080/features/api/" + this.fid, this.yourConfig).then((resp) => {
         this.form = resp.data;
         //Will perhaps use momentJs to reformat the deadline datetime saved format.
       }).catch((error) => {
@@ -466,7 +466,7 @@ export default {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          axios.delete('http://3.99.41.187/features/api/' + featureId, this.yourConfig)
+          axios.delete('http://3.99.41.187:8080/features/api/' + featureId, this.yourConfig)
               .then((resp) => {
                 this.form = resp.data;
                 console.log(this.form);

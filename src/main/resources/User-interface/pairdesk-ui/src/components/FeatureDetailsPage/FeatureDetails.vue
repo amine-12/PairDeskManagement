@@ -63,7 +63,7 @@ export default {
   mounted()
   {
 
-      axios.get("http://3.99.41.187/features/api/" + this.$route.params.featureId,this.yourConfig).then((resp) => {
+      axios.get("http://3.99.41.187:8080/features/api/" + this.$route.params.featureId,this.yourConfig).then((resp) => {
         this.info = resp.data;
         if(this.info.priority === "Low"){
           document.getElementById("pC").style.color = "green"
@@ -75,7 +75,7 @@ export default {
         this.formattedDate = new Date(this.info.deadline)
 
         try{
-          axios.get("http://3.99.41.187/users/api/" + this.info.userId, this.yourConfig).then((resp) => {
+          axios.get("http://3.99.41.187:8080/users/api/" + this.info.userId, this.yourConfig).then((resp) => {
             this.assigned_user = resp.data;
           })
         }

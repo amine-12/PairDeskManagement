@@ -57,7 +57,7 @@ export default {
     }
   },
   mounted() {
-    axios.get("http://3.99.41.187/users/api/" + this.$route.params.userId,this.yourConfig).then((resp) => {
+    axios.get("http://3.99.41.187:8080/users/api/" + this.$route.params.userId,this.yourConfig).then((resp) => {
       this.info = resp.data;
       this.formattedDate = new Date(this.info.creationTime)
       console.log(this.info)
@@ -70,7 +70,7 @@ export default {
 
     });
 
-    axios.get("http://3.99.41.187/features/api/users/" + this.$route.params.userId,this.yourConfig).then((resp) => {
+    axios.get("http://3.99.41.187:8080/features/api/users/" + this.$route.params.userId,this.yourConfig).then((resp) => {
         this.featuresList = resp.data;
         if(this.featuresList == null){
           this.isListEmpty = true
