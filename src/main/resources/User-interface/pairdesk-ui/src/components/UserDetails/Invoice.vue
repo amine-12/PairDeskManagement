@@ -59,7 +59,7 @@ export default {
     }
   },
   mounted() {
-    axios.get("http://3.99.41.187/users/api/" + this.$route.params.userId,this.yourConfig).then((resp) => {
+    axios.get("http://3.99.41.187:8080/users/api/" + this.$route.params.userId,this.yourConfig).then((resp) => {
       this.info = resp.data;
       this.formattedDate = new Date(this.info.creationTime)
     }).catch((error) => {
@@ -71,7 +71,7 @@ export default {
 
     });
 
-    axios.get("http://3.99.41.187/features/api/user/completed/" + this.$route.params.userId,this.yourConfig).then((resp) => {
+    axios.get("http://3.99.41.187:8080/features/api/user/completed/" + this.$route.params.userId,this.yourConfig).then((resp) => {
       this.featuresListPay = resp.data;
       if(this.featuresListPay == null){
         this.isListEmpty = true
@@ -85,7 +85,7 @@ export default {
 
     });
 
-    axios.get("http://3.99.41.187/invoices/api/user/payout/" + this.$route.params.userId,this.yourConfig).then((resp) => {
+    axios.get("http://3.99.41.187:8080/invoices/api/user/payout/" + this.$route.params.userId,this.yourConfig).then((resp) => {
       this.payout = resp.data;
     }).catch((error) => {
       if (error.response.status === 401) {
@@ -99,12 +99,12 @@ export default {
       invoicePay: this.payout,
     }
 
-    axios.get("http://3.99.41.187/invoices/api/user/" + this.$route.params.userId,this.yourConfig).then((resp) => {
+    axios.get("http://3.99.41.187:8080/invoices/api/user/" + this.$route.params.userId,this.yourConfig).then((resp) => {
       this.invoice = resp.data;
       this.invoiceId = this.invoice.invoiceId
       this.creationDate = new Date(this.invoice.creationTime)
       if(this.invoice === ""){
-        axios.post('http://3.99.41.187/invoices/api/add', form, this.yourConfig)
+        axios.post('http://3.99.41.187:8080/invoices/api/add', form, this.yourConfig)
             .then((resp) => {
               this.form = resp.data;
             })

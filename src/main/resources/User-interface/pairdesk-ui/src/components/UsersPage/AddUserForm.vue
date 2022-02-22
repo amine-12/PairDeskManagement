@@ -75,7 +75,7 @@ export default {
       }
     }
   },mounted() {
-    axios.get("http://3.99.41.187/users/api/password", this.yourConfig).then((resp) => {
+    axios.get("http://3.99.41.187:8080/users/api/password", this.yourConfig).then((resp) => {
       this.form.password = resp.data;
     })
   },
@@ -126,7 +126,7 @@ export default {
     },
     async submitForm() {
       if (this.formIsValid) {
-        await axios.post('http://3.99.41.187/api/auth/signup', this.form, this.yourConfig)
+        await axios.post('http://3.99.41.187:8080/api/auth/signup', this.form, this.yourConfig)
             .then((resp) => {
               this.form = resp.data;
 
@@ -143,7 +143,7 @@ export default {
       }
     },
     verifyUsername(){
-      axios.post('http://3.99.41.187/api/auth/existing-username/', this.form.username, this.yourConfig)
+      axios.post('http://3.99.41.187:8080/api/auth/existing-username/', this.form.username, this.yourConfig)
           .then((resp) => {
             console.log(this.form.username)
             this.check = resp.data;
@@ -165,7 +165,7 @@ export default {
       });
     },
     verifyEmail(){
-      axios.post('http://3.99.41.187/api/auth/existing-email/', this.form.email, this.yourConfig)
+      axios.post('http://3.99.41.187:8080/api/auth/existing-email/', this.form.email, this.yourConfig)
           .then((resp) => {
             console.log(this.form.email)
             this.checkTheEmail = resp.data;

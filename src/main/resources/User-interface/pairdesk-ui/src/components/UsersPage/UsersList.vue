@@ -92,7 +92,7 @@ export default {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          axios.delete('http://3.99.41.187/users/api/delete/' + userId, this.yourConfig)
+          axios.delete('http://3.99.41.187:8080/users/api/delete/' + userId, this.yourConfig)
               .then((resp) => {
                 this.form = resp.data;
                 console.log(this.form);
@@ -119,7 +119,7 @@ export default {
   },
   mounted()
   {
-    axios.get("http://3.99.41.187/users/api/all", this.yourConfig).then((resp) => {
+    axios.get("http://3.99.41.187:8080/users/api/all", this.yourConfig).then((resp) => {
       this.userList = resp.data;
     }).catch((error) => {
       if (error.response.status === 401) {

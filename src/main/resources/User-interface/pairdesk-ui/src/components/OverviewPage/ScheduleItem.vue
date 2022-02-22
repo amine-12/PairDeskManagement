@@ -42,7 +42,7 @@ export default {
     }
   },
   mounted() {
-    axios.get("http://3.99.41.187/features/api/" + this.featureId,this.yourConfig).then((resp) => {
+    axios.get("http://3.99.41.187:8080/features/api/" + this.featureId,this.yourConfig).then((resp) => {
       this.info = resp.data;
       const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
       let d = new Date(this.info.deadline )

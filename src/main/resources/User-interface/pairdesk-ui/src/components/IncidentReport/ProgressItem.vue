@@ -21,7 +21,7 @@ export default {
         Authorization: localStorage.getItem("user-token")
       }
     }
-    axios.get("http://3.99.41.187/features/api/progress/" + this.featureId, yourConfig).then((resp) => {
+    axios.get("http://3.99.41.187:8080/features/api/progress/" + this.featureId, yourConfig).then((resp) => {
       this.progress = resp.data;
       this.progress = this.progress.toFixed(1);
       console.log(this.progress);

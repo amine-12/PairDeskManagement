@@ -133,7 +133,7 @@ export default {
         document.getElementById("description").value = "";
         document.getElementById("taskName").value = "";
         console.log("form is valid")
-        axios.post('http://3.99.41.187/features/api/task/add', this.form, yourConfig)
+        axios.post('http://3.99.41.187:8080/features/api/task/add', this.form, yourConfig)
             .then((resp) => {
               this.form = resp.data;
               console.log(this.form);
