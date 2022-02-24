@@ -174,7 +174,7 @@ public class FeatureServiceImpl implements FeatureService{
 
            double progress= getFeatureProgress(allFeatures.get(i).getFeatureId());
             cal_obj2.set(year,month,day);
-            if(cal_obj2.after(cal_obj1) && progress!=100){
+            if(cal_obj2.after(cal_obj1) || progress==100){
                 allFeatures.remove(i);
             }
         }
